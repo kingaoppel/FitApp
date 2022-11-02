@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1084912680679",
+    "project_id": "dietapp-cb05d",
+    "storage_bucket": "dietapp-cb05d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084912680679:android:ece5cc83945296333b2c42",
+        "android_client_info": {
+          "package_name": "com.example.fitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084912680679-hikg3uriua27ckrckla47gdvo5h0qe39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr1UZA87At3kruaho8VoPEUBuKvZs_9Fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084912680679-hikg3uriua27ckrckla47gdvo5h0qe39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

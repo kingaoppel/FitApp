@@ -6,4 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@id/hg35"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg05" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_16"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg65"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg35">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailField"
+            style="@style/inputLayer.Email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/passwordField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_address"
+                tools:text="SUKA" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordField"
+            style="@style/inputLayer.Password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                tools:text="SUKA" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/loginButton"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_4"
+        android:padding="@dimen/dp_4"
+        android:text="@string/log_in"
+        android:textDirection="ltr"
+        android:textSize="@dimen/text_size_huge"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintTop_toBottomOf="@id/hg65" />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:
+        app:layout_constraintBottom_toBottomOf="@id/hg95"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintEnd_toStartOf="@id/vg90"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
