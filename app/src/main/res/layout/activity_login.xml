@@ -82,27 +82,25 @@
         app:layout_constraintTop_toBottomOf="@id/hg65" />
 
     <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/googleSignInButton"
         android:layout_marginBottom="@dimen/dp_8"
         app:buttonSize="icon_only"
-        app:layout_constraintEnd_toStartOf="@id/vg90"
-        app:layout_constraintStart_toEndOf="@id/vg10"
         app:layout_constraintBottom_toTopOf="@id/createAccountButton"
-        />
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10" />
 
     <TextView
+        android:id="@+id/createAccountButton"
+        style="@style/baseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_an_account"
-        style="@style/baseText"
         android:textSize="@dimen/text_size_large"
-        android:id="@+id/createAccountButton"
         app:layout_constraintBottom_toBottomOf="@id/hg95"
         app:layout_constraintEnd_toStartOf="@id/vg90"
-        app:layout_constraintStart_toEndOf="@id/vg10"
-        />
+        app:layout_constraintStart_toEndOf="@id/vg10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg05"
