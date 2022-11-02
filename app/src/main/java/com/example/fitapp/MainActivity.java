@@ -1,4 +1,4 @@
-package com.example.firapp;
+package com.example.fitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
