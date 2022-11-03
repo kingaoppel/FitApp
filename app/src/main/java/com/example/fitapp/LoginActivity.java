@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailInputLayout, passwordInputLayout;
     private TextInputEditText email, password;
-    private TextView loginButton, registerSwitch;
+    private TextView loginButton, registerSwitch, errorText;
     private SignInButton googleSignInButton;
 
     private boolean isEmailValid = false;
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (TextView) findViewById(R.id.loginButton);
         registerSwitch = (TextView) findViewById(R.id.createAccountButton);
         googleSignInButton = (SignInButton) findViewById(R.id.googleSignInButton);
-
+        errorText = (TextView) findViewById(R.id.errorText);
 
         initialize();
 
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                emailInputLayout.setErrorEnabled(false);
                 isEmailValid = count > 0 && ValidateCredentials.matchesEmail(s.toString());
             }
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                passwordInputLayout.setErrorEnabled(false);
                 isPasswordValid = count > 0 && ValidateCredentials.matchesPassword(s.toString());
             }
 
@@ -104,17 +104,19 @@ public class LoginActivity extends AppCompatActivity {
                     login();
                 }else{
                     if (!isEmailValid) {
-                        emailInputLayout.setError("Invalid email");
+                        emailInputLayout.setError("Invalid email format");
+                        emailInputLayout.setErrorEnabled(true);
                     }
                     if (!isPasswordValid) {
-                        passwordInputLayout.setError("Invalid password");
+                        passwordInputLayout.setErrorEnabled(true);
+                        passwordInputLayout.setError("Password must be at least 8 characters and contain at least one number and capital letter");
                         if(isEmailValid){
                             passwordInputLayout.requestFocus();
                         }else{
                             emailInputLayout.requestFocus();
                         }
                     }
-                    showKeyboard(v);
+
                 }
             }
         });
@@ -132,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initialize(){
         email.setText("");
         password.setText("");
+        errorText.setVisibility(View.GONE);
     }
 
     private void login(){
@@ -143,8 +146,5 @@ public class LoginActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
-    private void showKeyboard(View v) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
-    }
+
 }
