@@ -51,5 +51,5 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
 
     //Lottie Gradle import
-    implementation 'com.airbnb.android:lottie:5.0.3'
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }
