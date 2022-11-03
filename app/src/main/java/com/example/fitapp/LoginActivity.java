@@ -233,7 +233,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(){
-        System.out.println("Login");
+        errorText.setVisibility(View.GONE);
+        String emailString = email.getText().toString();
+        String passwordString = password.getText().toString();
+
+        mAuth.signInWithEmailAndPassword(emailString, passwordString)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //Sign in success, update UI with the signed-in user's information
+                            Log.d("LoginActivity", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        }else{
+                            //If sign in fails, display a message to the user
+                            Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            errorText.setVisibility(View.VISIBLE);
+                            errorText.setText("Something went wrong. Please try again");
+                            updateUI(null);
+                        }
+                    }
+                });
     }
 
     private void hideKeyboard(View v) {

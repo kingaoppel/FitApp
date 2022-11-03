@@ -259,6 +259,36 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
+        if(isConfirmPasswordValid && isPasswordValid && isEmailValid){
+            String s_email = email.getText().toString();
+            String s_password = password.getText().toString();
+            String s_confirmPassword = confirmPassword.getText().toString();
+
+            if(s_password.equals(s_confirmPassword)){
+                mAuth.createUserWithEmailAndPassword(s_email, s_password)
+                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    //Sign in success, update UI with the signed-in user's information
+                                    Log.d("RegisterActivity", "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                }else{
+                                    //If sign in fails, display a message to the user
+                                    Log.w("RegisterActivity", "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                                    updateUI(null);
+                                }
+                            }
+                        });
+            }else {
+                confirmPasswordInputLayout.setErrorEnabled(true);
+                confirmPasswordInputLayout.setError("Passwords do not match");
+                confirmPasswordInputLayout.requestFocus();
+            }
+        }
+
     }
 
     @Override
