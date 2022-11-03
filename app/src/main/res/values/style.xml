@@ -10,12 +10,14 @@
         <item name="boxCornerRadiusTopStart">@dimen/boxCornerRadius_12dp</item>
         <item name="endIconTint">@color/primary</item>
         <item name="boxStrokeColor">@color/text_input_stroke_color</item>
+        <item name="errorIconDrawable">@null</item>
     </style>
 
     <style name="inputLayer.Email">
         <item name="startIconDrawable">@drawable/ic_email</item>
         <item name="startIconTint">@color/primary</item>
         <item name="endIconMode">clear_text</item>
+
     </style>
 
     <style name="inputLayer.Password">
