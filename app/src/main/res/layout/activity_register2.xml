@@ -27,46 +27,51 @@
         android:padding="@dimen/dp_4"
         android:text="@string/what_do_you_want_to_achive"
         android:textSize="@dimen/text_size_header_font"
-        app:layout_constraintBottom_toTopOf="@id/hg40"
+        app:layout_constraintBottom_toTopOf="@id/hg45"
         app:layout_constraintEnd_toStartOf="@id/vg90"
         app:layout_constraintStart_toEndOf="@id/vg10"
-        app:layout_constraintTop_toBottomOf="@id/hg25" />
+        app:layout_constraintTop_toBottomOf="@id/hg30" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_16"
         android:gravity="center_vertical"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/hg90"
         app:layout_constraintEnd_toStartOf="@id/vg90"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/vg10"
-        app:layout_constraintTop_toBottomOf="@id/hg40"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@id/hg45"
+        app:layout_constraintVertical_bias="0.0"
+        >
 
         <Button
+            android:id="@+id/buttonWeightLoss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/button"
+            style="@style/button.weightLoss"
             android:text="@string/weight_loss"
-            >
+            android:layout_marginBottom="@dimen/dp_12"
 
-        </Button>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </Button>
+            />
 
         <Button
+            android:id="@+id/buttonPuttingOnWeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            style="@style/button.putting_on_weight"
+            android:text="@string/putting_on_weight"
+            android:layout_marginBottom="@dimen/dp_12"
+            />
 
-        </Button>
-
+        <Button
+            android:id="@+id/buttonMaintainingWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/button.maintaining_body_weight"
+            android:text="@string/maintaining_body_weight"
+            />
 
     </LinearLayout>
 
@@ -85,11 +90,19 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/hg40"
+        android:id="@+id/hg30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40" />
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg90"
