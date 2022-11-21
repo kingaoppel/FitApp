@@ -7,6 +7,7 @@
     tools:context=".LoginActivity$Register2Activity">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
@@ -17,18 +18,57 @@
         app:layout_constraintTop_toBottomOf="@id/hg05" />
 
     <TextView
+        android:id="@+id/textView"
         style="@style/baseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_4"
+        android:gravity="center"
         android:padding="@dimen/dp_4"
         android:text="@string/what_do_you_want_to_achive"
         android:textSize="@dimen/text_size_header_font"
-        
         app:layout_constraintBottom_toTopOf="@id/hg40"
         app:layout_constraintEnd_toStartOf="@id/vg90"
         app:layout_constraintStart_toEndOf="@id/vg10"
         app:layout_constraintTop_toBottomOf="@id/hg25" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg90"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg40"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/button"
+            android:text="@string/weight_loss"
+            >
+
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Button>
+
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg05"
@@ -63,13 +103,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10"/>
+        app:layout_constraintGuide_percent="0.10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vg90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.90"/>
+        app:layout_constraintGuide_percent="0.90" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

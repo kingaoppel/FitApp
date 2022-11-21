@@ -9,4 +9,7 @@
     <string name="register">Register</string>
     <string name="have_an_account_log_in">Have an account? Log in!</string>
     <string name="what_do_you_want_to_achive">What do you want to achieve?</string>
+    <string name="weight_loss">Weight loss</string>
+    <string name="putting_on_weight">Putting on weight</string>
+    <string name="maintaining_body_weight">Maintaining body weight</string>
 </resources>
