@@ -12,4 +12,16 @@
     <string name="weight_loss">Weight loss</string>
     <string name="putting_on_weight">Putting on weight</string>
     <string name="maintaining_body_weight">Maintaining body weight</string>
+    <string name="sex">Sex:</string>
+    <string name="date_of_birth">Date of birth:</string>
+    <string name="height">Height in cm:</string>
+    <string name="weight">Weight in cm:</string>
+    <string name="target">Target body weight:</string>
+    <string name="next">Next</string>
+    <string name="woman">  Woman</string>
+    <string name="man">  Man</string>
+    <string name="cm">100-220 cm</string>
+    <string name="kg">30-200 kg</string>
+
+
 </resources>
