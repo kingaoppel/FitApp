@@ -24,9 +24,18 @@
     <string name="kg">30-200 kg</string>
     <string name="additional_info">Additional info</string>
     <string name="date">01.01.2000</string>
+    <string name="dateToday">Mon, 12.01.2022</string>
     <string name="incorrectHeight">Height should be in the range: 100-220cm</string>
     <string name="incorrectWeight">Weight should be in the range: 30-300kg</string>
     <string name="level_of_activity">The level of physical activity:</string>
+    <string name="enter_a_name">Enter a name of product</string>
+    <string name="meal">Meal</string>
+    <string name="search">Search</string>
+    <string name="your_meals">Your meals</string>
+    <string name="favourite">Favourite</string>
+    <string name="notes">Notes</string>
+    <string name="add_product">Add a new product</string>
+
 
     <string-array name="array_level_of_act">
         <item>Small</item>
