@@ -209,7 +209,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if(currentUser != null){
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+//            change na Main
+            Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
             startActivity(intent);
             finish();
         }else{
