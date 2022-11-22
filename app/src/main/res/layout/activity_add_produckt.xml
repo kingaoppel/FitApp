@@ -11,12 +11,13 @@
         style="@style/baseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
         android:text="@string/meal"
         android:textSize="@dimen/text_size_header_font"
         app:layout_constraintEnd_toStartOf="@id/vg95"
         app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintBottom_toTopOf="@id/hg05"/>
+        app:layout_constraintBottom_toTopOf="@id/hg05"
+        app:layout_constraintTop_toBottomOf="@id/hg01"
+        />
 
     <TextView
         android:id="@+id/tvDateOfDay"
@@ -154,6 +155,13 @@
             tools:text="Product" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg100"
