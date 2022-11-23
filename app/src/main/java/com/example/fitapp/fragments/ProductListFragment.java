@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fitapp.R;
 
-public class NoteFragment extends Fragment {
+public class ProductListFragment extends Fragment {
 
     private Context context;
 
@@ -25,13 +25,12 @@ public class NoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note, container, false);
+        return inflater.inflate(R.layout.fragment_product_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
     }
 }

@@ -3,18 +3,21 @@ package com.example.fitapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.fitapp.fragments.NoteFragment;
+import com.example.fitapp.fragments.ProductListFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.List;
+import java.util.Calendar;
 
 public class AddProducktActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -23,10 +26,12 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     private TextView favourite;
     private TextView notes;
     private TextView addNewProduct;
+    private TextView date;
     private TextInputLayout searchInputLayout;
-    private LinearLayout linearLayout;
+    private LinearLayout addOwnProductLayout;
 
     private NoteFragment noteFragment;
+    private ProductListFragment productListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +44,27 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         notes = findViewById(R.id.tvNotes);
         addNewProduct = findViewById(R.id.addOwnProduct);
         searchInputLayout = (TextInputLayout) findViewById(R.id.searchField2);
-        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        addOwnProductLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        date = (TextView) findViewById(R.id.tvDateOfDay);
 
         String str;
 
         noteFragment = new NoteFragment();
+        productListFragment = new ProductListFragment();
+
+        addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddProducktActivity.this, AddOwnProductActivity.class);
+                startActivity(intent);
+            }
+        });
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 colors();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
                 search.setTextColor(getResources().getColor(R.color.black,null));
             }
         });
@@ -57,6 +73,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             @Override
             public void onClick(View view) {
                 colors();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
                 yourMeals.setTextColor(getResources().getColor(R.color.black,null));
             }
         });
@@ -65,6 +82,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             @Override
             public void onClick(View view) {
                 colors();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
                 favourite.setTextColor(getResources().getColor(R.color.black,null));
             }
         });
@@ -76,11 +94,11 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
                 colors();
                 notes.setTextColor(getResources().getColor(R.color.black,null));
                 searchInputLayout.setVisibility(View.GONE);
-                linearLayout.setVisibility(View.GONE);
+                addOwnProductLayout.setVisibility(View.GONE);
             }
         });
 
-        search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        searchInputLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -88,6 +106,32 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
                 }
             }
         });
+
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                int dayS = c.get(Calendar.DAY_OF_WEEK);
+//                JAK WYŚWIETLIĆ MON, 21.11.2022
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        AddProducktActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                date.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
     }
 
     private void hideKeyboard(View v) {
@@ -106,6 +150,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         favourite.setTextColor(getResources().getColor(R.color.primary,null));
         notes.setTextColor(getResources().getColor(R.color.primary,null));
         searchInputLayout.setVisibility(View.VISIBLE);
-        linearLayout.setVisibility(View.VISIBLE);
+        addOwnProductLayout.setVisibility(View.VISIBLE);
     }
+
 }
