@@ -9,6 +9,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
@@ -16,14 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.Calendar;
 
 public class Register3Activity extends AppCompatActivity {
 
     private TextView dateOfBirth;
-    private TextView weightInputField;
-    private TextView heightInputField;
-    private TextView targetInputField;
+    private TextInputLayout weightInputLayout, heightInputLayout, targetInputLayout;
+    private TextInputEditText weight, height, target;
     private TextView additionalInfo;
     private Spinner spinner;
     private LinearLayout linearLayoutAdditionalInfo;
@@ -40,16 +44,19 @@ public class Register3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_register3);
 
         dateOfBirth = findViewById(R.id.dateOfBirth);
-        weightInputField = findViewById(R.id.weightInputField);
-        heightInputField = findViewById(R.id.heightInputField);
-        targetInputField = findViewById(R.id.targetInputField);
-        additionalInfo = findViewById(R.id.additionalInfo);
-        spinner = findViewById(R.id.spinner);
-        linearLayoutAdditionalInfo = findViewById(R.id.linLayAdditionalInfo);
-        createAnAccount = findViewById(R.id.tvCreateAccount);
-        incorrectWeight = findViewById(R.id.incorrectWeight);
-        incorrectHeight = findViewById(R.id.incorrectHeight);
-        incorrectTarget = findViewById(R.id.incorrectTarget);
+        weight = (TextInputEditText) findViewById(R.id.weightInputField);
+        height = (TextInputEditText) findViewById(R.id.heightInputField);
+        target = (TextInputEditText) findViewById(R.id.targetInputField);
+        weightInputLayout = (TextInputLayout) findViewById(R.id.weightField);
+        heightInputLayout = (TextInputLayout) findViewById(R.id.heightField);
+        targetInputLayout = (TextInputLayout) findViewById(R.id.targetField);
+        additionalInfo = (TextView)  findViewById(R.id.additionalInfo);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        linearLayoutAdditionalInfo = (LinearLayout) findViewById(R.id.linLayAdditionalInfo);
+        createAnAccount = (TextView) findViewById(R.id.tvCreateAccount);
+        incorrectWeight = (TextView) findViewById(R.id.incorrectWeight);
+        incorrectHeight = (TextView) findViewById(R.id.incorrectHeight);
+        incorrectTarget = (TextView) findViewById(R.id.incorrectTarget);
 
         initialize();
 
@@ -67,7 +74,7 @@ public class Register3Activity extends AppCompatActivity {
             }
         });
 
-        weightInputField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -76,7 +83,7 @@ public class Register3Activity extends AppCompatActivity {
             }
         });
 
-        heightInputField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        height.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -85,7 +92,7 @@ public class Register3Activity extends AppCompatActivity {
             }
         });
 
-        targetInputField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        target.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -93,6 +100,26 @@ public class Register3Activity extends AppCompatActivity {
                 }
             }
         });
+
+
+        weight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                weightInputLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                weightInputLayout.setErrorEnabled(false);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 
         additionalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,16 +159,16 @@ public class Register3Activity extends AppCompatActivity {
     }
 
     private void initialize() {
-        weightInputField.setText("");
-        heightInputField.setText("");
-        targetInputField.setText("");
+        weight.setText("");
+        height.setText("");
+        target.setText("");
         incorrectHeight.setVisibility(View.GONE);
         incorrectWeight.setVisibility(View.GONE);
         incorrectTarget.setVisibility(View.GONE);
     }
 
     private boolean checkDataWei(){
-        String weight = weightInputField.getText().toString();
+        String weight = this.weight.getText().toString();
         if(weight.length()>2){
             int intWeight = valueOf(weight);
             if(intWeight>30 && intWeight<300){
@@ -154,7 +181,7 @@ public class Register3Activity extends AppCompatActivity {
     }
 
     private boolean checkDataTarg(){
-        String target = targetInputField.getText().toString();
+        String target = this.target.getText().toString();
         if(target.length()>2){
             int intWeight = valueOf(target);
             if(intWeight>30 && intWeight<300){
@@ -167,7 +194,7 @@ public class Register3Activity extends AppCompatActivity {
     }
 
     private boolean checkDataHei(){
-        String height = heightInputField.getText().toString();
+        String height = this.height.getText().toString();
         if(height.length()>2){
             int intWeight = valueOf(height);
             if(intWeight>100 && intWeight<220){
@@ -183,4 +210,5 @@ public class Register3Activity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+
 }
