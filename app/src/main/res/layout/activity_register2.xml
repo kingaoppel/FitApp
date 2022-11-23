@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@id/hg45"
         app:layout_constraintEnd_toStartOf="@id/vg90"
         app:layout_constraintStart_toEndOf="@id/vg10"
-        app:layout_constraintTop_toBottomOf="@id/hg30" />
+        app:layout_constraintTop_toBottomOf="@id/hg20" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -90,7 +90,7 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/hg30"
+        android:id="@+id/hg20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

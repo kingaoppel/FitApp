@@ -3,6 +3,7 @@ package com.example.fitapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.fitapp.fragments.NoteFragment;
 import com.example.fitapp.fragments.ProductListFragment;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
@@ -28,11 +30,13 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     private TextView addNewProduct;
     private TextView date;
     private TextInputLayout searchInputLayout;
+    private TextInputEditText searchItem;
     private LinearLayout addOwnProductLayout;
 
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         notes = findViewById(R.id.tvNotes);
         addNewProduct = findViewById(R.id.addOwnProduct);
         searchInputLayout = (TextInputLayout) findViewById(R.id.searchField2);
+        searchItem = (TextInputEditText) findViewById(R.id.searchInputField2);
         addOwnProductLayout = (LinearLayout) findViewById(R.id.linearLayout);
         date = (TextView) findViewById(R.id.tvDateOfDay);
 
@@ -98,7 +103,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             }
         });
 
-        searchInputLayout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        searchItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -106,7 +111,6 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
                 }
             }
         });
-
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override

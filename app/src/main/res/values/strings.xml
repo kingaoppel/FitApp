@@ -35,6 +35,17 @@
     <string name="favourite">Favourite</string>
     <string name="notes">Notes</string>
     <string name="add_product">Add a new product</string>
+    <string name="calories">Calories</string>
+    <string name="protein">Protein</string>
+    <string name="fat">Fat</string>
+    <string name="carbohydrates">Carbohydrates</string>
+    <string name="calories_per_100">Calories per 100g</string>
+    <string name="protein_per_100">Protein per 100g</string>
+    <string name="fat_per_100">Fat per 100g</string>
+    <string name="carbohydrates_per_100">Carbohydrates per 100g</string>
+    <string name="summary">Summary per 100g:</string>
+    <string name="macro_per_100">Macronutrients per 100g:</string>
+
 
 
     <string-array name="array_level_of_act">

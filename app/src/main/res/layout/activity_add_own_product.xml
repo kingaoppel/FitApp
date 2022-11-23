@@ -4,6 +4,311 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddOwnProductActivity">
+    tools:context=".AddOwnProductActivity"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg20"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg05"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_a_name"
+                tools:text="Name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/macro_per_100"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_huge"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_12"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg45"
+        app:layout_constraintEnd_toStartOf="@id/vg50"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg20"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/caloriesField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/caloriesInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/calories"
+                tools:text="Calories" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/proteinField"
+            style="@style/inputLayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/proteinInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/protein"
+                tools:text="Protein" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg45"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg50"
+        app:layout_constraintTop_toBottomOf="@id/hg20"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fatField"
+            style="@style/inputLayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fatInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fat"
+                tools:text="Fat" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carboField"
+            style="@style/inputLayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/carboInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/carbohydrates"
+                tools:text="Carbohydrates" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg80"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg45">
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@string/summary"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/calories"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/protein"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/fat"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/carbohydrates"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintBottom_toTopOf="@id/hg100"
+        app:layout_constraintTop_toBottomOf="@id/hg90"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            />
+
+        <TextView
+            android:id="@+id/addOwnProduct"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/add_product"
+            android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_16"
+            />
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.00" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

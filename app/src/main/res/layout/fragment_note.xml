@@ -12,7 +12,7 @@
         android:layout_gravity="center">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/heightField"
+            android:id="@+id/noteField"
             style="@style/inputLayer"
             android:layout_marginBottom="@dimen/dp_16"
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_marginLeft="@dimen/dp_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/heightInputField"
+                android:id="@+id/noteInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/notes"
