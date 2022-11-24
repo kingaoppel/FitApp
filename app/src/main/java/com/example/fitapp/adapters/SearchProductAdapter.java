@@ -1,9 +1,10 @@
 package com.example.fitapp.adapters;
-
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,7 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitapp.AddProducktActivity;
+import com.example.fitapp.MainActivity;
 import com.example.fitapp.R;
+import com.example.fitapp.Register2Activity;
+import com.example.fitapp.Register3Activity;
 
 import java.util.List;
 
@@ -47,11 +52,22 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
 
         TextView textView;
         private LinearLayout linearLayout;
+        private ImageView plus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tv_searchItemName);
             linearLayout = itemView.findViewById(R.id.additionalInfoLinLayout);
+            plus = itemView.findViewById(R.id.but_addProducttoMeal);
+
+            plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

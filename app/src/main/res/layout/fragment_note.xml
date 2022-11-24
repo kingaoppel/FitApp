@@ -9,15 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/noteField"
             style="@style/inputLayer"
             android:layout_marginBottom="@dimen/dp_16"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_marginTop="@dimen/dp_12"
+            android:layout_height="match_parent"
             android:layout_marginRight="@dimen/dp_24"
             android:layout_marginLeft="@dimen/dp_24">
 

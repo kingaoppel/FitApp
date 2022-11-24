@@ -50,6 +50,12 @@ public class ProductListFragment extends Fragment {
         items.add("Chleb");
         items.add("Jajka");
         items.add("Sok");
+        items.add("Jajka");
+        items.add("Sok");
+        items.add("Jajka");
+        items.add("Sok");
+        items.add("Jajka");
+        items.add("Sok");
 
         searchProduct = view.findViewById(R.id.search_results);
         searchProductAdapter = new SearchProductAdapter(context, items);
