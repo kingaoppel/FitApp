@@ -74,7 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
-                tools:text="Calories" />
+                tools:text="Calories"
+                android:numeric="integer"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/protein"
-                tools:text="Protein" />
+                tools:text="Protein"
+                android:numeric="integer"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +123,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fat"
-                tools:text="Fat" />
+                tools:text="Fat"
+                android:numeric="integer"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/carbohydrates"
-                tools:text="Carbohydrates" />
+                tools:text="Carbohydrates"
+                android:numeric="integer"/>
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -170,6 +174,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/sumCalories"
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,6 +186,7 @@
 
             <TextView
                 style="@style/baseText"
+                android:id="@+id/sumProtrins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
@@ -188,8 +194,10 @@
                 android:text="@string/protein"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_medium" />
+
             <TextView
                 style="@style/baseText"
+                android:id="@+id/sumFat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
@@ -197,7 +205,9 @@
                 android:text="@string/fat"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_medium" />
+
             <TextView
+                android:id="@+id/sumCarbo"
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -216,7 +226,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutAddNewPro"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"

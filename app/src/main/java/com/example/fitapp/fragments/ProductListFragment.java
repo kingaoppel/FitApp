@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,19 +42,19 @@ public class ProductListFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
 
         items.clear();
         items.add("Masło");
         items.add("Mleko");
         items.add("Chleb");
+        items.add("Jajka");
+        items.add("Sok");
 
         searchProduct = view.findViewById(R.id.search_results);
         searchProductAdapter = new SearchProductAdapter(context, items);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         searchProduct.setLayoutManager(manager);
         searchProduct.setAdapter(searchProductAdapter);
-
     }
 }

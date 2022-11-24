@@ -67,7 +67,7 @@ public class Register3Activity extends AppCompatActivity {
                 incorrectHeight.setVisibility(View.GONE);
                 incorrectTarget.setVisibility(View.GONE);
                 if(checkDataHei() && checkDataWei() && checkDataTarg()){
-                    Intent intent = new Intent(Register3Activity.this, MainActivity.class);
+                    Intent intent = new Intent(Register3Activity.this, AddProducktActivity.class);
                     startActivity(intent);
                     finish();
                 }

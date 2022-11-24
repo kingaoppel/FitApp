@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,15 +46,23 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+        private LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tv_searchItemName);
+            linearLayout = itemView.findViewById(R.id.additionalInfoLinLayout);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context,textView.getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,textView.getText(), Toast.LENGTH_SHORT).show();
 //                    searchProductAdapterInterface.getInfo(items.get(getAdapterPosition()));
+                    if(linearLayout.isShown()){
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                    else{
+                        linearLayout.setVisibility(View.VISIBLE);
+                    }
 
                 }
             });

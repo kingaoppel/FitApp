@@ -97,7 +97,7 @@
         />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutAddNewPro"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
