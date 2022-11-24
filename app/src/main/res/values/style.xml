@@ -48,7 +48,6 @@
 
     <style name="button">
         <item name="android:textSize">@dimen/text_size_button</item>
-
         <item name="backgroundTint">@color/white</item>
         <item name="strokeColor">@color/primary</item>
         <item name="strokeWidth">@dimen/dp_2</item>

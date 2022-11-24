@@ -45,6 +45,9 @@
     <string name="carbohydrates_per_100">Carbohydrates per 100g</string>
     <string name="summary">Summary per 100g:</string>
     <string name="macro_per_100">Macronutrients per 100g:</string>
+    <string name="productName">Product name</string>
+    <string name="quantity">100g</string>
+    <string name="calories_in_pro">1003kcal</string>
 
 
 
@@ -52,6 +55,12 @@
         <item>Small</item>
         <item>Medium</item>
         <item>Big</item>
+    </string-array>
+
+    <string-array name="search_items">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
 </resources>

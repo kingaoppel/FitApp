@@ -2,6 +2,8 @@ package com.example.fitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -14,12 +16,15 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.fitapp.adapters.SearchProductAdapter;
 import com.example.fitapp.fragments.NoteFragment;
 import com.example.fitapp.fragments.ProductListFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddProducktActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -35,6 +40,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +62,8 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
         noteFragment = new NoteFragment();
         productListFragment = new ProductListFragment();
+
+
 
         addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override

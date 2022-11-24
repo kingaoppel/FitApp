@@ -9,12 +9,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.R;
+import com.example.fitapp.adapters.SearchProductAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductListFragment extends Fragment {
 
     private Context context;
+
+    private SearchProductAdapter searchProductAdapter;
+    RecyclerView searchProduct;
+
+    private List<String> items = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -30,7 +41,19 @@ public class ProductListFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
+
+        items.clear();
+        items.add("Masło");
+        items.add("Mleko");
+        items.add("Chleb");
+
+        searchProduct = view.findViewById(R.id.search_results);
+        searchProductAdapter = new SearchProductAdapter(context, items);
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        searchProduct.setLayoutManager(manager);
+        searchProduct.setAdapter(searchProductAdapter);
 
     }
 }
