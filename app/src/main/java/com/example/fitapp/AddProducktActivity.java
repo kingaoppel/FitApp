@@ -69,20 +69,6 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         noteFragment = new NoteFragment();
         productListFragment = new ProductListFragment();
 
-        viewModel.getAutoCompleteMealsData().observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> strings) {
-                if(strings != null){
-                    productNames.clear();
-                    productNames.addAll(strings);
-                    System.out.println("productNames: ");
-                    for(String s : productNames){
-                        System.out.println("#product : " + s);
-                    }
-                }
-            }
-        });
-
         addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
