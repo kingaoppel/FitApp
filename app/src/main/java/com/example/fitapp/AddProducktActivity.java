@@ -2,6 +2,8 @@ package com.example.fitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -13,13 +15,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitapp.fragments.NoteFragment;
 import com.example.fitapp.fragments.ProductListFragment;
+import com.example.fitapp.viewModels.MainViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddProducktActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -32,6 +38,9 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     private TextInputLayout searchInputLayout;
     private TextInputEditText searchItem;
     private LinearLayout addOwnProductLayout;
+    private MainViewModel viewModel;
+    private List<String> productNames = new ArrayList<>();
+
 
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
@@ -42,6 +51,8 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_produckt);
+
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         search = findViewById(R.id.tvSearch);
         yourMeals = findViewById(R.id.tvYourMeals);
@@ -58,11 +69,38 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         noteFragment = new NoteFragment();
         productListFragment = new ProductListFragment();
 
+        viewModel.getAutoCompleteMealsData().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                if(strings != null){
+                    productNames.clear();
+                    productNames.addAll(strings);
+                    System.out.println("productNames: ");
+                    for(String s : productNames){
+                        System.out.println("#product : " + s);
+                    }
+                }
+            }
+        });
+
         addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddProducktActivity.this, AddOwnProductActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        searchInputLayout.setStartIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = searchItem.getText().toString();
+                if(query.length() > 0){
+                    viewModel.fetchAutoCompleteMeals(query);
+                }else{
+                    Toast.makeText(AddProducktActivity.this, "QUery shouldn't be empty", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
