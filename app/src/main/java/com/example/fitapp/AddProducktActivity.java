@@ -94,13 +94,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         searchInputLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String query = searchItem.getText().toString();
-                if(query.length() > 0){
-                    viewModel.fetchAutoCompleteMeals(query);
-                }else{
-                    Toast.makeText(AddProducktActivity.this, "QUery shouldn't be empty", Toast.LENGTH_SHORT).show();
-                }
-
+                searchForProduct();
             }
         });
 
@@ -175,6 +169,15 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             }
         });
 
+    }
+
+    private void searchForProduct() {
+        String query = searchItem.getText().toString();
+        if(query.length() > 0){
+            viewModel.fetchAutoCompleteMeals(query);
+        }else{
+            Toast.makeText(AddProducktActivity.this, "Query shouldn't be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void hideKeyboard(View v) {
