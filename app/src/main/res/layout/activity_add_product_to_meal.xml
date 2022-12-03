@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddOwnProductActivity"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:src="@drawable/ic_baseline_star"
+
+        app:layout_constraintBottom_toTopOf="@id/hg10"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg00"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg55"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg45"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginRight="@dimen/dp_12">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/caloriesField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/caloriesInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Quantity"
+                tools:text="@string/quantity"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg45"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg10">
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@string/productName"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_24"/>
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@string/summary_per_your_meal"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sumCalories"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/calories"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                style="@style/baseText"
+                android:id="@+id/sumProtrins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/protein"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                style="@style/baseText"
+                android:id="@+id/sumFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/fat"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/sumCarbo"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/carbohydrates"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/hg80"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintTop_toBottomOf="@id/hg55">
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@string/summary_per_your_day"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_24"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sumCalories2"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/calories"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                style="@style/baseText"
+                android:id="@+id/sumProtrins2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/protein"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                style="@style/baseText"
+                android:id="@+id/sumFat2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/fat"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/sumCarbo2"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/carbohydrates"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAddNewPro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/vg90"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/vg10"
+        app:layout_constraintBottom_toTopOf="@id/hg100"
+        app:layout_constraintTop_toBottomOf="@id/hg90"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            />
+
+        <TextView
+            android:id="@+id/addOwnProduct"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/add_a_product"
+            android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_16"
+            />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.00" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.00" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vg50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

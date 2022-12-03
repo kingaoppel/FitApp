@@ -8,4 +8,65 @@
     <string name="retype_password">Retype password</string>
     <string name="register">Register</string>
     <string name="have_an_account_log_in">Have an account? Log in!</string>
+    <string name="what_do_you_want_to_achive">What do you want to achieve?</string>
+    <string name="weight_loss">Weight loss</string>
+    <string name="putting_on_weight">Putting on weight</string>
+    <string name="maintaining_body_weight">Maintaining body weight</string>
+    <string name="sex">Sex:</string>
+    <string name="date_of_birth">Date of birth:</string>
+    <string name="height">Height in cm:</string>
+    <string name="weight">Weight in kg:</string>
+    <string name="target">Target body weight:</string>
+    <string name="next">Next</string>
+    <string name="woman">  Woman</string>
+    <string name="man">  Man</string>
+    <string name="cm">100-220 cm</string>
+    <string name="kg">30-200 kg</string>
+    <string name="additional_info">Additional info</string>
+    <string name="date">01.01.2000</string>
+    <string name="dateToday">Mon, 12.01.2022</string>
+    <string name="incorrectHeight">Height should be in the range: 100-220cm</string>
+    <string name="incorrectWeight">Weight should be in the range: 30-300kg</string>
+    <string name="level_of_activity">The level of physical activity:</string>
+    <string name="enter_a_name">Enter a name of product</string>
+    <string name="meal">Meal</string>
+    <string name="search">Search</string>
+    <string name="your_meals">Your meals</string>
+    <string name="favourite">Favourite</string>
+    <string name="notes">Notes</string>
+    <string name="add_a_new_product">Add a new product</string>
+    <string name="add_a_product">Add product</string>
+    <string name="calories">Calories</string>
+    <string name="protein">Protein</string>
+    <string name="fat">Fat</string>
+    <string name="carbohydrates">Carbohydrates</string>
+    <string name="calories_per_100">Calories per 100g</string>
+    <string name="protein_per_100">Protein per 100g</string>
+    <string name="fat_per_100">Fat per 100g</string>
+    <string name="carbohydrates_per_100">Carbohydrates per 100g</string>
+    <string name="summary">Summary per 100g:</string>
+    <string name="summary_per_your_day">Summary per your day:</string>
+    <string name="summary_per_your_meal">Summary per your meal:</string>
+    <string name="macro_per_100">Macronutrients per 100g:</string>
+    <string name="productName">Product name</string>
+    <string name="quantity">100g</string>
+    <string name="calories_in_pro">1003kcal</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="dinner">Dinner</string>
+    <string name="lunch">Lunch</string>
+    <string name="snack">Snack</string>
+    <string name="supper">Supper</string>
+
+    <string-array name="array_level_of_act">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Big</item>
+    </string-array>
+
+    <string-array name="search_items">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

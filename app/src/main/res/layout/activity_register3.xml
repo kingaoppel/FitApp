@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Register3Activity"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_32"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginBottom="@dimen/dp_32"/>
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@string/sex"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm" />
+
+        <RadioGroup
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/dp_24">
+
+            <RadioButton
+                style="@style/radioButton"
+                android:id="@+id/radioWoman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_72"
+                android:text="@string/woman"
+                />
+
+            <RadioButton
+                style="@style/radioButton"
+                android:id="@+id/radioMan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/man"
+                />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/date_of_birth"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_norm" />
+
+            <TextView
+                android:id="@+id/dateOfBirth"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/date"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/dp_24"/>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/heightField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/heightInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/height"
+                tools:text="@string/cm"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/incorrectHeight"
+            style="@style/incorrectValue"
+            android:textStyle="bold"
+
+            android:id="@+id/incorrectHeight"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/weightField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/weightInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/weight"
+                tools:text="@string/kg"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/incorrectWeight"
+            style="@style/incorrectValue"
+            android:textStyle="bold"
+
+            android:id="@+id/incorrectWeight"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/targetField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/targetInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/target"
+                tools:text="@string/kg"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/incorrectWeight"
+            style="@style/incorrectValue"
+            android:textStyle="bold"
+
+            android:id="@+id/incorrectTarget"/>
+
+        <TextView
+            android:id="@+id/tvCreateAccount"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_12"
+            android:text="@string/create_an_account"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_large"
+            android:layout_gravity="right"/>
+
+        <TextView
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_12"
+            android:text="@string/additional_info"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_large"
+            android:layout_gravity="center"
+            android:id="@+id/additionalInfo"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/linLayAdditionalInfo">
+
+            <TextView
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_12"
+                android:text="@string/level_of_activity"
+                android:textDirection="ltr"
+                android:textSize="@dimen/text_size_large"
+                android:id="@+id/tvLevelOfActivity"/>
+
+            <Spinner
+                android:layout_width="@dimen/dp_250"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:layout_gravity="center"
+                android:entries="@array/array_level_of_act"/>
+
+
+        </LinearLayout>
+
+        </LinearLayout>
+</ScrollView>

@@ -13,6 +13,13 @@
         <item name="errorIconDrawable">@null</item>
     </style>
 
+    <style name="inputLayer.Search">
+        <item name="startIconDrawable">@drawable/ic_search</item>
+        <item name="startIconTint">@color/primary</item>
+        <item name="endIconMode">clear_text</item>
+
+    </style>
+
     <style name="inputLayer.Email">
         <item name="startIconDrawable">@drawable/ic_email</item>
         <item name="startIconTint">@color/primary</item>
@@ -30,8 +37,48 @@
         <item name="android:textColor">@color/primary</item>
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:fontStyle">italic</item>
+    </style>
 
+    <style name="incorrectValue">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:fontStyle">italic</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
 
+    <style name="button">
+        <item name="android:textSize">@dimen/text_size_button</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/primary</item>
+        <item name="strokeWidth">@dimen/dp_2</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:padding">@dimen/dp_16</item>
+        <item name="textAllCaps">false</item>
+
+    </style>
+
+    <style name="button.weightLoss">
+        <item name="android:textColor">@color/red</item>
+
+    </style>
+
+    <style name="button.putting_on_weight">
+        <item name="android:textColor">@color/blue</item>
+
+    </style>
+
+    <style name="button.maintaining_body_weight">
+        <item name="android:textColor">@color/green</item>
+
+    </style>
+
+    <style name="radioButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">@dimen/text_size_huge</item>
     </style>
 
 </resources>

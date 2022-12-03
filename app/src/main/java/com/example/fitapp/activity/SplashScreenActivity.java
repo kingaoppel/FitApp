@@ -1,12 +1,13 @@
-package com.example.fitapp;
+package com.example.fitapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
+import com.example.fitapp.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                final Intent toLoginActivity = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                final Intent toLoginActivity = new Intent(SplashScreenActivity.this, LoginActivity.class);
                 finish();
                 startActivity(toLoginActivity);
             }

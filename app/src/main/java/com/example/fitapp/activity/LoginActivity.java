@@ -1,4 +1,4 @@
-package com.example.fitapp;
+package com.example.fitapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitapp.R;
 import com.example.fitapp.Utils.ValidateCredentials;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,37 +33,33 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    private TextInputLayout emailInputLayout, passwordInputLayout, confirmPasswordInputLayout;
-    private TextInputEditText email, password, confirmPassword;
-    private TextView errorText, registerButton, loginSwitch;
+    private TextInputLayout emailInputLayout, passwordInputLayout;
+    private TextInputEditText email, password;
+    private TextView loginButton, registerSwitch, errorText;
     private SignInButton googleSignInButton;
 
     private boolean isEmailValid = false;
     private boolean isPasswordValid = false;
-    private boolean isConfirmPasswordValid = false;
 
     private static final int REQ_ONE_TAP = 367;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
         emailInputLayout = (TextInputLayout) findViewById(R.id.emailField);
         passwordInputLayout = (TextInputLayout) findViewById(R.id.passwordField);
-        confirmPasswordInputLayout = (TextInputLayout) findViewById(R.id.retypePasswordField);
         email = (TextInputEditText) findViewById(R.id.emailInputField);
         password = (TextInputEditText) findViewById(R.id.passwordInputField);
-        confirmPassword = (TextInputEditText) findViewById(R.id.retypePasswordInputField);
-        errorText = (TextView) findViewById(R.id.errorText);
-        registerButton = (TextView) findViewById(R.id.registerButton);
-        loginSwitch = (TextView) findViewById(R.id.loginAccountButton);
+        loginButton = (TextView) findViewById(R.id.loginButton);
+        registerSwitch = (TextView) findViewById(R.id.createAccountButton);
         googleSignInButton = (SignInButton) findViewById(R.id.googleSignInButton);
+        errorText = (TextView) findViewById(R.id.errorText);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -71,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
         initialize();
 
@@ -84,15 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    hideKeyboard(v);
-                }
-            }
-        });
-
-        confirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -138,55 +127,36 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        confirmPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                confirmPasswordInputLayout.setError(null);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                confirmPasswordInputLayout.setErrorEnabled(false);
-                isConfirmPasswordValid = count > 0 && ValidateCredentials.matchesPassword(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-                    register();
+                if (isEmailValid && isPasswordValid) {
+                    login();
                 }else{
-                    if(!isConfirmPasswordValid){
-                        confirmPasswordInputLayout.setErrorEnabled(true);
-                        confirmPasswordInputLayout.setError("Passwords do not match");
-                        confirmPasswordInputLayout.requestFocus();
-                    }
-                    if(!isPasswordValid){
-                        passwordInputLayout.setErrorEnabled(true);
-                        passwordInputLayout.setError("Password must be at least 8 characters and contain at " +
-                                "least one number and capital letter");
-                        passwordInputLayout.requestFocus();
-                    }
-                    if(!isEmailValid){
+                    if (!isEmailValid) {
+                        emailInputLayout.setError("Invalid email format");
                         emailInputLayout.setErrorEnabled(true);
-                        emailInputLayout.setError("Invalid email");
-                        emailInputLayout.requestFocus();
                     }
+                    if (!isPasswordValid) {
+                        passwordInputLayout.setErrorEnabled(true);
+                        passwordInputLayout.setError("Password must be at least 8 characters and contain at least one number and capital letter");
+                        if(isEmailValid){
+                            passwordInputLayout.requestFocus();
+                        }else{
+                            emailInputLayout.requestFocus();
+                        }
+                    }
+
                 }
             }
         });
 
-        loginSwitch.setOnClickListener(new View.OnClickListener() {
+        registerSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -196,7 +166,6 @@ public class RegisterActivity extends AppCompatActivity {
                 googleSignIn();
             }
         });
-
     }
 
     @Override
@@ -209,11 +178,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if(currentUser != null){
-            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }else{
-            Log.d("RegisterActivity", "updateUI: User is not signed in");
+            Log.d("LoginActivity", "updateUI: User is not signed in");
         }
     }
 
@@ -232,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             }catch(ApiException e){
-                Log.w("RegisterActivity", "Google sign in failed", e);
+                Log.w("LoginActivity", "Google sign in failed", e);
             }
         }
     }
@@ -251,61 +220,57 @@ public class RegisterActivity extends AppCompatActivity {
                         }else{
                             //If sign in fails, display a message to the user
                             Log.w("RegisterActivity", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
                     }
                 });
     }
 
-    private void register() {
-        if(isConfirmPasswordValid && isPasswordValid && isEmailValid){
-            String s_email = email.getText().toString();
-            String s_password = password.getText().toString();
-            String s_confirmPassword = confirmPassword.getText().toString();
-
-            if(s_password.equals(s_confirmPassword)){
-                mAuth.createUserWithEmailAndPassword(s_email, s_password)
-                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    //Sign in success, update UI with the signed-in user's information
-                                    Log.d("RegisterActivity", "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
-                                }else{
-                                    //If sign in fails, display a message to the user
-                                    Log.w("RegisterActivity", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
-                                }
-                            }
-                        });
-            }else {
-                confirmPasswordInputLayout.setErrorEnabled(true);
-                confirmPasswordInputLayout.setError("Passwords do not match");
-                confirmPasswordInputLayout.requestFocus();
-            }
-        }
-
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
-
-    private void initialize() {
+    private void initialize(){
         email.setText("");
         password.setText("");
-        confirmPassword.setText("");
         errorText.setVisibility(View.GONE);
+    }
+
+    private void login(){
+        errorText.setVisibility(View.GONE);
+        String emailString = email.getText().toString();
+        String passwordString = password.getText().toString();
+
+        mAuth.signInWithEmailAndPassword(emailString, passwordString)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //Sign in success, update UI with the signed-in user's information
+                            Log.d("LoginActivity", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        }else{
+                            //If sign in fails, display a message to the user
+                            Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            errorText.setVisibility(View.VISIBLE);
+                            errorText.setText("Something went wrong. Please try again");
+                            updateUI(null);
+                        }
+                    }
+                });
     }
 
     private void hideKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+
+    public static class Register2Activity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_register2);
+        }
     }
 }
