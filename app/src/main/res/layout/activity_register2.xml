@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity$Register2Activity">
+    tools:context=".activity.LoginActivity$Register2Activity">
 
     <ImageView
         android:id="@+id/imageView"

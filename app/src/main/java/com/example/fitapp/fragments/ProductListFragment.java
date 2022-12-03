@@ -63,20 +63,6 @@ public class ProductListFragment extends Fragment {
             }
         });
 
-
-        items.clear();
-        items.add("Masło");
-        items.add("Mleko");
-        items.add("Chleb");
-        items.add("Jajka");
-        items.add("Sok");
-        items.add("Jajka");
-        items.add("Sok");
-        items.add("Jajka");
-        items.add("Sok");
-        items.add("Jajka");
-        items.add("Sok");
-
         searchProduct = view.findViewById(R.id.search_results);
         searchProductAdapter = new SearchProductAdapter(context, items);
         LinearLayoutManager manager = new LinearLayoutManager(context);

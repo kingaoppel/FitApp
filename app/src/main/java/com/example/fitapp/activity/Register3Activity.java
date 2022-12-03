@@ -1,4 +1,4 @@
-package com.example.fitapp;
+package com.example.fitapp.activity;
 
 import static java.lang.Short.valueOf;
 
@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.fitapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

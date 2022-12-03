@@ -1,8 +1,7 @@
-package com.example.fitapp;
+package com.example.fitapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -17,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitapp.R;
 import com.example.fitapp.fragments.NoteFragment;
 import com.example.fitapp.fragments.ProductListFragment;
 import com.example.fitapp.viewModels.MainViewModel;

@@ -1,8 +1,10 @@
-package com.example.fitapp;
+package com.example.fitapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.fitapp.R;
 
 public class AddProductToMeal extends AppCompatActivity {
 
