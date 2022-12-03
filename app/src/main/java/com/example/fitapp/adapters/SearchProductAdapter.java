@@ -33,6 +33,7 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
         View view = LayoutInflater.from(context).inflate(R.layout.search_item,parent,false);
         return new ViewHolder(view);
     }
+    
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
