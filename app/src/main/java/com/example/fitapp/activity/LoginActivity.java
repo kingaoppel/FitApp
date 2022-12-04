@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-
         initialize();
 
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {

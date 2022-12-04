@@ -2,6 +2,7 @@ package com.example.fitapp.activity;
 
 import static java.lang.Short.valueOf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
@@ -19,10 +21,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fitapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register3Activity extends AppCompatActivity {
 
@@ -36,6 +45,12 @@ public class Register3Activity extends AppCompatActivity {
     private TextView incorrectTarget;
     private TextView incorrectWeight;
     private TextView incorrectHeight;
+
+    FirebaseUser currentUser;
+    FirebaseFirestore db;
+    String uid;
+
+    Map<String, Object> data = new HashMap<>();
 
 
     @SuppressLint("MissingInflatedId")
@@ -61,6 +76,14 @@ public class Register3Activity extends AppCompatActivity {
 
         initialize();
 
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser != null){
+            uid = currentUser.getUid();
+            Log.d("User",uid);
+        }
+
         createAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +91,23 @@ public class Register3Activity extends AppCompatActivity {
                 incorrectHeight.setVisibility(View.GONE);
                 incorrectTarget.setVisibility(View.GONE);
                 if(checkDataHei() && checkDataWei() && checkDataTarg()){
+                    Log.d("Data",weight.getText().toString());
+                    int hei = valueOf(height.getText().toString());
+                    data.put("height", hei);
+                    db.collection("users").document(uid)
+                            .update("height",hei)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("AddData2", "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("AddData2", "Error writing document", e);
+                                }
+                            });
                     Intent intent = new Intent(Register3Activity.this, AddProducktActivity.class);
                     startActivity(intent);
                     finish();
