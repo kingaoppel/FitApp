@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +48,7 @@ public class Register3Activity extends AppCompatActivity {
     private TextView incorrectTarget;
     private TextView incorrectWeight;
     private TextView incorrectHeight;
+    private RadioButton woman,man;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -73,6 +77,8 @@ public class Register3Activity extends AppCompatActivity {
         incorrectWeight = (TextView) findViewById(R.id.incorrectWeight);
         incorrectHeight = (TextView) findViewById(R.id.incorrectHeight);
         incorrectTarget = (TextView) findViewById(R.id.incorrectTarget);
+        woman = (RadioButton) findViewById(R.id.radioWoman);
+        man = (RadioButton) findViewById(R.id.radioMan);
 
         initialize();
 
@@ -91,23 +97,7 @@ public class Register3Activity extends AppCompatActivity {
                 incorrectHeight.setVisibility(View.GONE);
                 incorrectTarget.setVisibility(View.GONE);
                 if(checkDataHei() && checkDataWei() && checkDataTarg()){
-                    Log.d("Data",weight.getText().toString());
-                    int hei = valueOf(height.getText().toString());
-                    data.put("height", hei);
-                    db.collection("users").document(uid)
-                            .update("height",hei)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("AddData2", "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("AddData2", "Error writing document", e);
-                                }
-                            });
+                    saveData();
                     Intent intent = new Intent(Register3Activity.this, AddProducktActivity.class);
                     startActivity(intent);
                     finish();
@@ -197,6 +187,46 @@ public class Register3Activity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    private void saveData(){
+        Log.d("Data",weight.getText().toString());
+        int hei = valueOf(height.getText().toString());
+        int wei = valueOf(weight.getText().toString());
+        int weiTarg = valueOf(weight.getText().toString());
+        String sex;
+        if(woman.isChecked())
+            sex = woman.getText().toString();
+        else
+            sex = man.getText().toString();
+
+        int calories = 2000;
+        int fat = 50;
+        int protein = 100;
+        int carbs = 200;
+//        data.put("height", hei);
+        db.collection("users").document(uid)
+                .update("height",hei,
+                        "current_weight",wei,
+                        "target_weight",weiTarg,
+                        "amount_calories",calories,
+                        "amount_fats",fat,
+                        "amount_proteins",protein,
+                        "amount_carbs",carbs,
+                        "sex",sex
+                        )
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("AddData2", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("AddData2", "Error writing document", e);
+                    }
+                });
     }
 
     private void initialize() {

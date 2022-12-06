@@ -28,6 +28,19 @@
         app:layout_constraintStart_toEndOf="@id/vg05"
         app:layout_constraintBottom_toTopOf="@id/hg05"/>
 
+    <TextView
+        android:id="@+id/tvAmountOfCalories"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/calories_per_100"
+        android:textSize="@dimen/text_size_norm"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@id/vg95"
+        app:layout_constraintStart_toEndOf="@id/vg05"
+        app:layout_constraintTop_toBottomOf="@id/hg05" />
+
     <ImageView
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
@@ -56,13 +69,14 @@
         app:layout_constraintTop_toBottomOf="@id/hg90"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toStartOf="@id/vg95"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/hg90"
+        app:layout_constraintEnd_toStartOf="@id/vg95"
         app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintTop_toBottomOf="@id/hg25"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/hg25">
 
         <TextView
             android:id="@+id/breakfast"
@@ -71,8 +85,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/breakfast"
-            android:textSize="@dimen/text_size_header_font"
-            />
+            android:textSize="@dimen/text_size_header_font" />
 
         <TextView
             android:id="@+id/breakfastKcal"
@@ -81,8 +94,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_in_pro"
-            android:textSize="@dimen/text_size_medium"
-            />
+            android:textSize="@dimen/text_size_medium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_breakfast"
@@ -90,8 +102,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/dinner"
@@ -100,8 +111,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/dinner"
-            android:textSize="@dimen/text_size_header_font"
-            />
+            android:textSize="@dimen/text_size_header_font" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_dinner"
@@ -109,8 +119,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/lunch"
@@ -119,8 +128,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/lunch"
-            android:textSize="@dimen/text_size_header_font"
-            />
+            android:textSize="@dimen/text_size_header_font" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lunch"
@@ -128,8 +136,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/snack"
@@ -138,8 +145,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/snack"
-            android:textSize="@dimen/text_size_header_font"
-            />
+            android:textSize="@dimen/text_size_header_font" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_snack"
@@ -147,8 +153,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/supper"
@@ -157,8 +162,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/supper"
-            android:textSize="@dimen/text_size_header_font"
-            />
+            android:textSize="@dimen/text_size_header_font" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_supper"
@@ -166,8 +170,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
     </LinearLayout>
 

@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="@dimen/dp_24">
-
             <RadioButton
                 style="@style/radioButton"
                 android:id="@+id/radioWoman"

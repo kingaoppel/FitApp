@@ -1,5 +1,6 @@
 package com.example.fitapp.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,10 +17,20 @@ import com.example.fitapp.R;
 import com.example.fitapp.adapters.BreakfastAdapter;
 import com.example.fitapp.adapters.SearchProductAdapter;
 import com.example.fitapp.viewModels.MainViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private BreakfastAdapter breakfastAdapter;
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
-    private TextView tvbreakfast, dinner, lunch, snack, supper;
+    private TextView tvbreakfast, dinner, lunch, snack, supper, calo;
+
+    FirebaseUser currentUser;
+    FirebaseFirestore db;
+    String uid;
+    Map<String, Object> data = new HashMap<>();
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -38,6 +55,35 @@ public class MainActivity extends AppCompatActivity {
 
         logoutButton = findViewById(R.id.logout);
         tvbreakfast = findViewById(R.id.breakfast);
+        calo = findViewById(R.id.tvAmountOfCalories);
+
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser != null){
+            uid = currentUser.getUid();
+            Log.d("User",uid);
+        }
+        DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        data = document.getData();
+                        Log.d("User", "DocumentSnapshot data: " + data.get("amount_calories"));
+                        calo.setText("Calories to eat: " + data.get("amount_calories").toString());
+                    } else {
+                        Log.d("User", "No such document");
+                    }
+                } else {
+                    Log.d("User", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
 
         tvbreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
