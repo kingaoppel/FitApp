@@ -14,8 +14,10 @@ public class MealUtils {
         return queryMap;
     }
 
-    public static Map<String, String> getAutoCompleteQueryMapToProduct(String query){
+    public static Map<String, String> getProductInfo(){
         Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("apiKey", "51a116becc0945f5a9b834dd2caff3a9");
+        queryMap.put("amount", "1");
 
         return queryMap;
     }

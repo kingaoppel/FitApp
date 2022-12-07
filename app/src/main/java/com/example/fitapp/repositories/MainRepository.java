@@ -7,6 +7,7 @@ import com.example.fitapp.Utils.MealUtils;
 import com.example.fitapp.remote.ApiClient;
 import com.example.fitapp.remote.MealApiService;
 import com.example.fitapp.remote.model.Search;
+import com.example.fitapp.remote.modelProduct.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class MainRepository {
     private static MainRepository instance;
     private final MealApiService apiService;
     private MutableLiveData<Search> autocompleteData = new MutableLiveData<>();
+    private MutableLiveData<Product> productInfo = new MutableLiveData<>();
 
     public static MainRepository getInstance() {
         if (instance == null) {
@@ -59,6 +61,31 @@ public class MainRepository {
     public LiveData<Search> getAutocompleteData(){
         return autocompleteData;
     }
+
+
+    public void fetchProductInfo(String id){
+        productInfo.setValue(new Product());
+        Map<String, String> params = MealUtils.getProductInfo();
+        Call<Product> call = apiService.getProductInfo(id, params);
+        call.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()){
+                    productInfo.setValue(response.body());
+                }
+                else{
+                    productInfo.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                productInfo.setValue(null);
+            }
+        });
+    }
+
+    public LiveData<Product> getProductInfo(){ return productInfo; }
 
 }
 

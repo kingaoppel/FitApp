@@ -1,6 +1,7 @@
 package com.example.fitapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +20,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.R;
+import com.example.fitapp.activity.AddProductToMeal;
 import com.example.fitapp.adapters.SearchProductAdapter;
 import com.example.fitapp.interfaces.SearchInterface;
 import com.example.fitapp.remote.model.ResultsItem;
 import com.example.fitapp.remote.model.Search;
+import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.viewModels.MainViewModel;
 
 import java.util.ArrayList;
@@ -72,9 +75,21 @@ public class ProductListFragment extends Fragment {
         SearchInterface searchInterface = new SearchInterface() {
             @Override
             public void onClick(ResultsItem item) {
-                Log.d("RV",item.getId() + " " );
+                mainViewModel.fetchProductInfobyId(String.valueOf(item.getId()));
             }
         };
+
+        mainViewModel.getProductLiveData().observe(getViewLifecycleOwner(), new Observer<Product>() {
+            @Override
+            public void onChanged(Product product) {
+                if(product != null && product.getNutrition() != null){
+                    Intent intent = new Intent(context, AddProductToMeal.class);
+                    startActivity(intent);
+                    //Bundle i sprawdzenie nazwy tutaj a w activity
+                    //mainViewModel.getProductLiveData().get....
+                }
+            }
+        });
 
         searchProduct = view.findViewById(R.id.search_results);
         searchProductAdapter = new SearchProductAdapter(context, items, searchInterface);
