@@ -78,14 +78,28 @@
         app:layout_constraintStart_toEndOf="@id/vg05"
         app:layout_constraintTop_toBottomOf="@id/hg25">
 
-        <TextView
-            android:id="@+id/breakfast"
-            style="@style/baseText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/breakfast"
-            android:textSize="@dimen/text_size_header_font" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/breakfast"
+                style="@style/baseText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/breakfast"
+                android:textSize="@dimen/text_size_header_font" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add"
+                android:id="@+id/but_addBreakfastToMeal"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/breakfastKcal"
@@ -103,6 +117,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:visibility="gone" />
+
+
 
         <TextView
             android:id="@+id/dinner"

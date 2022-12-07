@@ -60,13 +60,15 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
             textView = itemView.findViewById(R.id.tv_searchItemName);
             plus = itemView.findViewById(R.id.but_addProducttoMeal);
 
-            plus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), AddProducktActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
+            plus.setVisibility(View.GONE);
+
+//            plus.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent = new Intent(view.getContext(), AddProducktActivity.class);
+//                    view.getContext().startActivity(intent);
+//                }
+//            });
         }
     }
 }

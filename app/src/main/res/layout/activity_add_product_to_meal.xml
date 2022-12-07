@@ -75,7 +75,8 @@
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dp_24"/>
+            android:layout_marginBottom="@dimen/dp_24"
+            android:id="@+id/addProToMealProductName"/>
 
         <TextView
             style="@style/baseText"
@@ -272,7 +273,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
+        app:layout_constraintGuide_begin="780dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg10"
@@ -293,7 +294,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.80" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg100"

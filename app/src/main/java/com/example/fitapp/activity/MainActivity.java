@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fitapp.R;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo;
+    private ImageView addMealToBreakfast;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logout);
         tvbreakfast = findViewById(R.id.breakfast);
         calo = findViewById(R.id.tvAmountOfCalories);
+        addMealToBreakfast = findViewById(R.id.but_addBreakfastToMeal);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,7 +86,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        addMealToBreakfast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddProducktActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tvbreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,15 +116,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         items.clear();
-        items.add("1");
-        items.add("2");
-        items.add("3");
-        items.add("1");
-        items.add("2");
-        items.add("3");
-        items.add("1");
-        items.add("2");
-        items.add("3");
         items.add("1");
         items.add("2");
         items.add("3");
