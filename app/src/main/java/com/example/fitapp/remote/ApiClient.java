@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static String BASE_URL = "https://api.edamam.com/";
+    public static String BASE_URL = "https://api.spoonacular.com/food/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofit() {

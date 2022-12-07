@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.repositories.MainRepository;
 
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private final MainRepository mainRepository;
-    private final LiveData<List<String>> autocompleteData;
+    private final LiveData<Search> autocompleteData;
 
     public MainViewModel(){
         this.mainRepository = MainRepository.getInstance();
@@ -21,9 +22,8 @@ public class MainViewModel extends ViewModel {
         this.mainRepository.getAutocompleteByQuery(query);
     }
 
-    public LiveData<List<String>> getAutoCompleteMealsData(){
+    public LiveData<Search> getAutoCompleteMealsData(){
         return autocompleteData;
     }
-
 
 }

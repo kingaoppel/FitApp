@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.fitapp.Utils.MealUtils;
 import com.example.fitapp.remote.ApiClient;
 import com.example.fitapp.remote.MealApiService;
+import com.example.fitapp.remote.model.Search;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import retrofit2.Response;
 public class MainRepository {
     private static MainRepository instance;
     private final MealApiService apiService;
-    private MutableLiveData<List<String>> autocompleteData = new MutableLiveData<>();
+    private MutableLiveData<Search> autocompleteData = new MutableLiveData<>();
 
     public static MainRepository getInstance() {
         if (instance == null) {
@@ -35,12 +36,12 @@ public class MainRepository {
     //TODO: Add methods to get data from API
 
     public void getAutocompleteByQuery(String query) {
-        autocompleteData.setValue(new ArrayList<>());
+        autocompleteData.setValue(new Search());
         Map<String, String> params = MealUtils.getAutoCompleteQueryMap(query);
-        Call<List<String>> call = apiService.getAutocompleteByQuery(params);
-        call.enqueue(new Callback<List<String>>() {
+        Call<Search> call = apiService.getAutocompleteByQuery(params);
+        call.enqueue(new Callback<Search>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+            public void onResponse(Call<Search> call, Response<Search> response) {
                 if(response.isSuccessful()){
                     autocompleteData.setValue(response.body());
                 }else{
@@ -49,13 +50,13 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
+            public void onFailure(Call<Search> call, Throwable t) {
                 autocompleteData.setValue(null);
             }
         });
     }
 
-    public LiveData<List<String>> getAutocompleteData(){
+    public LiveData<Search> getAutocompleteData(){
         return autocompleteData;
     }
 
