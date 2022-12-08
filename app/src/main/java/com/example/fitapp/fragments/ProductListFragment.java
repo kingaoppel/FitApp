@@ -27,6 +27,7 @@ import com.example.fitapp.remote.model.ResultsItem;
 import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.viewModels.MainViewModel;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +36,15 @@ import java.util.stream.Collectors;
 public class ProductListFragment extends Fragment {
 
     private Context context;
-
     private MainViewModel mainViewModel;
-
     private SearchProductAdapter searchProductAdapter;
     RecyclerView searchProduct;
-
     private List<ResultsItem> items = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.context = context;
-
         this.mainViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(MainViewModel.class);
     }
 

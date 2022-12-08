@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private BreakfastAdapter breakfastAdapter;
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
-    private TextView tvbreakfast, dinner, lunch, snack, supper, calo;
+    private TextView tvbreakfast, dinner, lunch, snack, supper, calo,fat,carbo,protein;
     private ImageView addMealToBreakfast;
 
     FirebaseUser currentUser;
@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logout);
         tvbreakfast = findViewById(R.id.breakfast);
         calo = findViewById(R.id.tvAmountOfCalories);
+        protein = findViewById(R.id.tvAmountOfProteins);
+        fat = findViewById(R.id.tvAmountOfFats);
+        carbo = findViewById(R.id.tvAmountOfCarbo);
         addMealToBreakfast = findViewById(R.id.but_addBreakfastToMeal);
 
         db = FirebaseFirestore.getInstance();
@@ -76,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     if (document.exists()) {
                         data = document.getData();
                         Log.d("User", "DocumentSnapshot data: " + data.get("amount_calories"));
-                        calo.setText("Calories to eat: " + data.get("amount_calories").toString());
+                        calo.setText("Calories : " + data.get("amount_calories").toString());
+                        protein.setText("Proteins : " + data.get("amount_proteins").toString());
+                        fat.setText("Fats : " + data.get("amount_fats").toString());
+                        carbo.setText("Carbohydrates: " + data.get("amount_carbs").toString());
                     } else {
                         Log.d("User", "No such document");
                     }

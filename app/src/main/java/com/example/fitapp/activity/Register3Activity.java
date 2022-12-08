@@ -252,7 +252,7 @@ public class Register3Activity extends AppCompatActivity {
 
     private boolean checkDataWei(){
         String weight = this.weight.getText().toString();
-        if(weight.length()>2){
+        if(weight.length()>=2){
             int intWeight = valueOf(weight);
             if(intWeight>30 && intWeight<300){
                 return true;
@@ -265,7 +265,7 @@ public class Register3Activity extends AppCompatActivity {
 
     private boolean checkDataTarg(){
         String target = this.target.getText().toString();
-        if(target.length()>2){
+        if(target.length()>=2){
             int intWeight = valueOf(target);
             if(intWeight>30 && intWeight<300){
                 return true;
@@ -278,7 +278,7 @@ public class Register3Activity extends AppCompatActivity {
 
     private boolean checkDataHei(){
         String height = this.height.getText().toString();
-        if(height.length()>2){
+        if(height.length()>=2){
             int intWeight = valueOf(height);
             if(intWeight>100 && intWeight<220){
                 return true;

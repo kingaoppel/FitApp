@@ -28,18 +28,54 @@
         app:layout_constraintStart_toEndOf="@id/vg05"
         app:layout_constraintBottom_toTopOf="@id/hg05"/>
 
-    <TextView
-        android:id="@+id/tvAmountOfCalories"
-        style="@style/baseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/calories_per_100"
-        android:textSize="@dimen/text_size_norm"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/hg25"
         app:layout_constraintEnd_toStartOf="@id/vg95"
-        app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintTop_toBottomOf="@id/hg05" />
+        app:layout_constraintStart_toEndOf="@id/vg20"
+        app:layout_constraintTop_toBottomOf="@id/hg05"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_24"
+        >
+
+        <TextView
+            android:id="@+id/tvAmountOfCalories"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calories_per_100"
+            android:textSize="@dimen/text_size_huge" />
+
+        <TextView
+            android:id="@+id/tvAmountOfProteins"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_per_100"
+            android:textSize="@dimen/text_size_huge" />
+
+        <TextView
+            android:id="@+id/tvAmountOfFats"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_per_100"
+            android:textSize="@dimen/text_size_huge" />
+
+        <TextView
+            android:id="@+id/tvAmountOfCarbo"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_per_100"
+            android:textSize="@dimen/text_size_huge" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:layout_width="@dimen/dp_32"
