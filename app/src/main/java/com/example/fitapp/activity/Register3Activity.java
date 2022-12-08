@@ -31,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class Register3Activity extends AppCompatActivity {
     private TextView incorrectWeight;
     private TextView incorrectHeight;
     private RadioButton woman,man;
+    private int age;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -132,7 +134,6 @@ public class Register3Activity extends AppCompatActivity {
             }
         });
 
-
         weight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -172,6 +173,7 @@ public class Register3Activity extends AppCompatActivity {
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
+                age = LocalDate.now().getYear() - year;
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         Register3Activity.this,
@@ -191,20 +193,30 @@ public class Register3Activity extends AppCompatActivity {
 
     private void saveData(){
         Log.d("Data",weight.getText().toString());
-        int hei = valueOf(height.getText().toString());
-        int wei = valueOf(weight.getText().toString());
-        int weiTarg = valueOf(weight.getText().toString());
+        double hei = valueOf(height.getText().toString());
+        double wei = valueOf(weight.getText().toString());
+        double weiTarg = valueOf(weight.getText().toString());
         String sex;
-        if(woman.isChecked())
-            sex = woman.getText().toString();
-        else
-            sex = man.getText().toString();
 
-        int calories = 2000;
-        int fat = 50;
-        int protein = 100;
-        int carbs = 200;
+        double calories = 2000;
+
+        if(woman.isChecked()){
+            sex = woman.getText().toString();
+            calories = 655.1 + (9.563 * wei) + (1.85 * hei) - (4.676 * age);
+            //PPM u kobiet = 655,1 + (9,563 x masa ciała [kg]) + (1,85 x wzrost [cm]) - (4,676 x [wiek]);
+        }
+
+        else{
+            sex = man.getText().toString();
+            calories = 65.5 + (13.75 * wei) + (5.003 * hei) - (6.775 * age);
+            //PPM u mężczyzn = 66,5 + (13,75 x masa ciała [kg]) + (5,003 x wzrost [cm]) - (6,775 x [wiek]).
+        }
+
+        double fat = wei * 1.2;
+        double protein = wei * 1.8;
+        double carbs = wei * 3.3;
 //        data.put("height", hei);
+
         db.collection("users").document(uid)
                 .update("height",hei,
                         "current_weight",wei,
