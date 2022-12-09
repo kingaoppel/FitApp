@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitapp.R;
 import com.example.fitapp.remote.modelProduct.NutrientsItem;
@@ -31,6 +34,7 @@ public class AddProductToMeal extends AppCompatActivity {
     private TextInputEditText amount;
     private List<NutrientsItem> items = new ArrayList<>();
     private NutrientsItem nutrientsItemCal, nutrientsItemPro, nutrientsItemCarbo, nutrientsItemFat;
+    private LinearLayout linearLayout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -95,6 +99,18 @@ public class AddProductToMeal extends AppCompatActivity {
                     dFat = nutrientsItemFat.getAmount() * a/100;
                     fat.setText("Carbohydrates: " + dFat + "");
                 }
+            }
+        });
+
+        linearLayout = findViewById(R.id.linearLayoutAddNewPro);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AddProductToMeal.this,name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

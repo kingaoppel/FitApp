@@ -231,7 +231,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/vg10"
         app:layout_constraintBottom_toTopOf="@id/hg100"
-        app:layout_constraintTop_toBottomOf="@id/hg90"
+        app:layout_constraintTop_toBottomOf="@id/hg80"
         app:layout_constraintVertical_bias="0.0"
         >
 
