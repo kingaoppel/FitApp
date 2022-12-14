@@ -87,5 +87,9 @@ public class MainRepository {
 
     public LiveData<Product> getProductInfo(){ return productInfo; }
 
+    public void clearData(){
+        productInfo.setValue(null);
+    }
+
 }
 

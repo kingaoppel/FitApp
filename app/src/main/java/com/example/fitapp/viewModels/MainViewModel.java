@@ -36,4 +36,8 @@ public class MainViewModel extends ViewModel {
     public LiveData<Product> getProductLiveData() {
         return productLiveData;
     }
+
+    public void clearData(){
+        mainRepository.clearData();
+    }
 }

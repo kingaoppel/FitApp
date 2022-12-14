@@ -107,14 +107,12 @@ public class AddProductToMeal extends AppCompatActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mainViewModel.clearData();
                 Toast.makeText(AddProductToMeal.this,name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-
-
     }
 }

@@ -1,5 +1,8 @@
 package com.example.fitapp.activity;
 
+import static java.lang.Double.valueOf;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -8,22 +11,42 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitapp.Product;
 import com.example.fitapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class AddOwnProductActivity extends AppCompatActivity {
 
     private TextInputLayout nameInputField, caloriesInputField, proteinInputField, fatInputField, carboInputField;
-    private TextInputEditText name,calories, protein, fat, carbo;
-    private TextView sumCal,sumProtein,sumFat,sumCarbo;
+    private TextInputEditText name, calories, protein, fat, carbo;
+    private TextView sumCal, sumProtein, sumFat, sumCarbo;
     private LinearLayout linearLayout;
+
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    String uid;
+    String s_name;
+    Double s_cal;
+    Double s_pro;
+    Double s_fat;
+    Double s_carbo;
+    Double s_qua = 100.0;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,10 +73,19 @@ public class AddOwnProductActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linearLayoutAddNewPro);
 
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            uid = currentUser.getUid();
+            Log.d("User", uid);
+        }
+
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddOwnProductActivity.this,name.getText() + "zostało dodane", Toast.LENGTH_LONG).show();
+                whiteNewProduct();
+                Toast.makeText(AddOwnProductActivity.this, name.getText() + "zostało dodane", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddOwnProductActivity.this, AddProducktActivity.class);
                 startActivity(intent);
                 finish();
@@ -135,7 +167,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -144,7 +176,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         calories.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -153,7 +185,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         protein.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -162,7 +194,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         fat.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -171,7 +203,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         carbo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -181,5 +213,32 @@ public class AddOwnProductActivity extends AppCompatActivity {
     private void hideKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    private void whiteNewProduct() {
+        s_name = this.name.getText().toString();
+        s_cal = valueOf(this.calories.getText().toString());
+        s_pro = valueOf(this.protein.getText().toString());
+        s_fat = valueOf(this.fat.getText().toString());
+        s_carbo = valueOf(this.carbo.getText().toString());
+
+        if (s_cal >= 0 && s_pro >= 0 && s_fat >= 0 && s_carbo >= 0 && s_name.length() > 2) {
+            Product product = new Product(s_name, uid, s_cal, s_pro, s_fat, s_carbo, s_qua);
+            Map<String, Object> productValues = product.toMap();
+            db.collection("products").document(s_name)
+                    .set(productValues)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("AddData", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("AddData", "Error writing document", e);
+                        }
+                    });
+        }
     }
 }
