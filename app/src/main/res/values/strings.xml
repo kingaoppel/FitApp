@@ -56,6 +56,21 @@
     <string name="lunch">Lunch</string>
     <string name="snack">Snack</string>
     <string name="supper">Supper</string>
+    <string name="enter_your_measurements">Enter your measurements</string>
+    <string name="select_date">Select a date</string>
+    <string name="circumference_arm">Circumference arm</string>
+    <string name="circumference_calf">Circumference calf</string>
+    <string name="circumference_chest">Circumference chest</string>
+    <string name="circumference_hip">Circumference hip</string>
+    <string name="circumference_thigh">Circumference thigh</string>
+    <string name="circumference_waist">Circumference waist</string>
+
+    Double circumference_arm;
+    Double circumference_calf;
+    Double circumference_chest;
+    Double circumference_hip;
+    Double circumference_thigh;
+    Double circumference_waist;
 
     <string-array name="array_level_of_act">
         <item>Small</item>
