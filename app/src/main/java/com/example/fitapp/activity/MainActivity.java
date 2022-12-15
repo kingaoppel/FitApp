@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         userPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddBodyMeasurmentsActivity.class);
                 startActivity(intent);
             }
         });

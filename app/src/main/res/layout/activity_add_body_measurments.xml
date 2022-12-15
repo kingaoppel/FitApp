@@ -30,6 +30,8 @@
             android:textSize="@dimen/text_size_norm"
             android:layout_gravity="center"/>
 
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,7 +195,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/dp_32"
             >
 
             <ImageView
