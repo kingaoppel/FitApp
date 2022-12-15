@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo,fat,carbo,protein;
-    private ImageView addMealToBreakfast;
+    private ImageView addMealToBreakfast, userPage;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         fat = findViewById(R.id.tvAmountOfFats);
         carbo = findViewById(R.id.tvAmountOfCarbo);
         addMealToBreakfast = findViewById(R.id.but_addBreakfastToMeal);
+
+        userPage = findViewById(R.id.menu_user);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -89,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d("User", "get failed with ", task.getException());
                 }
+            }
+        });
+
+        userPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
+                startActivity(intent);
             }
         });
 

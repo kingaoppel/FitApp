@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.AddBodyMeasurmentsActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true">
@@ -48,7 +47,7 @@
                 android:textSize="@dimen/text_size_norm" />
 
             <TextView
-                android:id="@+id/dateOfBirth"
+                android:id="@+id/dateOfMeas"
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,6 +60,24 @@
                 android:paddingLeft="@dimen/dp_24"/>
 
         </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/circumferenceWeightField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/circumferenceWeightInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/weight"
+                tools:text="@string/kg"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/circumferenceArmField"
@@ -115,6 +132,87 @@
                 android:numeric="integer"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/circumferenceHipField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/circumferenceHipInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/circumference_hip"
+                tools:text="@string/cm"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/circumferenceThighField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/circumferenceThighInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/circumference_thigh"
+                tools:text="@string/cm"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/circumferenceWaistField"
+            style="@style/inputLayer"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/circumferenceWaistInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/circumference_waist"
+                tools:text="@string/cm"
+                android:numeric="integer"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutAddNewBodyMeas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp_32"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:src="@drawable/ic_add"
+                />
+
+            <TextView
+                android:id="@+id/textAddBodyMeadurments"
+                style="@style/baseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/add_a_body_meas"
+                android:textSize="@dimen/text_size_huge"
+                android:paddingLeft="@dimen/dp_16"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

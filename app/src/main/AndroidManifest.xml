@@ -16,20 +16,6 @@
         android:theme="@style/Theme.FitApp"
         tools:targetApi="31">
         <activity
-            android:name=".AddBodyMeasurmentsActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UserPageActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activity.AddProductToMeal"
             android:exported="false">
             <meta-data

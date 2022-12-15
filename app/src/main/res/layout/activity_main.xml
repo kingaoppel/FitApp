@@ -96,6 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/hg90"/>
 
     <ImageView
+        android:id="@+id/menu_user"
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
         android:src="@drawable/ic_menu"
