@@ -32,9 +32,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Register3Activity extends AppCompatActivity {
@@ -51,6 +53,7 @@ public class Register3Activity extends AppCompatActivity {
     private TextView incorrectHeight;
     private RadioButton woman,man;
     private int age;
+    private Date dateToSave;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -100,7 +103,7 @@ public class Register3Activity extends AppCompatActivity {
                 incorrectTarget.setVisibility(View.GONE);
                 if(checkDataHei() && checkDataWei() && checkDataTarg()){
                     saveData();
-                    Intent intent = new Intent(Register3Activity.this, AddProducktActivity.class);
+                    Intent intent = new Intent(Register3Activity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -169,11 +172,11 @@ public class Register3Activity extends AppCompatActivity {
         dateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
+                Calendar d = Calendar.getInstance();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                age = LocalDate.now().getYear() - year;
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         Register3Activity.this,
@@ -182,7 +185,12 @@ public class Register3Activity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 dateOfBirth.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
+                                d.set(Calendar.YEAR,year);
+                                d.set(Calendar.MONTH,monthOfYear);
+                                d.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                                Log.d("DATKA",d.toString());
+                                age = LocalDate.now().getYear() - year;
+                                dateToSave = d.getTime();
                             }
                         },
                         year, month, day);
@@ -217,6 +225,9 @@ public class Register3Activity extends AppCompatActivity {
         double carbs = wei * 3.3;
 //        data.put("height", hei);
 
+        List<String> fav = new ArrayList<>();
+        List<String> mypro = new ArrayList<>();
+
         db.collection("users").document(uid)
                 .update("height",hei,
                         "current_weight",wei,
@@ -225,7 +236,11 @@ public class Register3Activity extends AppCompatActivity {
                         "amount_fats",fat,
                         "amount_proteins",protein,
                         "amount_carbs",carbs,
-                        "sex",sex
+                        "sex",sex,
+                        "date_of_bitrth",dateToSave,
+                        "age",age,
+                        "favourite",fav,
+                        "my_products",mypro
                         )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

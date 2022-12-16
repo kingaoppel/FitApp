@@ -20,14 +20,23 @@ import android.widget.Toast;
 
 import com.example.fitapp.Product;
 import com.example.fitapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddOwnProductActivity extends AppCompatActivity {
@@ -36,6 +45,8 @@ public class AddOwnProductActivity extends AppCompatActivity {
     private TextInputEditText name, calories, protein, fat, carbo;
     private TextView sumCal, sumProtein, sumFat, sumCarbo;
     private LinearLayout linearLayout;
+    Map<String, Object> dataRef = new HashMap<>();
+    List<String> lista = new ArrayList<>();
 
     FirebaseFirestore db;
     FirebaseUser currentUser;
@@ -46,7 +57,6 @@ public class AddOwnProductActivity extends AppCompatActivity {
     Double s_fat;
     Double s_carbo;
     Double s_qua = 100.0;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -225,8 +235,53 @@ public class AddOwnProductActivity extends AppCompatActivity {
         if (s_cal >= 0 && s_pro >= 0 && s_fat >= 0 && s_carbo >= 0 && s_name.length() > 2) {
             Product product = new Product(s_name, uid, s_cal, s_pro, s_fat, s_carbo, s_qua);
             Map<String, Object> productValues = product.toMap();
-            db.collection("products").document(s_name)
+            db.collection("products").document(uid + s_name)
                     .set(productValues)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("AddData", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("AddData", "Error writing document", e);
+                        }
+                    });
+
+
+            lista.add(s_name);
+
+            if(currentUser != null){
+                uid = currentUser.getUid();
+                Log.d("User",uid);
+            }
+
+            DocumentReference docRef = db.collection("users").document(uid);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            dataRef = document.getData();
+                            Log.d("User", "DocumentSnapshot data: " + dataRef.get("my_products"));
+                            lista = (List<String>) dataRef.get("my_products");
+                        } else {
+                            Log.d("User", "No such document");
+                        }
+                    } else {
+                        Log.d("User", "get failed with ", task.getException());
+                    }
+                }
+            });
+
+            lista.add(s_name);
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("my_products", lista);
+            db.collection("users").document(uid)
+                    .set(result, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

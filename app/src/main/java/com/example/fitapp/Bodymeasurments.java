@@ -2,24 +2,25 @@ package com.example.fitapp;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Bodymeasurments {
 
     String uid;
-    Date date;
-    Double circumference_arm;
-    Double circumference_calf;
-    Double circumference_chest;
-    Double circumference_hip;
-    Double circumference_thigh;
-    Double circumference_waist;
-    Double weight;
+    List<Date> date;
+    List<Double> circumference_arm;
+    List<Double> circumference_calf;
+    List<Double> circumference_chest;
+    List<Double> circumference_hip;
+    List<Double> circumference_thigh;
+    List<Double> circumference_waist;
+    List<Double> weight;
 
     public Bodymeasurments() {
     }
 
-    public Bodymeasurments(String uid, Date date, Double circumference_arm, Double circumference_calf, Double circumference_chest, Double circumference_hip, Double circumference_thigh, Double circumference_waist, Double weight) {
+    public Bodymeasurments(String uid, List<Date> date, List<Double> circumference_arm, List<Double> circumference_calf, List<Double> circumference_chest, List<Double> circumference_hip, List<Double> circumference_thigh, List<Double> circumference_waist, List<Double> weight) {
         this.uid = uid;
         this.date = date;
         this.circumference_arm = circumference_arm;

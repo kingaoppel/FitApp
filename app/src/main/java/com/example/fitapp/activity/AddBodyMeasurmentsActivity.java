@@ -1,29 +1,58 @@
 package com.example.fitapp.activity;
 
+import static java.lang.Double.valueOf;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.fitapp.Bodymeasurments;
+import com.example.fitapp.Product;
 import com.example.fitapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class AddBodyMeasurmentsActivity extends AppCompatActivity {
 
     private TextView date;
     private TextInputLayout weightInputLayout, circumferenceArmInputLayout, circumferenceCalfInputLayout, circumferenceChestInputLayout, circumferenceHipInputLayout,circumferenceThighInputLayout, circumferenceWaistInputLayout;
     private TextInputEditText weight, circumferenceArm, circumferenceCalf, circumferenceChest, circumferenceHip,circumferenceThigh, circumferenceWaist;
+    private List<Date> dateToFire = new ArrayList<>();
+    private LinearLayout linearLayoutAddMeas;
+    private List<Double> wei = new ArrayList<>();
+    private List<Double> arm = new ArrayList<>();
+    private List<Double> calf = new ArrayList<>();
+    private List<Double> chest = new ArrayList<>();
+    private List<Double> hip = new ArrayList<>();
+    private List<Double> thigh = new ArrayList<>();
+    private List<Double> waist = new ArrayList<>();
 
+    FirebaseUser currentUser;
+    FirebaseFirestore db;
+    String uid;
+    String addDate;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,6 +76,23 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceHip = findViewById(R.id.circumferenceHipInputField);
         circumferenceThigh = findViewById(R.id.circumferenceThighInputField);
         circumferenceWaist = findViewById(R.id.circumferenceWeightInputField);
+
+        linearLayoutAddMeas = findViewById(R.id.linearLayoutAddNewBodyMeas);
+
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser != null){
+            uid = currentUser.getUid();
+            Log.d("User",uid);
+        }
+
+        linearLayoutAddMeas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                whiteNewBodyMeas();
+            }
+        });
 
         weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -118,7 +164,8 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-
+                dateToFire.add(c.getTime());
+                addDate = (day + month + year + "");
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         AddBodyMeasurmentsActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -126,7 +173,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
+                                addDate = (dayOfMonth + monthOfYear + year + "");
                             }
                         },
                         year, month, day);
@@ -134,6 +181,35 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void whiteNewBodyMeas() {
+        wei.add(valueOf(this.weight.getText().toString()));
+        arm.add(valueOf(this.circumferenceArm.getText().toString()));
+        calf.add(valueOf(this.circumferenceCalf.getText().toString()));
+        chest.add(valueOf(this.circumferenceChest.getText().toString()));
+        hip.add(valueOf(this.circumferenceHip.getText().toString()));
+        thigh.add(valueOf(this.circumferenceThigh.getText().toString()));
+        waist.add(valueOf(this.circumferenceWaist.getText().toString()));
+        Calendar cal = Calendar.getInstance();
+        dateToFire.add(cal.getTime());
+            Bodymeasurments bodymeasurments = new Bodymeasurments(uid,dateToFire,arm,calf,chest,hip,thigh,waist,wei);
+            Map<String, Object> bodyValues = bodymeasurments.toMap();
+            db.collection("body_measuremants").document("11" + uid)
+                    .set(bodyValues)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("AddData", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("AddData", "Error writing document", e);
+                        }
+                    });
+        }
+
 
     private void hideKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
