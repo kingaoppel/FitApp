@@ -3,6 +3,7 @@ package com.example.fitapp.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.R;
 import com.example.fitapp.activity.AddProductToMeal;
-import com.example.fitapp.adapters.SearchProductAdapter;
+import com.example.fitapp.adapters.MyProductAdapter;
 import com.example.fitapp.interfaces.SearchInterface;
 import com.example.fitapp.remote.model.ResultsItem;
-import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.viewModels.MainViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyProductListFragment extends Fragment {
 
@@ -34,10 +43,17 @@ public class MyProductListFragment extends Fragment {
 
     private MainViewModel mainViewModel;
 
-    private SearchProductAdapter searchProductAdapter;
+    private MyProductAdapter myProductAdapter;
     RecyclerView searchProduct;
 
     private List<ResultsItem> items = new ArrayList<>();
+
+    Map<String, Object> dataRef = new HashMap<>();
+    List<String> lista = new ArrayList<>();
+
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    String uid;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,23 +72,33 @@ public class MyProductListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mainViewModel.getAutoCompleteMealsData().observe(getViewLifecycleOwner(), new Observer<Search>() {
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            uid = currentUser.getUid();
+            Log.d("User", uid);
+        }
+
+        DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onChanged(Search search) {
-                if(search!= null && search.getResults()!=null && search.getResults().size()> 0){
-                    items.clear();
-                    items.addAll(search.getResults());
-                    searchProductAdapter.notifyDataSetChanged();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        dataRef = document.getData();
+                        Log.d("User", "DocumentSnapshot data: " + dataRef.get("my_products"));
+                        lista = (List<String>) dataRef.get("my_products");
+                    } else {
+                        Log.d("User", "No such document");
+                    }
+                } else {
+                    Log.d("User", "get failed with ", task.getException());
                 }
             }
         });
 
-        SearchInterface searchInterface = new SearchInterface() {
-            @Override
-            public void onClick(ResultsItem item) {
-                mainViewModel.fetchProductInfobyId(String.valueOf(item.getId()));
-            }
-        };
 
         mainViewModel.getProductLiveData().observe(getViewLifecycleOwner(), new Observer<Product>() {
             @Override
@@ -87,9 +113,9 @@ public class MyProductListFragment extends Fragment {
         });
 
         searchProduct = view.findViewById(R.id.search_results);
-        searchProductAdapter = new SearchProductAdapter(context, items, searchInterface);
+        myProductAdapter = new MyProductAdapter(context, lista);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         searchProduct.setLayoutManager(manager);
-        searchProduct.setAdapter(searchProductAdapter);
+        searchProduct.setAdapter(myProductAdapter);
     }
 }

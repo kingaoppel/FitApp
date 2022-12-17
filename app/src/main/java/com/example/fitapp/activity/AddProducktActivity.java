@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitapp.R;
+import com.example.fitapp.adapters.MyProductAdapter;
+import com.example.fitapp.fragments.MyProductListFragment;
 import com.example.fitapp.fragments.NoteFragment;
 import com.example.fitapp.fragments.ProductListFragment;
 import com.example.fitapp.viewModels.MainViewModel;
@@ -44,6 +46,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
+    private MyProductListFragment myProductListFragment;
 
 
     @SuppressLint("MissingInflatedId")
@@ -68,6 +71,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
         noteFragment = new NoteFragment();
         productListFragment = new ProductListFragment();
+        myProductListFragment = new MyProductListFragment();
 
         addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +101,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             @Override
             public void onClick(View view) {
                 colors();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, myProductListFragment).commit();
                 yourMeals.setTextColor(getResources().getColor(R.color.black,null));
             }
         });

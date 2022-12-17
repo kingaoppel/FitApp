@@ -2,6 +2,7 @@ package com.example.fitapp.activity;
 
 import static java.lang.Short.valueOf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,11 +20,20 @@ import android.widget.Toast;
 import com.example.fitapp.R;
 import com.example.fitapp.remote.modelProduct.NutrientsItem;
 import com.example.fitapp.viewModels.MainViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 
 public class AddProductToMeal extends AppCompatActivity {
@@ -35,6 +46,13 @@ public class AddProductToMeal extends AppCompatActivity {
     private List<NutrientsItem> items = new ArrayList<>();
     private NutrientsItem nutrientsItemCal, nutrientsItemPro, nutrientsItemCarbo, nutrientsItemFat;
     private LinearLayout linearLayout;
+
+    Map<String, Object> dataRef = new HashMap<>();
+    List<String> lista = new ArrayList<>();
+
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    String uid;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,18 +69,48 @@ public class AddProductToMeal extends AppCompatActivity {
         fat = findViewById(R.id.sumFat);
         carbo = findViewById(R.id.sumCarbo);
 
-        sName = mainViewModel.getProductLiveData().getValue().getName().toUpperCase(Locale.ROOT);
+        sName = getIntent().getStringExtra("NAME");
+
+        //sName = mainViewModel.getProductLiveData().getValue().getName().toUpperCase(Locale.ROOT);
         name.setText(sName);
+
+
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            uid = currentUser.getUid();
+            Log.d("User", uid);
+        }
+
+        DocumentReference docRef = db.collection("product").document(sName);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        dataRef = document.getData();
+                        Log.d("UserMeal", "DocumentSnapshot data: " + dataRef.get("my_products"));
+                        calories.setText("Calories: " + dataRef.get("calories").toString());
+                    } else {
+                        Log.d("UserMeal", "No such document");
+                    }
+                } else {
+                    Log.d("UserMeal", "get failed with ", task.getException());
+                }
+            }
+        });
 
         dAmount = mainViewModel.getProductLiveData().getValue().getAmount();
         amount.setText(dAmount.toString());
 
-        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
-        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
-        if(nutrientsItemCal != null){
-            dCalories = nutrientsItemCal.getAmount();
-            calories.setText("Calories: " + dCalories + "");
-        }
+//        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
+//        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
+//        if(nutrientsItemCal != null){
+//            dCalories = nutrientsItemCal.getAmount();
+//            calories.setText("Calories: " + dCalories + "");
+//        }
 
         nutrientsItemPro = items.stream().filter(s -> s.getName().equals("Protein")).findFirst().orElse(null);
         if(nutrientsItemPro != null){

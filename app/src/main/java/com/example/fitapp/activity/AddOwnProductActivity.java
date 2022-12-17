@@ -91,6 +91,25 @@ public class AddOwnProductActivity extends AppCompatActivity {
             Log.d("User", uid);
         }
 
+        DocumentReference docRef = db.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        dataRef = document.getData();
+                        Log.d("User", "DocumentSnapshot data: " + dataRef.get("my_products"));
+                        lista = (List<String>) dataRef.get("my_products");
+                    } else {
+                        Log.d("User", "No such document");
+                    }
+                } else {
+                    Log.d("User", "get failed with ", task.getException());
+                }
+            }
+        });
+
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,33 +268,6 @@ public class AddOwnProductActivity extends AppCompatActivity {
                             Log.w("AddData", "Error writing document", e);
                         }
                     });
-
-
-            lista.add(s_name);
-
-            if(currentUser != null){
-                uid = currentUser.getUid();
-                Log.d("User",uid);
-            }
-
-            DocumentReference docRef = db.collection("users").document(uid);
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            dataRef = document.getData();
-                            Log.d("User", "DocumentSnapshot data: " + dataRef.get("my_products"));
-                            lista = (List<String>) dataRef.get("my_products");
-                        } else {
-                            Log.d("User", "No such document");
-                        }
-                    } else {
-                        Log.d("User", "get failed with ", task.getException());
-                    }
-                }
-            });
 
             lista.add(s_name);
             HashMap<String, Object> result = new HashMap<>();

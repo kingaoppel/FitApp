@@ -41,6 +41,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -109,6 +110,7 @@ public class ProductListFragment extends Fragment {
                     whiteNewProduct();
 
                     Intent intent = new Intent(context, AddProductToMeal.class);
+                    intent.putExtra("NAME", product.getName().toString());
                     startActivity(intent);
 
                     //Bundle i sprawdzenie nazwy tutaj a w activity
@@ -167,9 +169,5 @@ public class ProductListFragment extends Fragment {
                         }
                     });
         }
-
-
     }
-
-
 }
