@@ -39,7 +39,7 @@ import java.util.Optional;
 public class AddProductToMeal extends AppCompatActivity {
 
     String sName = "maslo";
-    Double dAmount = 100.0, dFat, dProtein, dCarbo, dCalories;
+    Double dAmount = 100.0, dFat = 100.0, dProtein = 100.0, dCarbo = 100.0, dCalories = 100.0;
     private TextView name,calories,protein,fat,carbo;
     private MainViewModel mainViewModel;
     private TextInputEditText amount;
@@ -93,7 +93,16 @@ public class AddProductToMeal extends AppCompatActivity {
                         dataRef = document.getData();
                         Log.d("UserMeal", "DocumentSnapshot data: ");
                         dCalories = (Double) dataRef.get("calories");
-                        calories.setText("Dupa");
+                        calories.setText("Calories: " + dCalories.toString());
+
+                        dProtein = (Double) dataRef.get("protein");
+                        protein.setText("Proteins: " + dProtein.toString());
+
+                        dFat = (Double) dataRef.get("fats");
+                        fat.setText("Fats: " + dFat.toString());
+
+                        dCarbo = (Double) dataRef.get("carbs");
+                        carbo.setText("Carbohydrates: " + dCarbo);
 
                         // ustawić defaultowe wartości i dopiero zmienic potem, program potrzebuje chwili na ogarniecie się
                         // dodać interface żeby mozna było wchodzić w nasze produkty
@@ -108,49 +117,50 @@ public class AddProductToMeal extends AppCompatActivity {
 
         dAmount = mainViewModel.getProductLiveData().getValue().getAmount();
         amount.setText(dAmount.toString());
-        //calories.setText("Calories: " + dataRef.get("carbs").toString());
+//        calories.setText("Calories: " + dataRef.get("carbs").toString());
 
-        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
-        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
-        if(nutrientsItemCal != null){
-            dCalories = nutrientsItemCal.getAmount();
-            calories.setText("Calories: " + dCalories + "");
-        }
+//        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
+//        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
+//        if(nutrientsItemCal != null){
+//            dCalories = nutrientsItemCal.getAmount();
+//            calories.setText("Calories: " + dCalories + "");
+//        }
 
-        nutrientsItemPro = items.stream().filter(s -> s.getName().equals("Protein")).findFirst().orElse(null);
-        if(nutrientsItemPro != null){
-            dProtein = nutrientsItemPro.getAmount();
-            protein.setText("Proteins: " + dProtein + "");
-        }
+//        nutrientsItemPro = items.stream().filter(s -> s.getName().equals("Protein")).findFirst().orElse(null);
+//        if(nutrientsItemPro != null){
+//            dProtein = nutrientsItemPro.getAmount();
+//            protein.setText("Proteins: " + dProtein + "");
+//        }
 
-        nutrientsItemCarbo = items.stream().filter(s -> s.getName().equals("Carbohydrates")).findFirst().orElse(null);
-        if(nutrientsItemCarbo != null){
-            dCarbo = nutrientsItemCarbo.getAmount();
-            carbo.setText("Carbohydrates: " + dCarbo + "");
-        }
-
-        nutrientsItemFat = items.stream().filter(s -> s.getName().equals("Fat")).findFirst().orElse(null);
-        if(nutrientsItemFat != null){
-            dFat = nutrientsItemFat.getAmount();
-            fat.setText("Carbohydrates: " + dFat + "");
-        }
+//        nutrientsItemCarbo = items.stream().filter(s -> s.getName().equals("Carbohydrates")).findFirst().orElse(null);
+//        if(nutrientsItemCarbo != null){
+//            dCarbo = nutrientsItemCarbo.getAmount();
+//            carbo.setText("Carbohydrates: " + dCarbo + "");
+//        }
+//
+//        nutrientsItemFat = items.stream().filter(s -> s.getName().equals("Fat")).findFirst().orElse(null);
+//        if(nutrientsItemFat != null){
+//            dFat = nutrientsItemFat.getAmount();
+//            fat.setText("Carbohydrates: " + dFat + "");
+//        }
 
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if(!hasFocus) {
                     double a = valueOf(amount.getText().toString());
-                    dCalories = nutrientsItemCal.getAmount() * a / 100;
-                    calories.setText("Calories: " + dCalories + "");
+                    double temp;
+                    temp = dCalories * a / 100;
+                    calories.setText("Calories: " + temp + "");
 
-                    dProtein = nutrientsItemPro.getAmount() * a / 100;
-                    protein.setText("Proteins: " + dProtein + "");
+                    temp = dProtein * a / 100;
+                    protein.setText("Proteins: " + temp + "");
 
-                    dCarbo = nutrientsItemCarbo.getAmount() * a / 100;
-                    carbo.setText("Carbohydrates: " + dCarbo + "");
+                    temp = dCarbo * a / 100;
+                    carbo.setText("Fats: " + temp + "");
 
-                    dFat = nutrientsItemFat.getAmount() * a/100;
-                    fat.setText("Carbohydrates: " + dFat + "");
+                    temp = dFat * a/100;
+                    fat.setText("Carbohydrates: " + temp + "");
                 }
             }
         });

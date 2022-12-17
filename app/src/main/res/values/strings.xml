@@ -65,6 +65,14 @@
     <string name="circumference_hip">Circumference hip</string>
     <string name="circumference_thigh">Circumference thigh</string>
     <string name="circumference_waist">Circumference waist</string>
+    <string name="user_name">User name</string>
+    <string name="your_weight_now">Your weight now 56kg</string>
+    <string name="your_progress">- 8kg from 14 Dec</string>
+    <string name="calories_per_day_goal">Calories per day if you want to reach your goal:</string>
+    <string name="bmi">Your BMI for today:</string>
+    <string name="body_measurements">Body measurements: </string>
+    <string name="settings">Settings</string>
+
 
     Double circumference_arm;
     Double circumference_calf;

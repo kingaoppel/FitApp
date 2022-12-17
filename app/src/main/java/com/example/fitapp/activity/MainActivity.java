@@ -16,18 +16,15 @@ import android.widget.TextView;
 
 import com.example.fitapp.R;
 import com.example.fitapp.adapters.BreakfastAdapter;
-import com.example.fitapp.adapters.SearchProductAdapter;
-import com.example.fitapp.viewModels.MainViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo,fat,carbo,protein;
-    private ImageView addMealToBreakfast, userPage;
+    private ImageView addMealToBreakfast, bodyMeasPage, userPage;
+    private static final DecimalFormat df = new DecimalFormat("0");
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -63,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         carbo = findViewById(R.id.tvAmountOfCarbo);
         addMealToBreakfast = findViewById(R.id.but_addBreakfastToMeal);
 
-        userPage = findViewById(R.id.menu_user);
+        bodyMeasPage = findViewById(R.id.menu);
+        userPage = findViewById(R.id.menu_person);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     if (document.exists()) {
                         data = document.getData();
                         Log.d("User", "DocumentSnapshot data: " + data.get("amount_calories"));
-                        calo.setText("Calories : " + data.get("amount_calories").toString());
-                        protein.setText("Proteins : " + data.get("amount_proteins").toString());
-                        fat.setText("Fats : " + data.get("amount_fats").toString());
-                        carbo.setText("Carbohydrates: " + data.get("amount_carbs").toString());
+                        //Integer temp = (Integer) data.get("amount_calories");
+                        calo.setText("Calories : " + df.format(data.get("amount_calories")) + "");
+                        protein.setText("Proteins : " + df.format(data.get("amount_proteins")).toString());
+                        fat.setText("Fats : " + df.format(data.get("amount_fats")).toString());
+                        carbo.setText("Carbohydrates: " + df.format(data.get("amount_carbs")).toString());
                     } else {
                         Log.d("User", "No such document");
                     }
@@ -94,10 +94,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        userPage.setOnClickListener(new View.OnClickListener() {
+        bodyMeasPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddBodyMeasurmentsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        userPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserPageActivity.class);
                 startActivity(intent);
             }
         });
