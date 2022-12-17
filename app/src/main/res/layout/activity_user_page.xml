@@ -63,7 +63,8 @@
             android:textColor="@color/blue"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:gravity="center"/>
 
         <TextView
             style="@style/baseText"
@@ -82,7 +83,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="@dimen/dp_32"
-        android:layout_marginEnd="@dimen/dp_32">
+        android:layout_marginEnd="@dimen/dp_32"
+        android:layout_gravity="center"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/userPage_nowWeight"
@@ -94,7 +97,8 @@
             android:text="@string/kg"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
         <ImageView
             android:layout_width="wrap_content"

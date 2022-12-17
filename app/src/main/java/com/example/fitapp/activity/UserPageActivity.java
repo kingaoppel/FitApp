@@ -37,10 +37,12 @@ public class UserPageActivity extends AppCompatActivity {
     TextView yourWeightNowString;
     TextView yourWeightNow;
     TextView yourWeightTarget;
+    TextView progressWeight;
 
-    Double temp, tempToProgressWeight;
+    Double temp;
+    Long tempToProgressWeight;
 
-    private List<Double> wei = new ArrayList<>();
+    private List<Long> wei = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class UserPageActivity extends AppCompatActivity {
         yourWeightNowString = findViewById(R.id.userPage_yourWeightNow);
         yourWeightNow = findViewById(R.id.userPage_nowWeight);
         yourWeightTarget = findViewById(R.id.userPage_targetWeight);
+        progressWeight = findViewById(R.id.userPage_progressInWeight);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,17 +99,16 @@ public class UserPageActivity extends AppCompatActivity {
                     if (document.exists()) {
                         dataMeas = document.getData();
                         Log.d("User", "DocumentSnapshot data: ");
-                        wei = (List<Double>) dataMeas.get("weight");
+                        wei = (List<Long>) dataMeas.get("weight");
 
                         if(wei.size() < 2){
                             //setvisability na gone
                         }
                         else{
                             yourWeightNow.setText(wei.get(0) + "");
-
+                            tempToProgressWeight = progressWeight(wei.get(0), wei.get(wei.size()-1));
+                            progressWeight.setText(tempToProgressWeight.toString() + " kg from the beginning of training" );
                         }
-
-
 
                     } else {
                         Log.d("User", "No such document");
@@ -137,9 +139,15 @@ public class UserPageActivity extends AppCompatActivity {
         return bmiVal;
     }
 
-    Double progressWeight(double weightNow, double weightTarget){
-        Double temp;
+    Long progressWeight(Long weightNow, Long weightTarget){
+        Long temp ;
         temp = weightTarget - weightNow;
+        temp = weightNow - weightTarget;
         return temp;
+    }
+
+    void setVisa(String s){
+        return;
+        //ustawić na poczatek visability na gone w wszystkich layoutach i potem jak pobierzemy dane z firestore to ustawić na visable
     }
 }
