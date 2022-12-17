@@ -83,7 +83,7 @@ public class AddProductToMeal extends AppCompatActivity {
             Log.d("User", uid);
         }
 
-        DocumentReference docRef = db.collection("product").document(sName);
+        DocumentReference docRef = db.collection("products").document(sName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -91,8 +91,12 @@ public class AddProductToMeal extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         dataRef = document.getData();
-                        Log.d("UserMeal", "DocumentSnapshot data: " + dataRef.get("my_products"));
-                        calories.setText("Calories: " + dataRef.get("calories").toString());
+                        Log.d("UserMeal", "DocumentSnapshot data: ");
+                        dCalories = (Double) dataRef.get("calories");
+                        calories.setText("Dupa");
+
+                        // ustawić defaultowe wartości i dopiero zmienic potem, program potrzebuje chwili na ogarniecie się
+                        // dodać interface żeby mozna było wchodzić w nasze produkty
                     } else {
                         Log.d("UserMeal", "No such document");
                     }
@@ -104,13 +108,14 @@ public class AddProductToMeal extends AppCompatActivity {
 
         dAmount = mainViewModel.getProductLiveData().getValue().getAmount();
         amount.setText(dAmount.toString());
+        //calories.setText("Calories: " + dataRef.get("carbs").toString());
 
-//        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
-//        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
-//        if(nutrientsItemCal != null){
-//            dCalories = nutrientsItemCal.getAmount();
-//            calories.setText("Calories: " + dCalories + "");
-//        }
+        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
+        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
+        if(nutrientsItemCal != null){
+            dCalories = nutrientsItemCal.getAmount();
+            calories.setText("Calories: " + dCalories + "");
+        }
 
         nutrientsItemPro = items.stream().filter(s -> s.getName().equals("Protein")).findFirst().orElse(null);
         if(nutrientsItemPro != null){
