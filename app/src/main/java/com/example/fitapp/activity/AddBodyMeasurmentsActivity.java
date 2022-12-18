@@ -95,6 +95,28 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
             Log.d("User",uid);
         }
 
+
+        DocumentReference docRef = db.collection("body_measuremants").document("11" + uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        dataMeas = document.getData();
+                        Log.d("User", "DocumentSnapshot data: " + dataMeas.get("name"));
+                        wei = (List<Double>) dataMeas.get("weight");
+
+                    } else {
+                        Log.d("User", "No such document");
+                    }
+                } else {
+                    Log.d("User", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
         linearLayoutAddMeas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
