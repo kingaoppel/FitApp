@@ -40,9 +40,9 @@ public class UserPageActivity extends AppCompatActivity {
     TextView progressWeight;
 
     Double temp;
-    Long tempToProgressWeight;
+    Double tempToProgressWeight;
 
-    private List<Long> wei = new ArrayList<>();
+    private List<Double> wei = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +99,14 @@ public class UserPageActivity extends AppCompatActivity {
                     if (document.exists()) {
                         dataMeas = document.getData();
                         Log.d("User", "DocumentSnapshot data: ");
-                        wei = (List<Long>) dataMeas.get("weight");
+                        wei = (List<Double>) dataMeas.get("weight");
 
                         if(wei.size() < 2){
                             //setvisability na gone
                         }
                         else{
                             yourWeightNow.setText(wei.get(0) + "");
-                            tempToProgressWeight = progressWeight(wei.get(0), wei.get(wei.size()-1));
+                            tempToProgressWeight = progressWeightFun(wei.get(0), wei.get(wei.size()-1));
                             progressWeight.setText(tempToProgressWeight.toString() + " kg from the beginning of training" );
                         }
 
@@ -139,8 +139,8 @@ public class UserPageActivity extends AppCompatActivity {
         return bmiVal;
     }
 
-    Long progressWeight(Long weightNow, Long weightTarget){
-        Long temp ;
+    Double progressWeightFun(Double weightNow, Double weightTarget){
+        Double temp ;
         temp = weightTarget - weightNow;
         temp = weightNow - weightTarget;
         return temp;

@@ -19,18 +19,24 @@ import android.widget.TextView;
 import com.example.fitapp.Bodymeasurments;
 import com.example.fitapp.Product;
 import com.example.fitapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +54,8 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
     private List<Double> hip = new ArrayList<>();
     private List<Double> thigh = new ArrayList<>();
     private List<Double> waist = new ArrayList<>();
+
+    Map<String, Object> dataMeas = new HashMap<>();
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -192,10 +200,11 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         waist.add(valueOf(this.circumferenceWaist.getText().toString()));
         Calendar cal = Calendar.getInstance();
         dateToFire.add(cal.getTime());
+
             Bodymeasurments bodymeasurments = new Bodymeasurments(uid,dateToFire,arm,calf,chest,hip,thigh,waist,wei);
             Map<String, Object> bodyValues = bodymeasurments.toMap();
             db.collection("body_measuremants").document("11" + uid)
-                    .set(bodyValues)
+                    .set(bodyValues, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
