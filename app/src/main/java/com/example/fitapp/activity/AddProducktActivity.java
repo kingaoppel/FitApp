@@ -93,7 +93,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             public void onClick(View view) {
                 colors();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
-                search.setTextColor(getResources().getColor(R.color.black,null));
+                search.setTextColor(getResources().getColor(R.color.black, null));
             }
         });
 
@@ -102,7 +102,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             public void onClick(View view) {
                 colors();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, myProductListFragment).commit();
-                yourMeals.setTextColor(getResources().getColor(R.color.black,null));
+                yourMeals.setTextColor(getResources().getColor(R.color.black, null));
             }
         });
 
@@ -111,7 +111,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             public void onClick(View view) {
                 colors();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, productListFragment).commit();
-                favourite.setTextColor(getResources().getColor(R.color.black,null));
+                favourite.setTextColor(getResources().getColor(R.color.black, null));
             }
         });
 
@@ -120,7 +120,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             public void onClick(View view) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, noteFragment).commit();
                 colors();
-                notes.setTextColor(getResources().getColor(R.color.black,null));
+                notes.setTextColor(getResources().getColor(R.color.black, null));
                 searchInputLayout.setVisibility(View.GONE);
                 addOwnProductLayout.setVisibility(View.GONE);
             }
@@ -129,7 +129,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         searchItem.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -163,9 +163,9 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
     private void searchForProduct() {
         String query = searchItem.getText().toString();
-        if(query.length() > 0){
+        if (query.length() > 0) {
             viewModel.fetchAutoCompleteMeals(query);
-        }else{
+        } else {
             Toast.makeText(AddProducktActivity.this, "Query shouldn't be empty", Toast.LENGTH_SHORT).show();
         }
     }
@@ -180,11 +180,11 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
 
     }
 
-    void colors(){
-        search.setTextColor(getResources().getColor(R.color.primary,null));
-        yourMeals.setTextColor(getResources().getColor(R.color.primary,null));
-        favourite.setTextColor(getResources().getColor(R.color.primary,null));
-        notes.setTextColor(getResources().getColor(R.color.primary,null));
+    void colors() {
+        search.setTextColor(getResources().getColor(R.color.primary, null));
+        yourMeals.setTextColor(getResources().getColor(R.color.primary, null));
+        favourite.setTextColor(getResources().getColor(R.color.primary, null));
+        notes.setTextColor(getResources().getColor(R.color.primary, null));
         searchInputLayout.setVisibility(View.VISIBLE);
         addOwnProductLayout.setVisibility(View.VISIBLE);
     }

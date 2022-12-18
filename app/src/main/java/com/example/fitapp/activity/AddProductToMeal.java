@@ -40,7 +40,7 @@ public class AddProductToMeal extends AppCompatActivity {
 
     String sName = "maslo";
     Double dAmount = 100.0, dFat = 100.0, dProtein = 100.0, dCarbo = 100.0, dCalories = 100.0;
-    private TextView name,calories,protein,fat,carbo;
+    private TextView name, calories, protein, fat, carbo;
     private MainViewModel mainViewModel;
     private TextInputEditText amount;
     private List<NutrientsItem> items = new ArrayList<>();
@@ -146,7 +146,7 @@ public class AddProductToMeal extends AppCompatActivity {
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     double a = valueOf(amount.getText().toString());
                     double temp;
                     temp = dCalories * a / 100;
@@ -158,7 +158,7 @@ public class AddProductToMeal extends AppCompatActivity {
                     temp = dCarbo * a / 100;
                     carbo.setText("Fats: " + temp + "");
 
-                    temp = dFat * a/100;
+                    temp = dFat * a / 100;
                     fat.setText("Carbohydrates: " + temp + "");
                 }
             }
@@ -170,7 +170,7 @@ public class AddProductToMeal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mainViewModel.clearData();
-                Toast.makeText(AddProductToMeal.this,name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddProductToMeal.this, name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
                 startActivity(intent);
                 finish();

@@ -51,7 +51,7 @@ public class Register3Activity extends AppCompatActivity {
     private TextView incorrectTarget;
     private TextView incorrectWeight;
     private TextView incorrectHeight;
-    private RadioButton woman,man;
+    private RadioButton woman, man;
     private int age;
     private Date dateToSave;
 
@@ -75,7 +75,7 @@ public class Register3Activity extends AppCompatActivity {
         weightInputLayout = (TextInputLayout) findViewById(R.id.weightField);
         heightInputLayout = (TextInputLayout) findViewById(R.id.heightField);
         targetInputLayout = (TextInputLayout) findViewById(R.id.targetField);
-        additionalInfo = (TextView)  findViewById(R.id.additionalInfo);
+        additionalInfo = (TextView) findViewById(R.id.additionalInfo);
         spinner = (Spinner) findViewById(R.id.spinner);
         linearLayoutAdditionalInfo = (LinearLayout) findViewById(R.id.linLayAdditionalInfo);
         createAnAccount = (TextView) findViewById(R.id.tvCreateAccount);
@@ -90,9 +90,9 @@ public class Register3Activity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null){
+        if (currentUser != null) {
             uid = currentUser.getUid();
-            Log.d("User",uid);
+            Log.d("User", uid);
         }
 
         createAnAccount.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +101,7 @@ public class Register3Activity extends AppCompatActivity {
                 incorrectWeight.setVisibility(View.GONE);
                 incorrectHeight.setVisibility(View.GONE);
                 incorrectTarget.setVisibility(View.GONE);
-                if(checkDataHei() && checkDataWei() && checkDataTarg()){
+                if (checkDataHei() && checkDataWei() && checkDataTarg()) {
                     saveData();
                     Intent intent = new Intent(Register3Activity.this, MainActivity.class);
                     startActivity(intent);
@@ -113,7 +113,7 @@ public class Register3Activity extends AppCompatActivity {
         weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -122,7 +122,7 @@ public class Register3Activity extends AppCompatActivity {
         height.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -131,7 +131,7 @@ public class Register3Activity extends AppCompatActivity {
         target.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -159,10 +159,9 @@ public class Register3Activity extends AppCompatActivity {
         additionalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(linearLayoutAdditionalInfo.isShown()){
+                if (linearLayoutAdditionalInfo.isShown()) {
                     linearLayoutAdditionalInfo.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     linearLayoutAdditionalInfo.setVisibility(View.VISIBLE);
                 }
             }
@@ -185,10 +184,10 @@ public class Register3Activity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 dateOfBirth.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                d.set(Calendar.YEAR,year);
-                                d.set(Calendar.MONTH,monthOfYear);
-                                d.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-                                Log.d("DATKA",d.toString());
+                                d.set(Calendar.YEAR, year);
+                                d.set(Calendar.MONTH, monthOfYear);
+                                d.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                Log.d("DATKA", d.toString());
                                 age = LocalDate.now().getYear() - year;
                                 dateToSave = d.getTime();
                             }
@@ -199,8 +198,8 @@ public class Register3Activity extends AppCompatActivity {
         });
     }
 
-    private void saveData(){
-        Log.d("Data",weight.getText().toString());
+    private void saveData() {
+        Log.d("Data", weight.getText().toString());
         double hei = valueOf(height.getText().toString());
         double wei = valueOf(weight.getText().toString());
         double weiTarg = valueOf(weight.getText().toString());
@@ -208,13 +207,11 @@ public class Register3Activity extends AppCompatActivity {
 
         double calories = 2000;
 
-        if(woman.isChecked()){
+        if (woman.isChecked()) {
             sex = woman.getText().toString();
             calories = 655.1 + (9.563 * wei) + (1.85 * hei) - (4.676 * age);
             //PPM u kobiet = 655,1 + (9,563 x masa ciała [kg]) + (1,85 x wzrost [cm]) - (4,676 x [wiek]);
-        }
-
-        else{
+        } else {
             sex = man.getText().toString();
             calories = 65.5 + (13.75 * wei) + (5.003 * hei) - (6.775 * age);
             //PPM u mężczyzn = 66,5 + (13,75 x masa ciała [kg]) + (5,003 x wzrost [cm]) - (6,775 x [wiek]).
@@ -229,19 +226,19 @@ public class Register3Activity extends AppCompatActivity {
         List<String> mypro = new ArrayList<>();
 
         db.collection("users").document(uid)
-                .update("height",hei,
-                        "current_weight",wei,
-                        "target_weight",weiTarg,
-                        "amount_calories",calories,
-                        "amount_fats",fat,
-                        "amount_proteins",protein,
-                        "amount_carbs",carbs,
-                        "sex",sex,
-                        "date_of_bitrth",dateToSave,
-                        "age",age,
-                        "favourite",fav,
-                        "my_products",mypro
-                        )
+                .update("height", hei,
+                        "current_weight", wei,
+                        "target_weight", weiTarg,
+                        "amount_calories", calories,
+                        "amount_fats", fat,
+                        "amount_proteins", protein,
+                        "amount_carbs", carbs,
+                        "sex", sex,
+                        "date_of_bitrth", dateToSave,
+                        "age", age,
+                        "favourite", fav,
+                        "my_products", mypro
+                )
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -265,11 +262,11 @@ public class Register3Activity extends AppCompatActivity {
         incorrectTarget.setVisibility(View.GONE);
     }
 
-    private boolean checkDataWei(){
+    private boolean checkDataWei() {
         String weight = this.weight.getText().toString();
-        if(weight.length()>=2){
+        if (weight.length() >= 2) {
             int intWeight = valueOf(weight);
-            if(intWeight>30 && intWeight<300){
+            if (intWeight > 30 && intWeight < 300) {
                 return true;
             }
             incorrectWeight.setVisibility(View.VISIBLE);
@@ -278,11 +275,11 @@ public class Register3Activity extends AppCompatActivity {
         return false;
     }
 
-    private boolean checkDataTarg(){
+    private boolean checkDataTarg() {
         String target = this.target.getText().toString();
-        if(target.length()>=2){
+        if (target.length() >= 2) {
             int intWeight = valueOf(target);
-            if(intWeight>30 && intWeight<300){
+            if (intWeight > 30 && intWeight < 300) {
                 return true;
             }
             incorrectTarget.setVisibility(View.VISIBLE);
@@ -291,11 +288,11 @@ public class Register3Activity extends AppCompatActivity {
         return false;
     }
 
-    private boolean checkDataHei(){
+    private boolean checkDataHei() {
         String height = this.height.getText().toString();
-        if(height.length()>=2){
+        if (height.length() >= 2) {
             int intWeight = valueOf(height);
-            if(intWeight>100 && intWeight<220){
+            if (intWeight > 100 && intWeight < 220) {
                 return true;
             }
             incorrectHeight.setVisibility(View.VISIBLE);

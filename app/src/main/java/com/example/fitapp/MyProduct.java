@@ -55,17 +55,17 @@ public class MyProduct {
     }
 
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("name",name);
-        if(uid != null){
-            result.put("owner",uid);
+        result.put("name", name);
+        if (uid != null) {
+            result.put("owner", uid);
         }
-        result.put("calories",calories);
-        result.put("protein",protein);
-        result.put("fats",fats);
-        result.put("carbs",carbs);
-        result.put("quantity",quantity);
+        result.put("calories", calories);
+        result.put("protein", protein);
+        result.put("fats", fats);
+        result.put("carbs", carbs);
+        result.put("quantity", quantity);
         return result;
     }
 }

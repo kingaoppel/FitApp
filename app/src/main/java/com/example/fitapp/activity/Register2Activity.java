@@ -46,9 +46,9 @@ public class Register2Activity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null){
+        if (currentUser != null) {
             uid = currentUser.getUid();
-            Log.d("User",uid);
+            Log.d("User", uid);
         }
 
         butWeightLoss.setOnClickListener(new View.OnClickListener() {

@@ -16,21 +16,21 @@ public class MainViewModel extends ViewModel {
     private final LiveData<Search> autocompleteData;
     private final LiveData<Product> productLiveData;
 
-    public MainViewModel(){
+    public MainViewModel() {
         this.mainRepository = MainRepository.getInstance();
         this.autocompleteData = mainRepository.getAutocompleteData();
         this.productLiveData = mainRepository.getProductInfo();
     }
 
-    public void fetchAutoCompleteMeals(String query){
+    public void fetchAutoCompleteMeals(String query) {
         this.mainRepository.getAutocompleteByQuery(query);
     }
 
-    public LiveData<Search> getAutoCompleteMealsData(){
+    public LiveData<Search> getAutoCompleteMealsData() {
         return autocompleteData;
     }
 
-    public void fetchProductInfobyId(String id){
+    public void fetchProductInfobyId(String id) {
         this.mainRepository.fetchProductInfo(id);
     }
 
@@ -38,11 +38,11 @@ public class MainViewModel extends ViewModel {
         return productLiveData;
     }
 
-    public void clearData(){
+    public void clearData() {
         mainRepository.clearData();
     }
 
-    public void setNameProduct(String name){
+    public void setNameProduct(String name) {
         mainRepository.setNameProduct(name);
     }
 }

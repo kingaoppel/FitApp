@@ -59,7 +59,7 @@ public class FavouriteProductListFragment extends Fragment {
         mainViewModel.getAutoCompleteMealsData().observe(getViewLifecycleOwner(), new Observer<Search>() {
             @Override
             public void onChanged(Search search) {
-                if(search!= null && search.getResults()!=null && search.getResults().size()> 0){
+                if (search != null && search.getResults() != null && search.getResults().size() > 0) {
                     items.clear();
                     items.addAll(search.getResults());
                     searchProductAdapter.notifyDataSetChanged();
@@ -77,7 +77,7 @@ public class FavouriteProductListFragment extends Fragment {
         mainViewModel.getProductLiveData().observe(getViewLifecycleOwner(), new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
-                if(product != null && product.getNutrition() != null){
+                if (product != null && product.getNutrition() != null) {
                     Intent intent = new Intent(context, AddProductToMeal.class);
                     startActivity(intent);
                     //Bundle i sprawdzenie nazwy tutaj a w activity

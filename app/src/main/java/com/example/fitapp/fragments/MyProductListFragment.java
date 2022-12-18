@@ -106,7 +106,7 @@ public class MyProductListFragment extends Fragment {
         mainViewModel.getProductLiveData().observe(getViewLifecycleOwner(), new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
-                if(product != null && product.getNutrition() != null){
+                if (product != null && product.getNutrition() != null) {
                     Intent intent = new Intent(context, AddProductToMeal.class);
                     startActivity(intent);
                     //Bundle i sprawdzenie nazwy tutaj a w activity
@@ -125,7 +125,7 @@ public class MyProductListFragment extends Fragment {
         };
 
         searchProduct = view.findViewById(R.id.search_results);
-        myProductAdapter = new MyProductAdapter(context, lista,myProductInterface);
+        myProductAdapter = new MyProductAdapter(context, lista, myProductInterface);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         searchProduct.setLayoutManager(manager);
         searchProduct.setAdapter(myProductAdapter);

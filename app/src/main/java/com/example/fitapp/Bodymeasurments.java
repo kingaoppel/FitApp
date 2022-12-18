@@ -32,17 +32,17 @@ public class Bodymeasurments {
         this.weight = weight;
     }
 
-    public Map<String, Object> toMap(){
+    public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("uid",uid);
-        result.put("date",date);
-        result.put("circumference_arm",circumference_arm);
-        result.put("circumference_calf",circumference_calf);
-        result.put("circumference_chest",circumference_chest);
-        result.put("circumference_hip",circumference_hip);
-        result.put("circumference_thigh",circumference_thigh);
-        result.put("circumference_waist",circumference_waist);
-        result.put("weight",weight);
+        result.put("uid", uid);
+        result.put("date", date);
+        result.put("circumference_arm", circumference_arm);
+        result.put("circumference_calf", circumference_calf);
+        result.put("circumference_chest", circumference_chest);
+        result.put("circumference_hip", circumference_hip);
+        result.put("circumference_thigh", circumference_thigh);
+        result.put("circumference_waist", circumference_waist);
+        result.put("weight", weight);
         return result;
     }
 

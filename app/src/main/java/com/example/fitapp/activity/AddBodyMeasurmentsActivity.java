@@ -42,8 +42,8 @@ import java.util.Map;
 public class AddBodyMeasurmentsActivity extends AppCompatActivity {
 
     private TextView date;
-    private TextInputLayout weightInputLayout, circumferenceArmInputLayout, circumferenceCalfInputLayout, circumferenceChestInputLayout, circumferenceHipInputLayout,circumferenceThighInputLayout, circumferenceWaistInputLayout;
-    private TextInputEditText weight, circumferenceArm, circumferenceCalf, circumferenceChest, circumferenceHip,circumferenceThigh, circumferenceWaist;
+    private TextInputLayout weightInputLayout, circumferenceArmInputLayout, circumferenceCalfInputLayout, circumferenceChestInputLayout, circumferenceHipInputLayout, circumferenceThighInputLayout, circumferenceWaistInputLayout;
+    private TextInputEditText weight, circumferenceArm, circumferenceCalf, circumferenceChest, circumferenceHip, circumferenceThigh, circumferenceWaist;
     private List<Date> dateToFire = new ArrayList<>();
     private LinearLayout linearLayoutAddMeas;
     private List<Double> wei = new ArrayList<>();
@@ -89,9 +89,9 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null){
+        if (currentUser != null) {
             uid = currentUser.getUid();
-            Log.d("User",uid);
+            Log.d("User", uid);
         }
 
 
@@ -136,7 +136,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -145,7 +145,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceArm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -154,7 +154,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceCalf.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -163,7 +163,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceChest.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -172,7 +172,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceHip.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -181,7 +181,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceThigh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -190,7 +190,7 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         circumferenceWaist.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -232,23 +232,23 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         dateToFire.add(cal.getTime());
 
-            Bodymeasurments bodymeasurments = new Bodymeasurments(uid,dateToFire,arm,calf,chest,hip,thigh,waist,wei);
-            Map<String, Object> bodyValues = bodymeasurments.toMap();
-            db.collection("body_measuremants").document("11" + uid)
-                    .set(bodyValues, SetOptions.merge())
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("AddData", "DocumentSnapshot successfully written!");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("AddData", "Error writing document", e);
-                        }
-                    });
-        }
+        Bodymeasurments bodymeasurments = new Bodymeasurments(uid, dateToFire, arm, calf, chest, hip, thigh, waist, wei);
+        Map<String, Object> bodyValues = bodymeasurments.toMap();
+        db.collection("body_measuremants").document("11" + uid)
+                .set(bodyValues, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("AddData", "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("AddData", "Error writing document", e);
+                    }
+                });
+    }
 
 
     private void hideKeyboard(View v) {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MealUtils {
 
-    public static Map<String, String> getAutoCompleteQueryMap(String query){
+    public static Map<String, String> getAutoCompleteQueryMap(String query) {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("apiKey", "51a116becc0945f5a9b834dd2caff3a9");
         queryMap.put("query", query);
@@ -14,11 +14,11 @@ public class MealUtils {
         return queryMap;
     }
 
-    public static Map<String, String> getProductInfo(){
+    public static Map<String, String> getProductInfo() {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("apiKey", "51a116becc0945f5a9b834dd2caff3a9");
         queryMap.put("amount", "100");
-        queryMap.put("unit","grams");
+        queryMap.put("unit", "grams");
 
         return queryMap;
     }

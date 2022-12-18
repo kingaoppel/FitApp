@@ -18,6 +18,6 @@ public interface MealApiService {
     Call<Search> getAutocompleteByQuery(@QueryMap(encoded = false) Map<String, String> query);
 
     @GET("ingredients/{id}/information")
-    Call<Product> getProductInfo(@Path(value = "id", encoded = false) String id,@QueryMap(encoded = false) Map<String, String> query);
+    Call<Product> getProductInfo(@Path(value = "id", encoded = false) String id, @QueryMap(encoded = false) Map<String, String> query);
 
 }

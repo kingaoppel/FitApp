@@ -45,9 +45,9 @@ public class MainRepository {
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     autocompleteData.setValue(response.body());
-                }else{
+                } else {
                     autocompleteData.setValue(null);
                 }
             }
@@ -59,22 +59,21 @@ public class MainRepository {
         });
     }
 
-    public LiveData<Search> getAutocompleteData(){
+    public LiveData<Search> getAutocompleteData() {
         return autocompleteData;
     }
 
 
-    public void fetchProductInfo(String id){
+    public void fetchProductInfo(String id) {
         productInfo.setValue(new Product());
         Map<String, String> params = MealUtils.getProductInfo();
         Call<Product> call = apiService.getProductInfo(id, params);
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     productInfo.setValue(response.body());
-                }
-                else{
+                } else {
                     productInfo.setValue(null);
                 }
             }
@@ -86,15 +85,17 @@ public class MainRepository {
         });
     }
 
-    public LiveData<Product> getProductInfo(){ return productInfo; }
+    public LiveData<Product> getProductInfo() {
+        return productInfo;
+    }
 
-    public void clearData(){
+    public void clearData() {
         productInfo.setValue(null);
     }
 
-    public void setNameProduct(String name){
+    public void setNameProduct(String name) {
         Product temp = productInfo.getValue();
-        if(temp == null){
+        if (temp == null) {
             temp = new Product();
         }
         temp.setName(name);

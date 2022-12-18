@@ -34,7 +34,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
     @NonNull
     @Override
     public BreakfastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_item, parent, false);
         return new ViewHolder(view);
     }
 

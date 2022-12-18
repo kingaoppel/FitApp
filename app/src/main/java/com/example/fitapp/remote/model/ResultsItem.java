@@ -2,26 +2,26 @@ package com.example.fitapp.remote.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResultsItem{
+public class ResultsItem {
 
-	@SerializedName("image")
-	private String image;
+    @SerializedName("image")
+    private String image;
 
-	@SerializedName("name")
-	private String name;
+    @SerializedName("name")
+    private String name;
 
-	@SerializedName("id")
-	private int id;
+    @SerializedName("id")
+    private int id;
 
-	public String getImage(){
-		return image;
-	}
+    public String getImage() {
+        return image;
+    }
 
-	public String getName(){
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getId(){
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 }

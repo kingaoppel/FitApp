@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -96,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
+                if (!hasFocus) {
                     hideKeyboard(v);
                 }
             }
@@ -162,19 +162,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
                     register();
-                }else{
-                    if(!isConfirmPasswordValid){
+                } else {
+                    if (!isConfirmPasswordValid) {
                         confirmPasswordInputLayout.setErrorEnabled(true);
                         confirmPasswordInputLayout.setError("Passwords do not match");
                         confirmPasswordInputLayout.requestFocus();
                     }
-                    if(!isPasswordValid){
+                    if (!isPasswordValid) {
                         passwordInputLayout.setErrorEnabled(true);
                         passwordInputLayout.setError("Password must be at least 8 characters and contain at " +
                                 "least one number and capital letter");
                         passwordInputLayout.requestFocus();
                     }
-                    if(!isEmailValid){
+                    if (!isEmailValid) {
                         emailInputLayout.setErrorEnabled(true);
                         emailInputLayout.setError("Invalid email");
                         emailInputLayout.requestFocus();
@@ -209,12 +209,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
-        if(currentUser != null){
+        if (currentUser != null) {
 //            change na Main
             Intent intent = new Intent(RegisterActivity.this, Register2Activity.class);
             startActivity(intent);
             finish();
-        }else{
+        } else {
             Log.d("RegisterActivity", "updateUI: User is not signed in");
         }
     }
@@ -228,12 +228,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if(requestCode == REQ_ONE_TAP){
+        if (requestCode == REQ_ONE_TAP) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
-            }catch(ApiException e){
+            } catch (ApiException e) {
                 Log.w("RegisterActivity", "Google sign in failed", e);
             }
         }
@@ -245,12 +245,12 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             //Sign in success, update UI with the signed-in user's information
                             Log.d("RegisterActivity", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                        }else{
+                        } else {
                             //If sign in fails, display a message to the user
                             Log.w("RegisterActivity", "signInWithCredential:failure", task.getException());
                             Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -261,22 +261,22 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        if(isConfirmPasswordValid && isPasswordValid && isEmailValid){
+        if (isConfirmPasswordValid && isPasswordValid && isEmailValid) {
             String s_email = email.getText().toString();
             String s_password = password.getText().toString();
             String s_confirmPassword = confirmPassword.getText().toString();
 
-            if(s_password.equals(s_confirmPassword)){
+            if (s_password.equals(s_confirmPassword)) {
                 mAuth.createUserWithEmailAndPassword(s_email, s_password)
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     //Sign in success, update UI with the signed-in user's information
                                     Log.d("RegisterActivity", "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     updateUI(user);
-                                }else{
+                                } else {
                                     //If sign in fails, display a message to the user
                                     Log.w("RegisterActivity", "createUserWithEmail:failure", task.getException());
                                     Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -284,7 +284,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }else {
+            } else {
                 confirmPasswordInputLayout.setErrorEnabled(true);
                 confirmPasswordInputLayout.setError("Passwords do not match");
                 confirmPasswordInputLayout.requestFocus();

@@ -106,9 +106,9 @@ public class UserPageActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null){
+        if (currentUser != null) {
             uid = currentUser.getUid();
-            Log.d("User",uid);
+            Log.d("User", uid);
         }
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -120,7 +120,7 @@ public class UserPageActivity extends AppCompatActivity {
                         data = document.getData();
                         Log.d("User", "DocumentSnapshot data: " + data.get("name"));
                         calories.setText(df.format(data.get("amount_calories")) + "");
-                        temp = bmiCal((Double) data.get("current_weight"),(Double) data.get("height"));
+                        temp = bmiCal((Double) data.get("current_weight"), (Double) data.get("height"));
                         bmi.setText(df.format(temp) + "");
                         yourWeightTarget.setText(data.get("target_weight").toString());
                         yourWeightNowString.setText("Your weight now " + data.get("current_weight").toString());
@@ -134,7 +134,6 @@ public class UserPageActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
         DocumentReference docRefMeas = db.collection("body_measuremants").document("11" + uid);
@@ -155,46 +154,45 @@ public class UserPageActivity extends AppCompatActivity {
                         circumferenceWaistList = (List<Double>) dataMeas.get("circumference_waist");
 
 
-                    if(weightList != null) {
-                        if (weightList.size() < 2) {
-                            linearLayoutMeasuremants.setVisibility(View.GONE);
-                            yourWeightNow.setText(weightList.get(weightList.size() - 1).toString());
-                            yourWeightNowString.setText("Your weight now " + weightList.get(weightList.size() - 1).toString());
-                        } else {
-                            linearLayoutMeasuremants.setVisibility(View.VISIBLE);
+                        if (weightList != null) {
+                            if (weightList.size() < 2) {
+                                linearLayoutMeasuremants.setVisibility(View.GONE);
+                                yourWeightNow.setText(weightList.get(weightList.size() - 1).toString());
+                                yourWeightNowString.setText("Your weight now " + weightList.get(weightList.size() - 1).toString());
+                            } else {
+                                linearLayoutMeasuremants.setVisibility(View.VISIBLE);
 //                            yourWeightNow.setText(weightList.get(0) + "");
-                            String t1 = weightList.get(0).toString();
-                            String t2 = weightList.get(weightList.size() - 1).toString();
-                            String t3 = "";
-                            tempToProgressWeight = progressWeightFun(Double.valueOf(t1), Double.valueOf(t2));
-                            if (tempToProgressWeight > 0) {
-                                t3 = " more ";
+                                String t1 = weightList.get(0).toString();
+                                String t2 = weightList.get(weightList.size() - 1).toString();
+                                String t3 = "";
+                                tempToProgressWeight = progressWeightFun(Double.valueOf(t1), Double.valueOf(t2));
+                                if (tempToProgressWeight > 0) {
+                                    t3 = " more ";
+                                }
+                                progressWeight.setText(tempToProgressWeight.toString() + " kg" + t3 + "from the beginning of training (" + weightList.get(0).toString() + " kg)");
+
+                                armFirst.setText(circumferenceArmList.get(0).toString());
+                                armNow.setText(circumferenceArmList.get(circumferenceArmList.size() - 1).toString() + " kg");
+
+                                calfFirst.setText(circumferenceCalfList.get(0).toString());
+                                calfNow.setText(circumferenceCalfList.get(circumferenceCalfList.size() - 1).toString() + " kg");
+
+                                chestFirst.setText(circumferenceChestList.get(0).toString());
+                                chestNow.setText(circumferenceChestList.get(circumferenceChestList.size() - 1).toString() + " kg");
+
+                                hipFirst.setText(circumferenceHipList.get(0).toString());
+                                hipNow.setText(circumferenceHipList.get(circumferenceHipList.size() - 1).toString() + " kg");
+
+                                waistFirst.setText(circumferenceWaistList.get(0).toString());
+                                waistNow.setText(circumferenceWaistList.get(circumferenceWaistList.size() - 1).toString() + " kg");
+
+                                thighFirst.setText(circumferenceThighList.get(0).toString());
+                                thighNow.setText(circumferenceThighList.get(circumferenceThighList.size() - 1).toString() + " kg");
+
                             }
-                            progressWeight.setText(tempToProgressWeight.toString() + " kg" + t3 + "from the beginning of training (" + weightList.get(0).toString() + " kg)");
-
-                            armFirst.setText(circumferenceArmList.get(0).toString());
-                            armNow.setText(circumferenceArmList.get(circumferenceArmList.size() - 1).toString() + " kg");
-
-                            calfFirst.setText(circumferenceCalfList.get(0).toString());
-                            calfNow.setText(circumferenceCalfList.get(circumferenceCalfList.size() - 1).toString() + " kg");
-
-                            chestFirst.setText(circumferenceChestList.get(0).toString());
-                            chestNow.setText(circumferenceChestList.get(circumferenceChestList.size() - 1).toString() + " kg");
-
-                            hipFirst.setText(circumferenceHipList.get(0).toString());
-                            hipNow.setText(circumferenceHipList.get(circumferenceHipList.size() - 1).toString() + " kg");
-
-                            waistFirst.setText(circumferenceWaistList.get(0).toString());
-                            waistNow.setText(circumferenceWaistList.get(circumferenceWaistList.size() - 1).toString() + " kg");
-
-                            thighFirst.setText(circumferenceThighList.get(0).toString());
-                            thighNow.setText(circumferenceThighList.get(circumferenceThighList.size() - 1).toString() + " kg");
-
+                        } else {
+                            linearLayoutMeasuremants.setVisibility(View.GONE);
                         }
-                    }
-                    else{
-                        linearLayoutMeasuremants.setVisibility(View.GONE);
-                    }
 
                     } else {
                         Log.d("User", "No such document");
@@ -209,31 +207,29 @@ public class UserPageActivity extends AppCompatActivity {
 
     }
 
-    Double bmiCal(Double weight, Double height){
-        Double h = height/100;
-        Double bmiVal = weight/(h*h);
+    Double bmiCal(Double weight, Double height) {
+        Double h = height / 100;
+        Double bmiVal = weight / (h * h);
         Log.d("BMI", weight + "    " + height + "    " + h + "     ");
 
-        if(bmiVal < 18.5){
+        if (bmiVal < 18.5) {
             bmi.setTextColor(0xFF375EC1);
-        }
-        else if(bmiVal > 18.5 && bmiVal < 24.9){
+        } else if (bmiVal > 18.5 && bmiVal < 24.9) {
             bmi.setTextColor(0xFF5AE343);
-        }
-        else if(bmiVal > 24.9){
+        } else if (bmiVal > 24.9) {
             bmi.setTextColor(0xFFF61B1B);
         }
 
         return bmiVal;
     }
 
-    Double progressWeightFun(Double weightNow, Double weightTarget){
-        Double temp ;
+    Double progressWeightFun(Double weightNow, Double weightTarget) {
+        Double temp;
         temp = weightTarget - weightNow;
         return temp;
     }
 
-    void setVisa(String s){
+    void setVisa(String s) {
         return;
         //ustawić na poczatek visability na gone w wszystkich layoutach i potem jak pobierzemy dane z firestore to ustawić na visable
     }

@@ -1,4 +1,5 @@
 package com.example.fitapp.adapters;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -26,7 +27,7 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
     private List<ResultsItem> items;
     private SearchInterface searchInterface;
 
-    public SearchProductAdapter(Context context, List<ResultsItem> items, SearchInterface searchInterface){
+    public SearchProductAdapter(Context context, List<ResultsItem> items, SearchInterface searchInterface) {
         this.context = context;
         this.items = items;
         this.searchInterface = searchInterface;
@@ -35,10 +36,10 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
     @NonNull
     @Override
     public SearchProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_item, parent, false);
         return new ViewHolder(view);
     }
-    
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

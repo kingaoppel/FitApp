@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private BreakfastAdapter breakfastAdapter;
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
-    private TextView tvbreakfast, dinner, lunch, snack, supper, calo,fat,carbo,protein;
+    private TextView tvbreakfast, dinner, lunch, snack, supper, calo, fat, carbo, protein;
     private ImageView addMealToBreakfast, bodyMeasPage, userPage;
     private static final DecimalFormat df = new DecimalFormat("0");
 
@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(currentUser != null){
+        if (currentUser != null) {
             uid = currentUser.getUid();
-            Log.d("User",uid);
+            Log.d("User", uid);
         }
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -121,10 +121,9 @@ public class MainActivity extends AppCompatActivity {
         tvbreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(breakfast.isShown()){
+                if (breakfast.isShown()) {
                     breakfast.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     breakfast.setVisibility(View.VISIBLE);
                 }
             }
