@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -104,6 +105,13 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
                         dataMeas = document.getData();
                         Log.d("User", "DocumentSnapshot data: " + dataMeas.get("name"));
                         wei = (List<Double>) dataMeas.get("weight");
+                        arm = (List<Double>) dataMeas.get("circumference_arm");
+                        calf = (List<Double>) dataMeas.get("circumference_calf");
+                        chest = (List<Double>) dataMeas.get("circumference_chest");
+                        hip = (List<Double>) dataMeas.get("circumference_hip");
+                        thigh = (List<Double>) dataMeas.get("circumference_thigh");
+                        waist = (List<Double>) dataMeas.get("circumference_waist");
+                        dateToFire = (List<Date>) dataMeas.get("date");
 
                     } else {
                         Log.d("User", "No such document");
@@ -119,6 +127,9 @@ public class AddBodyMeasurmentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 whiteNewBodyMeas();
+                Intent intent = new Intent(AddBodyMeasurmentsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

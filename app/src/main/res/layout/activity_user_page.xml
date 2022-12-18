@@ -38,7 +38,8 @@
             android:layout_marginBottom="@dimen/dp_32"
             android:text="@string/user_name"
             android:textDirection="ltr"
-            android:textSize="@dimen/text_size_header_font" />
+            android:textSize="@dimen/text_size_header_font"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/userPage_yourWeightNow"
@@ -174,6 +175,13 @@
             android:layout_gravity="center"
             android:textColor="@color/green" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/bodyMeasuremantsLayout">
+
+
         <TextView
             style="@style/baseText"
             android:layout_width="wrap_content"
@@ -193,6 +201,7 @@
             android:text="@string/circumference_arm"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -200,7 +209,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_armFirst"
@@ -244,6 +254,7 @@
             android:text="@string/circumference_chest"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -251,7 +262,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_chestFirst"
@@ -295,6 +307,7 @@
             android:text="@string/circumference_waist"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -302,7 +315,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_waistFirst"
@@ -346,6 +360,7 @@
             android:text="@string/circumference_hip"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -353,7 +368,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_hipFirst"
@@ -397,6 +413,7 @@
             android:text="@string/circumference_thigh"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -404,7 +421,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_thighFirst"
@@ -448,6 +466,7 @@
             android:text="@string/circumference_calf"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_huge"
+            android:paddingLeft="@dimen/dp_24"
             />
 
         <LinearLayout
@@ -455,7 +474,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="@dimen/dp_32"
-            android:layout_marginEnd="@dimen/dp_32">
+            android:layout_marginEnd="@dimen/dp_32"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/userPage_calfFirst"
@@ -490,6 +510,20 @@
                 android:layout_gravity="center"/>
 
         </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/baseText"
+            android:id="@+id/tVaddBodyMeas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:text="@string/add_a_body_meas"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm"
+            android:layout_gravity="center"
+            />
 
         <TextView
             style="@style/baseText"
