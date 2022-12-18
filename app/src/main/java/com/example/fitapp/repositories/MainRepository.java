@@ -94,6 +94,9 @@ public class MainRepository {
 
     public void setNameProduct(String name){
         Product temp = productInfo.getValue();
+        if(temp == null){
+            temp = new Product();
+        }
         temp.setName(name);
         productInfo.setValue(temp);
     }

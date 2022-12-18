@@ -118,7 +118,7 @@ public class MyProductListFragment extends Fragment {
         myProductInterface = new MyProductInterface() {
             @Override
             public void onClick(String name) {
-                mainViewModel.setNameProduct(uid+name);
+                mainViewModel.setNameProduct(name);
                 Intent intent = new Intent(context, AddProductToMeal.class);
                 startActivity(intent);
             }

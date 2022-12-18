@@ -82,7 +82,7 @@ public class AddProductToMeal extends AppCompatActivity {
             Log.d("User", uid);
         }
 
-        DocumentReference docRef = db.collection("products").document(sName);
+        DocumentReference docRef = db.collection("products").document(uid + sName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -176,5 +176,11 @@ public class AddProductToMeal extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mainViewModel.clearData();
     }
 }
