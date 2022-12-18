@@ -69,11 +69,10 @@ public class AddProductToMeal extends AppCompatActivity {
         fat = findViewById(R.id.sumFat);
         carbo = findViewById(R.id.sumCarbo);
 
-        sName = getIntent().getStringExtra("NAME");
+//        sName = getIntent().getStringExtra("NAME");
 
-        //sName = mainViewModel.getProductLiveData().getValue().getName().toUpperCase(Locale.ROOT);
+        sName = mainViewModel.getProductLiveData().getValue().getName();
         name.setText(sName);
-
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();

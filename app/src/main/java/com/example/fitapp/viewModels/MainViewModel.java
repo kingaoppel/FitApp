@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.repositories.MainRepository;
@@ -39,5 +40,9 @@ public class MainViewModel extends ViewModel {
 
     public void clearData(){
         mainRepository.clearData();
+    }
+
+    public void setNameProduct(String name){
+        mainRepository.setNameProduct(name);
     }
 }

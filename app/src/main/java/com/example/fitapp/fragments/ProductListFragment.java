@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +19,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.example.fitapp.activity.AddProductToMeal;
 import com.example.fitapp.adapters.SearchProductAdapter;
@@ -30,23 +29,14 @@ import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.NutrientsItem;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.viewModels.MainViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ProductListFragment extends Fragment {
 
@@ -152,7 +142,7 @@ public class ProductListFragment extends Fragment {
         }
 
         if (s_cal >= 0 && s_pro >= 0 && s_fat >= 0 && s_carbo >= 0 && s_name.length() > 2) {
-            com.example.fitapp.Product product = new com.example.fitapp.Product(s_name, null, s_cal, s_pro, s_fat, s_carbo, s_qua);
+            MyProduct product = new MyProduct(s_name, null, s_cal, s_pro, s_fat, s_carbo, s_qua);
             Map<String, Object> productValues = product.toMap();
             db.collection("products").document(s_name)
                     .set(productValues)

@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fitapp.Product;
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,7 +34,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -252,7 +251,7 @@ public class AddOwnProductActivity extends AppCompatActivity {
         s_carbo = valueOf(this.carbo.getText().toString());
 
         if (s_cal >= 0 && s_pro >= 0 && s_fat >= 0 && s_carbo >= 0 && s_name.length() > 2) {
-            Product product = new Product(s_name, uid, s_cal, s_pro, s_fat, s_carbo, s_qua);
+            MyProduct product = new MyProduct(s_name, uid, s_cal, s_pro, s_fat, s_carbo, s_qua);
             Map<String, Object> productValues = product.toMap();
             db.collection("products").document(uid + s_name)
                     .set(productValues)

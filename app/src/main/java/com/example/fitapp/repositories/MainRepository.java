@@ -3,6 +3,7 @@ package com.example.fitapp.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.Utils.MealUtils;
 import com.example.fitapp.remote.ApiClient;
 import com.example.fitapp.remote.MealApiService;
@@ -89,6 +90,12 @@ public class MainRepository {
 
     public void clearData(){
         productInfo.setValue(null);
+    }
+
+    public void setNameProduct(String name){
+        Product temp = productInfo.getValue();
+        temp.setName(name);
+        productInfo.setValue(temp);
     }
 
 }

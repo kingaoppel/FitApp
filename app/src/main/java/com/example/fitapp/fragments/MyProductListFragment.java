@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fitapp.R;
 import com.example.fitapp.activity.AddProductToMeal;
 import com.example.fitapp.adapters.MyProductAdapter;
+import com.example.fitapp.interfaces.MyProductInterface;
 import com.example.fitapp.interfaces.SearchInterface;
 import com.example.fitapp.remote.model.ResultsItem;
 import com.example.fitapp.remote.modelProduct.Product;
@@ -42,6 +43,8 @@ public class MyProductListFragment extends Fragment {
     private Context context;
 
     private MainViewModel mainViewModel;
+
+    private MyProductInterface myProductInterface;
 
     private MyProductAdapter myProductAdapter;
     RecyclerView searchProduct;
@@ -112,8 +115,17 @@ public class MyProductListFragment extends Fragment {
             }
         });
 
+        myProductInterface = new MyProductInterface() {
+            @Override
+            public void onClick(String name) {
+                mainViewModel.setNameProduct(uid+name);
+                Intent intent = new Intent(context, AddProductToMeal.class);
+                startActivity(intent);
+            }
+        };
+
         searchProduct = view.findViewById(R.id.search_results);
-        myProductAdapter = new MyProductAdapter(context, lista);
+        myProductAdapter = new MyProductAdapter(context, lista,myProductInterface);
         LinearLayoutManager manager = new LinearLayoutManager(context);
         searchProduct.setLayoutManager(manager);
         searchProduct.setAdapter(myProductAdapter);

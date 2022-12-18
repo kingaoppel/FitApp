@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.R;
+import com.example.fitapp.interfaces.MyProductInterface;
 import com.example.fitapp.remote.model.ResultsItem;
 
 import java.text.BreakIterator;
@@ -18,10 +19,12 @@ import java.util.List;
 public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.ViewHolder> {
     private Context context;
     private List<String> items;
+    private MyProductInterface myProductInterface;
 
-    public MyProductAdapter(Context context, List<String> items) {
+    public MyProductAdapter(Context context, List<String> items, MyProductInterface myProductInterface) {
         this.context = context;
         this.items = items;
+        this.myProductInterface = myProductInterface;
     }
 
     public MyProductAdapter() {
@@ -56,7 +59,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    myProductInterface.onClick(items.get(getAdapterPosition()));
                 }
             });
         }
