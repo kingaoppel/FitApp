@@ -14,17 +14,19 @@ public class Meal {
     private Double proteins;
     private Double fats;
     private Double carbo;
+    private String note;
 
     public Meal() {
     }
 
-    public Meal(List<String> itemsName, List<Double> itemsAmount, Double calories, Double proteins, Double fats, Double carbo) {
+    public Meal(List<String> itemsName, List<Double> itemsAmount, Double calories, Double proteins, Double fats, Double carbo, String note) {
         this.itemsName = itemsName;
         this.itemsAmount = itemsAmount;
         this.calories = calories;
         this.proteins = proteins;
         this.fats = fats;
         this.carbo = carbo;
+        this.note = note;
     }
 
     public List<String> getItemsName() {
@@ -75,6 +77,12 @@ public class Meal {
         this.carbo = carbo;
     }
 
+    public String getNote() {
+        return note;
+    }
 
+    public void setNote(String note) {
+        this.note = note;
+    }
 
 }
