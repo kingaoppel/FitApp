@@ -12,7 +12,35 @@ public class MyProduct implements Serializable {
     public Double protein;
     public Double fats;
     public Double carbs;
-    public Double quantity;
+    public Double amount;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public Double getCalories() {
+        return calories;
+    }
+
+    public Double getProtein() {
+        return protein;
+    }
+
+    public Double getFats() {
+        return fats;
+    }
+
+    public Double getCarbs() {
+        return carbs;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -38,21 +66,21 @@ public class MyProduct implements Serializable {
         this.carbs = carbs;
     }
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public void setAmount(Double quantity) {
+        this.amount = quantity;
     }
 
     public MyProduct() {
     }
 
-    public MyProduct(String name, String owner, Double calories, Double protein, Double fats, Double carbs, Double quantity) {
+    public MyProduct(String name, String owner, Double calories, Double protein, Double fats, Double carbs, Double amount) {
         this.name = name;
         this.uid = owner;
         this.calories = calories;
         this.protein = protein;
         this.fats = fats;
         this.carbs = carbs;
-        this.quantity = quantity;
+        this.amount = amount;
     }
 
 
@@ -66,7 +94,7 @@ public class MyProduct implements Serializable {
         result.put("protein", protein);
         result.put("fats", fats);
         result.put("carbs", carbs);
-        result.put("quantity", quantity);
+        result.put("quantity", amount);
         return result;
     }
 }

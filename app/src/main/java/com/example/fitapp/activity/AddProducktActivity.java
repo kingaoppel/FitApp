@@ -27,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AddProducktActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
@@ -43,11 +44,11 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     private MainViewModel viewModel;
     private List<String> productNames = new ArrayList<>();
 
-
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
     private MyProductListFragment myProductListFragment;
 
+    private Date dateOfMeal;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -72,6 +73,9 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         noteFragment = new NoteFragment();
         productListFragment = new ProductListFragment();
         myProductListFragment = new MyProductListFragment();
+
+        // ZMIENIĆ NA VIEW MODEL
+        dateOfMeal = (Date) getIntent().getSerializableExtra("DATE");
 
         addOwnProductLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,29 +139,38 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             }
         });
 
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-                int dayS = c.get(Calendar.DAY_OF_WEEK);
-//                JAK WYŚWIETLIĆ MON, 21.11.2022
+        if(dateOfMeal != null){
+            int day = dateOfMeal.getDate();
+            int month = dateOfMeal.getMonth() + 1;
+            int year = dateOfMeal.getYear() + 1900;
+            date.setText(day + "." + month + "." + year);
+        } else {
+            date.setText("Today");
+        }
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddProducktActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                date.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
-                            }
-                        },
-                        year, month, day);
-                datePickerDialog.show();
-            }
-        });
+//        date.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final Calendar c = Calendar.getInstance();
+//                int year = c.get(Calendar.YEAR);
+//                int month = c.get(Calendar.MONTH);
+//                int day = c.get(Calendar.DAY_OF_MONTH);
+//                int dayS = c.get(Calendar.DAY_OF_WEEK);
+////                JAK WYŚWIETLIĆ MON, 21.11.2022
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                        AddProducktActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year,
+//                                                  int monthOfYear, int dayOfMonth) {
+//                                date.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+//                            }
+//                        },
+//                        year, month, day);
+//                datePickerDialog.show();
+//            }
+//        });
 
     }
 

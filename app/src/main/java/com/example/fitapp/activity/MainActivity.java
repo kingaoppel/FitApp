@@ -2,6 +2,7 @@ package com.example.fitapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,9 @@ import android.widget.TextView;
 
 import com.example.fitapp.R;
 import com.example.fitapp.adapters.BreakfastAdapter;
+import com.example.fitapp.repositories.MainRepository;
+import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
+import com.example.fitapp.viewModels.MainViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
     String uid;
     Map<String, Object> data = new HashMap<>();
+    Date theDate;
+    Calendar newC;
+
+    private MainViewModel viewModel;
+    private List<DayWithMeals> itemsDay = new ArrayList<>();
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -72,11 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         if (currentUser != null) {
             uid = currentUser.getUid();
             Log.d("User", uid);
+            viewModel.loadFromSharedPrefs(this);
         }
+
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -119,7 +132,11 @@ public class MainActivity extends AppCompatActivity {
         addMealToBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewModel.setMealName("breakfast");
+                viewModel.setDate(theDate);
                 Intent intent = new Intent(MainActivity.this, AddProducktActivity.class);
+                intent.putExtra("MEAL_NAME", "breakfast");
+                intent.putExtra("DATE", theDate);
                 startActivity(intent);
             }
         });
@@ -155,16 +172,27 @@ public class MainActivity extends AppCompatActivity {
         breakfast.setLayoutManager(manager);
         breakfast.setAdapter(breakfastAdapter);
 
+        Calendar myCal = Calendar.getInstance();
+        newC = (Calendar) myCal.clone();
+        date.setText(myCal.get(Calendar.DAY_OF_MONTH) + "." + (myCal.get(Calendar.MONTH)+1) + "." + myCal.get(Calendar.YEAR));
+        newC.set(Calendar.YEAR,myCal.get(Calendar.YEAR));
+        newC.set(Calendar.MONTH,myCal.get(Calendar.MONTH)+1);
+        newC.set(Calendar.DAY_OF_MONTH,myCal.get(Calendar.DAY_OF_MONTH));
+        newC.set(Calendar.HOUR,0);
+        newC.set(Calendar.MINUTE,0);
+        newC.set(Calendar.SECOND,0);
+
+        theDate = newC.getTime();
+
+
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
-                Calendar newC = (Calendar) c.clone();
+                newC = (Calendar) c.clone();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
-                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         MainActivity.this,
@@ -175,11 +203,17 @@ public class MainActivity extends AppCompatActivity {
                                 newC.set(Calendar.YEAR,year);
                                 newC.set(Calendar.MONTH,monthOfYear);
                                 newC.set(Calendar.DAY_OF_MONTH,dayOfMonth+1);
+                                newC.set(Calendar.HOUR,0);
+                                newC.set(Calendar.MINUTE,0);
+                                newC.set(Calendar.SECOND,0);
 
+                                theDate = newC.getTime();
                                 long time_val = newC.getTimeInMillis();
                                 String formatted_date = (DateFormat.format("EEEE", time_val))
                                         .toString();
                                 date.setText(formatted_date + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+
+                                newDayWithMeals(theDate);
                             }
                         },
                         year, month, day);
@@ -187,5 +221,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    boolean newDayWithMeals(Date date){
+        itemsDay = viewModel.getDayWithMealsLiveData().getValue();
+        if(itemsDay == null){
+            itemsDay = new ArrayList<>();
+        }
+        for (DayWithMeals dayWithMeals : itemsDay) {
+            if ((dayWithMeals.getDate().toString()).equals(date.toString())) {
+                return false;
+            }
+        }
+        DayWithMeals dayWithMeals = new DayWithMeals();
+        dayWithMeals.setDate(date);
+        itemsDay.add(dayWithMeals);
+        viewModel.setDayWithMealsAndSave(itemsDay, this);
+        return true;
     }
 }

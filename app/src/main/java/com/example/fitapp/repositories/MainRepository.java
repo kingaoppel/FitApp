@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class MainRepository {
     private static final String SHARED_PREFS = "sharedPrefs";
     private MutableLiveData<Search> autocompleteData = new MutableLiveData<>();
     private MutableLiveData<Product> productInfo = new MutableLiveData<>();
+    private MutableLiveData<Date> date = new MutableLiveData<>();
+    private MutableLiveData<String> meal_name = new MutableLiveData<>();
     private MutableLiveData<List<DayWithMeals>> dayWithMealsMutableLiveData = new MutableLiveData<>(new ArrayList<>());
 
     public static MainRepository getInstance() {
@@ -42,7 +45,7 @@ public class MainRepository {
         return instance;
     }
 
-    private MainRepository() {
+    public MainRepository() {
         apiService = ApiClient.getRetrofit().create(MealApiService.class);
     }
 
@@ -161,6 +164,22 @@ public class MainRepository {
         }
         dayWithMealsList.add(dayWithMeals);
         dayWithMealsMutableLiveData.setValue(dayWithMealsList);
+    }
+
+    public LiveData<String> getMealNameLiveData() {
+        return meal_name;
+    }
+
+    public void setMealName(String name) {
+        meal_name.setValue(name);
+    }
+
+    public LiveData<Date> getDateLiveData() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date.setValue(date);
     }
 }
 

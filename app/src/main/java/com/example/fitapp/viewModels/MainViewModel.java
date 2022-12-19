@@ -3,15 +3,14 @@ package com.example.fitapp.viewModels;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.fitapp.MyProduct;
 import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.repositories.MainRepository;
 import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
 
+import java.util.Date;
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
@@ -19,17 +18,46 @@ public class MainViewModel extends ViewModel {
     private final LiveData<Search> autocompleteData;
     private final LiveData<Product> productLiveData;
     private final LiveData<List<DayWithMeals>> dayWithMealsLiveData;
+    private final LiveData<String> mealNameLiveData;
+    private final LiveData<Date> dateLiveData;
 
     public MainViewModel() {
         this.mainRepository = MainRepository.getInstance();
         this.autocompleteData = mainRepository.getAutocompleteData();
         this.productLiveData = mainRepository.getProductInfo();
         this.dayWithMealsLiveData = mainRepository.getDayWithMealsLiveData();
+        this.mealNameLiveData = mainRepository.getMealNameLiveData();
+        this.dateLiveData = mainRepository.getDateLiveData();
     }
 
     public void fetchAutoCompleteMeals(String query) {
         this.mainRepository.getAutocompleteByQuery(query);
     }
+
+    public LiveData<String> getMealNameLiveData() {
+        return mealNameLiveData;
+    }
+
+    public LiveData<Date> getDateLiveData() {
+        return dateLiveData;
+    }
+
+    public String getMealName() {
+        return mealNameLiveData.getValue();
+    }
+
+    public Date getDate() {
+        return dateLiveData.getValue();
+    }
+
+    public void setMealName(String mealName) {
+        mainRepository.setMealName(mealName);
+    }
+
+    public void setDate(Date date) {
+        mainRepository.setDate(date);
+    }
+
 
     public LiveData<Search> getAutoCompleteMealsData() {
         return autocompleteData;

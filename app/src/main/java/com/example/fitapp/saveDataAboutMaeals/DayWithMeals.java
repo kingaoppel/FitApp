@@ -2,16 +2,18 @@ package com.example.fitapp.saveDataAboutMaeals;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class DayWithMeals implements Serializable {
+
     private Date date;
 
-    private List<Meal> breakfast;
-    private List<Meal> dinner;
-    private List<Meal> lunch;
-    private List<Meal> snack;
-    private List<Meal> supper;
+    private Meal breakfast;
+    private Meal dinner;
+    private Meal lunch;
+    private Meal snack;
+    private Meal supper;
 
     private Double sumCallories;
     private Double sumProteins;
@@ -19,7 +21,7 @@ public class DayWithMeals implements Serializable {
     private Double sumCarbo;
     // po dodaniu, usunieciu produktu z konkretnego meal, aktualizujemy tu dane
 
-    public DayWithMeals(Date date, List<Meal> breakfast, List<Meal> dinner, List<Meal> lunch, List<Meal> snack, List<Meal> supper, Double sumCallories, Double sumProteins, Double sumFats, Double sumCarbo) {
+    public DayWithMeals(Date date, Meal breakfast, Meal dinner, Meal lunch, Meal snack, Meal supper, Double sumCallories, Double sumProteins, Double sumFats, Double sumCarbo) {
         this.date = date;
         this.breakfast = breakfast;
         this.dinner = dinner;
@@ -35,6 +37,7 @@ public class DayWithMeals implements Serializable {
     public DayWithMeals() {
     }
 
+
     public Date getDate() {
         return date;
     }
@@ -43,43 +46,43 @@ public class DayWithMeals implements Serializable {
         this.date = date;
     }
 
-    public List<Meal> getBreakfast() {
+    public Meal getBreakfast() {
         return breakfast;
     }
 
-    public void setBreakfast(List<Meal> breakfast) {
+    public void setBreakfast(Meal breakfast) {
         this.breakfast = breakfast;
     }
 
-    public List<Meal> getDinner() {
+    public Meal getDinner() {
         return dinner;
     }
 
-    public void setDinner(List<Meal> dinner) {
+    public void setDinner(Meal dinner) {
         this.dinner = dinner;
     }
 
-    public List<Meal> getLunch() {
+    public Meal getLunch() {
         return lunch;
     }
 
-    public void setLunch(List<Meal> lunch) {
+    public void setLunch(Meal lunch) {
         this.lunch = lunch;
     }
 
-    public List<Meal> getSnack() {
+    public Meal getSnack() {
         return snack;
     }
 
-    public void setSnack(List<Meal> snack) {
+    public void setSnack(Meal snack) {
         this.snack = snack;
     }
 
-    public List<Meal> getSupper() {
+    public Meal getSupper() {
         return supper;
     }
 
-    public void setSupper(List<Meal> supper) {
+    public void setSupper(Meal supper) {
         this.supper = supper;
     }
 
@@ -114,5 +117,6 @@ public class DayWithMeals implements Serializable {
     public void setSumCarbo(Double sumCarbo) {
         this.sumCarbo = sumCarbo;
     }
+
 
 }
