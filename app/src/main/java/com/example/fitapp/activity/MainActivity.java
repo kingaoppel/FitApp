@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -158,16 +159,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
+                Calendar newC = (Calendar) c.clone();
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
                 int day = c.get(Calendar.DAY_OF_MONTH);
+                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         MainActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                newC.set(Calendar.YEAR,year);
+                                newC.set(Calendar.MONTH,monthOfYear);
+                                newC.set(Calendar.DAY_OF_MONTH,dayOfMonth+1);
+
+                                long time_val = newC.getTimeInMillis();
+                                String formatted_date = (DateFormat.format("EEEE", time_val))
+                                        .toString();
+                                date.setText(formatted_date + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year);
                             }
                         },
                         year, month, day);
