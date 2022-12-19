@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private TextView logoutButton;
+    private TextView date;
 
     private Context context;
     private BreakfastAdapter breakfastAdapter;
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         bodyMeasPage = findViewById(R.id.menu);
         userPage = findViewById(R.id.menu_person);
+        date = findViewById(R.id.tvDateOfDay);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,6 +153,27 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(context);
         breakfast.setLayoutManager(manager);
         breakfast.setAdapter(breakfastAdapter);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
+            }
+        });
 
     }
 }
