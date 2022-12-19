@@ -1,5 +1,9 @@
 package com.example.fitapp.repositories;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,7 +13,11 @@ import com.example.fitapp.remote.ApiClient;
 import com.example.fitapp.remote.MealApiService;
 import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
+import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +29,11 @@ import retrofit2.Response;
 public class MainRepository {
     private static MainRepository instance;
     private final MealApiService apiService;
+    private SharedPreferences sharedPreferences;
+    private static final String SHARED_PREFS = "sharedPrefs";
     private MutableLiveData<Search> autocompleteData = new MutableLiveData<>();
     private MutableLiveData<Product> productInfo = new MutableLiveData<>();
+    private MutableLiveData<List<DayWithMeals>> dayWithMealsMutableLiveData = new MutableLiveData<>(new ArrayList<>());
 
     public static MainRepository getInstance() {
         if (instance == null) {
@@ -102,5 +113,54 @@ public class MainRepository {
         productInfo.setValue(temp);
     }
 
+    public LiveData<List<DayWithMeals>> getDayWithMealsLiveData() {
+        return dayWithMealsMutableLiveData;
+    }
+
+    public void setDayWithMeals(List<DayWithMeals> dayWithMeals) {
+        dayWithMealsMutableLiveData.setValue(dayWithMeals);
+    }
+
+    //save to shared prefs
+    public boolean saveToSharedPrefs(Context context) {
+        sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        List<DayWithMeals> dayWithMeals = dayWithMealsMutableLiveData.getValue();
+        Gson gson = new Gson();
+        String json = dayWithMeals != null ? gson.toJson(dayWithMeals) : null;
+
+        if (json != null) {
+            editor.putString("dayWithMeals", json);
+            editor.apply();
+            return true;
+        } else
+            return false;
+    }
+
+    //load from shared prefs
+    public boolean loadFromSharedPrefs(Context context) {
+        sharedPreferences = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("dayWithMeals", null);
+        Type listOfDayMeals = new TypeToken<List<DayWithMeals>>() {
+        }.getType();
+        List<DayWithMeals> dayWithMeals = gson.fromJson(json, listOfDayMeals);
+        if (dayWithMeals != null) {
+            dayWithMealsMutableLiveData.setValue(dayWithMeals);
+            return true;
+        }
+        return false;
+    }
+
+    public void addDayWithMeals(DayWithMeals dayWithMeals) {
+        //add another item to the list
+        List<DayWithMeals> dayWithMealsList = dayWithMealsMutableLiveData.getValue();
+        if (dayWithMealsList == null) {
+            dayWithMealsList = new ArrayList<>();
+        }
+        dayWithMealsList.add(dayWithMeals);
+        dayWithMealsMutableLiveData.setValue(dayWithMealsList);
+    }
 }
 

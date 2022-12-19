@@ -3,13 +3,13 @@ package com.example.fitapp.saveDataAboutMaeals;
 import com.example.fitapp.MyProduct;
 import com.example.fitapp.remote.modelProduct.Product;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class Meal {
+public class Meal implements Serializable {
 
-    private List<String> itemsName; // maslo, mleko, miodek
-    private List<Double> itemsAmount; //100, 80, 90
+    private List<MyProduct> items;
     private Double calories;
     private Double proteins;
     private Double fats;
@@ -19,9 +19,8 @@ public class Meal {
     public Meal() {
     }
 
-    public Meal(List<String> itemsName, List<Double> itemsAmount, Double calories, Double proteins, Double fats, Double carbo, String note) {
-        this.itemsName = itemsName;
-        this.itemsAmount = itemsAmount;
+    public Meal(List<MyProduct> items, Double calories, Double proteins, Double fats, Double carbo, String note) {
+        this.items = items;
         this.calories = calories;
         this.proteins = proteins;
         this.fats = fats;
@@ -29,20 +28,12 @@ public class Meal {
         this.note = note;
     }
 
-    public List<String> getItemsName() {
-        return itemsName;
+    public List<MyProduct> getItems() {
+        return items;
     }
 
-    public void setItemsName(List<String> itemsName) {
-        this.itemsName = itemsName;
-    }
-
-    public List<Double> getItemsAmount() {
-        return itemsAmount;
-    }
-
-    public void setItemsAmount(List<Double> itemsAmount) {
-        this.itemsAmount = itemsAmount;
+    public void setItems(List<MyProduct> items) {
+        this.items = items;
     }
 
     public Double getCalories() {

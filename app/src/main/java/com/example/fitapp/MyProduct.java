@@ -1,9 +1,10 @@
 package com.example.fitapp;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyProduct {
+public class MyProduct implements Serializable {
 
     public String name;
     public String uid;

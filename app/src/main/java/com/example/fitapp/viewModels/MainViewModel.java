@@ -1,5 +1,7 @@
 package com.example.fitapp.viewModels;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +10,7 @@ import com.example.fitapp.MyProduct;
 import com.example.fitapp.remote.model.Search;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.repositories.MainRepository;
+import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
 
 import java.util.List;
 
@@ -15,11 +18,13 @@ public class MainViewModel extends ViewModel {
     private final MainRepository mainRepository;
     private final LiveData<Search> autocompleteData;
     private final LiveData<Product> productLiveData;
+    private final LiveData<List<DayWithMeals>> dayWithMealsLiveData;
 
     public MainViewModel() {
         this.mainRepository = MainRepository.getInstance();
         this.autocompleteData = mainRepository.getAutocompleteData();
         this.productLiveData = mainRepository.getProductInfo();
+        this.dayWithMealsLiveData = mainRepository.getDayWithMealsLiveData();
     }
 
     public void fetchAutoCompleteMeals(String query) {
@@ -44,5 +49,32 @@ public class MainViewModel extends ViewModel {
 
     public void setNameProduct(String name) {
         mainRepository.setNameProduct(name);
+    }
+
+    public LiveData<List<DayWithMeals>> getDayWithMealsLiveData() {
+        return dayWithMealsLiveData;
+    }
+
+    public void setDayWithMeals(List<DayWithMeals> dayWithMeals) {
+        mainRepository.setDayWithMeals(dayWithMeals);
+    }
+
+    public boolean setDayWithMealsAndSave(List<DayWithMeals> dayWithMeals, Context ctx){
+        setDayWithMeals(dayWithMeals);
+        return mainRepository.saveToSharedPrefs(ctx);
+    }
+
+    //add single item to list
+    public boolean addDayWithMealsAndSave(DayWithMeals dayWithMeals, Context ctx){
+        mainRepository.addDayWithMeals(dayWithMeals);
+        return mainRepository.saveToSharedPrefs(ctx);
+    }
+
+    public boolean saveToSharedPrefs(Context context) {
+        return mainRepository.saveToSharedPrefs(context);
+    }
+
+    public boolean loadFromSharedPrefs(Context context) {
+        return mainRepository.loadFromSharedPrefs(context);
     }
 }

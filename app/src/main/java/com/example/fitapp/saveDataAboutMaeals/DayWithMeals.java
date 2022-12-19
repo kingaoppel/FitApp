@@ -1,9 +1,10 @@
 package com.example.fitapp.saveDataAboutMaeals;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class DayWithMeals {
+public class DayWithMeals implements Serializable {
     private Date date;
 
     private List<Meal> breakfast;

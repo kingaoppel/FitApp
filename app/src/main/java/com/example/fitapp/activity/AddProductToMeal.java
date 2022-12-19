@@ -77,12 +77,17 @@ public class AddProductToMeal extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        calories.setText("Calories: " + dCalories.toString());
+        protein.setText("Proteins: " + dProtein.toString());
+        fat.setText("Fats: " + dFat.toString());
+        carbo.setText("Carbohydrates: " + dCarbo);
+
         if (currentUser != null) {
             uid = currentUser.getUid();
             Log.d("User", uid);
         }
 
-        DocumentReference docRef = db.collection("products").document(uid + sName);
+        DocumentReference docRef = db.collection("products").document(sName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -174,6 +179,7 @@ public class AddProductToMeal extends AppCompatActivity {
                 Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
     }
