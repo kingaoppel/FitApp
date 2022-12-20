@@ -39,6 +39,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -232,14 +233,9 @@ public class MainActivity extends AppCompatActivity {
         Calendar myCal = Calendar.getInstance();
         newC = (Calendar) myCal.clone();
         date.setText(myCal.get(Calendar.DAY_OF_MONTH) + "." + (myCal.get(Calendar.MONTH) + 1) + "." + myCal.get(Calendar.YEAR));
-        newC.set(Calendar.YEAR, myCal.get(Calendar.YEAR));
-        newC.set(Calendar.MONTH, myCal.get(Calendar.MONTH) + 1);
-        newC.set(Calendar.DAY_OF_MONTH, myCal.get(Calendar.DAY_OF_MONTH));
-        newC.set(Calendar.HOUR, 0);
-        newC.set(Calendar.MINUTE, 0);
-        newC.set(Calendar.SECOND, 0);
+        GregorianCalendar cal  = new GregorianCalendar(myCal.get(Calendar.YEAR), myCal.get(Calendar.MONTH), myCal.get(Calendar.DAY_OF_MONTH));
 
-        theDate = newC.getTime();
+        theDate = cal.getTime();
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                                 newC.set(Calendar.YEAR, year);
                                 newC.set(Calendar.MONTH, monthOfYear);
                                 newC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                newC.set(Calendar.HOUR, 0);
+                                newC.set(Calendar.HOUR_OF_DAY, 0);
                                 newC.set(Calendar.MINUTE, 0);
                                 newC.set(Calendar.SECOND, 0);
 
@@ -289,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                                             progressBar.setMax(caloriesSumPerDay.intValue());
                                             itemsBreakfast.clear();
                                             if(dayWithMeals.getBreakfast() != null){
-                                                itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                                                itemsBreakfast.addAll(dayWithMeals.getBreakfast().getItems());
                                                 breakfastAdapter.notifyDataSetChanged();
                                             }
                                         }
@@ -319,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                             carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
                             itemsBreakfast.clear();
                             if(dayWithMeals.getBreakfast() != null){
-                                itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                                itemsBreakfast.addAll(dayWithMeals.getBreakfast().getItems());
                                 breakfastAdapter.notifyDataSetChanged();
                             }
                         }
