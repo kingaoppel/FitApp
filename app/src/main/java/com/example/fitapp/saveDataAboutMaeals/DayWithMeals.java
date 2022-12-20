@@ -41,41 +41,45 @@ public class DayWithMeals implements Serializable {
         sumCarbo = 0.0;
     }
 
-    public void setNutritions(){
-        sumCallories = 0.0;
-        sumProteins = 0.0;
-        sumFats = 0.0;
-        sumCarbo = 0.0;
-        if(breakfast != null){
-            sumCallories += breakfast.getCalories();
-            sumProteins += breakfast.getProteins();
-            sumFats += breakfast.getFats();
-            sumCarbo += breakfast.getCarbo();
+    public void setNutritions() {
+        Double tempCalories = 0.0;
+        Double tempProteins = 0.0;
+        Double tempFats = 0.0;
+        Double tempCarbo = 0.0;
+        if (breakfast != null) {
+            tempCalories += breakfast.getCalories();
+            tempProteins += breakfast.getProteins();
+            tempFats += breakfast.getFats();
+            tempCarbo += breakfast.getCarbo();
         }
-        if(dinner != null){
-            sumCallories += dinner.getCalories();
-            sumProteins += dinner.getProteins();
-            sumFats += dinner.getFats();
-            sumCarbo += dinner.getCarbo();
+        if (dinner != null) {
+            tempCalories += dinner.getCalories();
+            tempProteins += dinner.getProteins();
+            tempFats += dinner.getFats();
+            tempCarbo += dinner.getCarbo();
         }
-        if(lunch != null){
-            sumCallories += lunch.getCalories();
-            sumProteins += lunch.getProteins();
-            sumFats += lunch.getFats();
-            sumCarbo += lunch.getCarbo();
+        if (lunch != null) {
+            tempCalories += lunch.getCalories();
+            tempProteins += lunch.getProteins();
+            tempFats += lunch.getFats();
+            tempCarbo += lunch.getCarbo();
         }
-        if(snack != null){
-            sumCallories += snack.getCalories();
-            sumProteins += snack.getProteins();
-            sumFats += snack.getFats();
-            sumCarbo += snack.getCarbo();
+        if (snack != null) {
+            tempCalories += snack.getCalories();
+            tempProteins += snack.getProteins();
+            tempFats += snack.getFats();
+            tempCarbo += snack.getCarbo();
         }
-        if(supper != null){
-            sumCallories += supper.getCalories();
-            sumProteins += supper.getProteins();
-            sumFats += supper.getFats();
-            sumCarbo += supper.getCarbo();
+        if (supper != null) {
+            tempCalories += supper.getCalories();
+            tempProteins += supper.getProteins();
+            tempFats += supper.getFats();
+            tempCarbo += supper.getCarbo();
         }
+        this.sumCallories = tempCalories;
+        this.sumProteins = tempProteins;
+        this.sumFats = tempFats;
+        this.sumCarbo = tempCarbo;
     }
 
 

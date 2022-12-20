@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fitapp.R;
@@ -63,6 +64,10 @@ public class UserPageActivity extends AppCompatActivity {
     private List<Double> circumferenceThighList = new ArrayList<>();
     private List<Double> circumferenceWaistList = new ArrayList<>();
 
+    private ProgressBar progressBarWeight;
+    private int currentProgressWeight = 0;
+    private int maxProgressWeight = 100;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -91,6 +96,8 @@ public class UserPageActivity extends AppCompatActivity {
         thighNow = findViewById(R.id.userPage_calfNow);
 
         addBodyMeas = findViewById(R.id.tVaddBodyMeas);
+
+        progressBarWeight = findViewById(R.id.progressBarWeight);
 
         addBodyMeas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +133,10 @@ public class UserPageActivity extends AppCompatActivity {
                         yourWeightNowString.setText("Your weight now " + data.get("current_weight").toString());
                         yourWeightNow.setText(data.get("current_weight").toString());
 
+                        currentProgressWeight = ((Double)data.get("current_weight")).intValue();
+                        progressBarWeight.setProgress(currentProgressWeight);
+                        progressBarWeight.setMax(((Double)data.get("target_weight")).intValue());
+
                     } else {
                         Log.d("User", "No such document");
                     }
@@ -159,16 +170,24 @@ public class UserPageActivity extends AppCompatActivity {
                                 linearLayoutMeasuremants.setVisibility(View.GONE);
                                 yourWeightNow.setText(weightList.get(weightList.size() - 1).toString());
                                 yourWeightNowString.setText("Your weight now " + weightList.get(weightList.size() - 1).toString());
+
+
                             } else {
                                 linearLayoutMeasuremants.setVisibility(View.VISIBLE);
 //                            yourWeightNow.setText(weightList.get(0) + "");
                                 String t1 = weightList.get(0).toString();
                                 String t2 = weightList.get(weightList.size() - 1).toString();
                                 String t3 = "";
+
+                                currentProgressWeight = (weightList.get(0).intValue());
+                                progressBarWeight.setProgress(currentProgressWeight);
+                                progressBarWeight.setMax(weightList.get(weightList.size() - 1).intValue());
+
                                 tempToProgressWeight = progressWeightFun(Double.valueOf(t1), Double.valueOf(t2));
                                 if (tempToProgressWeight > 0) {
                                     t3 = " more ";
                                 }
+
                                 progressWeight.setText(tempToProgressWeight.toString() + " kg" + t3 + "from the beginning of training (" + weightList.get(0).toString() + " kg)");
 
                                 armFirst.setText(circumferenceArmList.get(0).toString());

@@ -46,6 +46,7 @@ public class AddProductToMeal extends AppCompatActivity {
     String sName = "maslo";
     private String mealName;
     Double dAmount = 100.0, dFat = 100.0, dProtein = 100.0, dCarbo = 100.0, dCalories = 100.0;
+    Double dAmount2 = 100.0, dFat2 = 100.0, dProtein2 = 100.0, dCarbo2 = 100.0, dCalories2 = 100.0;
     private TextView name, calories, protein, fat, carbo;
     private MainViewModel mainViewModel;
     private TextInputEditText amount;
@@ -93,6 +94,7 @@ public class AddProductToMeal extends AppCompatActivity {
         protein.setText("Proteins: " + dProtein.toString());
         fat.setText("Fats: " + dFat.toString());
         carbo.setText("Carbohydrates: " + dCarbo);
+        amount.setText(dAmount.toString());
 
         myProduct.setCalories(dCalories);
         myProduct.setProtein(dProtein);
@@ -131,12 +133,39 @@ public class AddProductToMeal extends AppCompatActivity {
                         dCarbo = (Double) dataRef.get("carbs");
                         carbo.setText("Carbohydrates: " + dCarbo);
                         myProduct.setCarbs(dCarbo);
-
-
-                        // ustawić defaultowe wartości i dopiero zmienic potem, program potrzebuje chwili na ogarniecie się
-                        // dodać interface żeby mozna było wchodzić w nasze produkty
                     } else {
-                        Log.d("UserMeal", "No such document");
+                        DocumentReference docRef = db.collection("products").document(uid+sName);
+                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        dataRef = document.getData();
+                                        Log.d("UserMeal", "DocumentSnapshot data: ");
+                                        dCalories = (Double) dataRef.get("calories");
+                                        calories.setText("Calories: " + dCalories.toString());
+                                        myProduct.setCalories(dCalories);
+
+                                        dProtein = (Double) dataRef.get("protein");
+                                        protein.setText("Proteins: " + dProtein.toString());
+                                        myProduct.setProtein(dProtein);
+
+                                        dFat = (Double) dataRef.get("fats");
+                                        fat.setText("Fats: " + dFat.toString());
+                                        myProduct.setFats(dFat);
+
+                                        dCarbo = (Double) dataRef.get("carbs");
+                                        carbo.setText("Carbohydrates: " + dCarbo);
+                                        myProduct.setCarbs(dCarbo);
+                                    } else {
+                                        Log.d("UserMeal", "No such document");
+                                    }
+                                } else {
+                                    Log.d("UserMeal", "get failed with ", task.getException());
+                                }
+                            }
+                        });
                     }
                 } else {
                     Log.d("UserMeal", "get failed with ", task.getException());
@@ -155,15 +184,19 @@ public class AddProductToMeal extends AppCompatActivity {
                     double temp;
                     temp = dCalories * a / 100;
                     calories.setText("Calories: " + temp + "");
+                    dCalories2 = temp;
 
                     temp = dProtein * a / 100;
                     protein.setText("Proteins: " + temp + "");
+                    dProtein2 = temp;
 
                     temp = dCarbo * a / 100;
                     carbo.setText("Fats: " + temp + "");
+                    dCarbo2 = temp;
 
                     temp = dFat * a / 100;
                     fat.setText("Carbohydrates: " + temp + "");
+                    dFat2 = temp;
 
                     dAmount = a;
 
@@ -219,6 +252,11 @@ public class AddProductToMeal extends AppCompatActivity {
                                 for (MyProduct myProduct : myProductList) {
                                     if (myProduct.getName().equals(sName)) {
                                         myProduct.setAmount(dAmount);
+                                        myProduct.setAmount(dAmount2);
+                                        myProduct.setCalories(dCalories2);
+                                        myProduct.setCarbs(dCarbo2);
+                                        myProduct.setFats(dFat2);
+                                        myProduct.setProtein(dProtein2);
                                         meal.setItems(myProductList);
                                         if (mealName.equals("breakfast")) {
                                             dayWithMeals.setBreakfast(meal);
@@ -238,11 +276,11 @@ public class AddProductToMeal extends AppCompatActivity {
                             }
                             MyProduct myProduct = new MyProduct();
                             myProduct.setName(sName);
-                            myProduct.setAmount(dAmount);
-                            myProduct.setCalories(dCalories);
-                            myProduct.setCarbs(dCarbo);
-                            myProduct.setFats(dFat);
-                            myProduct.setProtein(dProtein);
+                            myProduct.setAmount(dAmount2);
+                            myProduct.setCalories(dCalories2);
+                            myProduct.setCarbs(dCarbo2);
+                            myProduct.setFats(dFat2);
+                            myProduct.setProtein(dProtein2);
                             myProductList.add(myProduct);
                             meal.setItems(myProductList);
                             if (mealName.equals("breakfast")) {

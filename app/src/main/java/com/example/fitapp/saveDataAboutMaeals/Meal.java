@@ -42,19 +42,20 @@ public class Meal implements Serializable {
     }
 
     public void setNutritoons() {
-//        calories = 0.0;
-//        proteins = 0.0;
-//        fats = 0.0;
-//        carbo = 0.0;
-        if(items != null) {
-            for (MyProduct item : items) {
-                calories += item.getCalories();
-                proteins += item.getProtein();
-                fats += item.getFats();
-                carbo += item.getCarbs();
-            }
+        Double tempCalories = 0.0;
+        Double tempProteins = 0.0;
+        Double tempFats = 0.0;
+        Double tempCarbo = 0.0;
+        for (MyProduct item : items) {
+            tempCalories += item.getCalories();
+            tempProteins += item.getProtein();
+            tempFats += item.getFats();
+            tempCarbo += item.getCarbs();
         }
-        return;
+        this.calories = tempCalories;
+        this.proteins = tempProteins;
+        this.fats = tempFats;
+        this.carbo = tempCarbo;
     }
 
     public Double getCalories() {

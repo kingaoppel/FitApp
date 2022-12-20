@@ -1,9 +1,6 @@
 package com.example.fitapp.adapters;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
-import com.example.fitapp.activity.AddProducktActivity;
-import com.example.fitapp.activity.MainActivity;
-import com.example.fitapp.activity.Register3Activity;
 import com.example.fitapp.interfaces.OnMealAdapterItemClickInterface;
 
 import java.util.List;
 
-public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> {
+public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
     private Context context;
     private List<MyProduct> items;
     private OnMealAdapterItemClickInterface onMealAdapterItemClickInterface;
 
-    public BreakfastAdapter(Context context, List<MyProduct> items, OnMealAdapterItemClickInterface onMealAdapterItemClickInterface) {
+    public MealAdapter(Context context, List<MyProduct> items, OnMealAdapterItemClickInterface onMealAdapterItemClickInterface) {
         this.context = context;
         this.items = items;
         this.onMealAdapterItemClickInterface = onMealAdapterItemClickInterface;
@@ -37,13 +30,13 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
     @NonNull
     @Override
-    public BreakfastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MealAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.search_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BreakfastAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MealAdapter.ViewHolder holder, int position) {
         String str = items.get(position).getName();
         holder.textView.setText(str);
     }

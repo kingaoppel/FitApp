@@ -8,8 +8,8 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginTop="@dimen/dp_24"
         android:indeterminateOnly="false"
         android:progressDrawable="@drawable/custom_progress"
@@ -17,8 +17,7 @@
         app:layout_constraintEnd_toStartOf="@+id/vg80"
         app:layout_constraintStart_toEndOf="@+id/vg20"
         app:layout_constraintTop_toBottomOf="@id/hg05"
-        tools:progress="60"
-        />
+        tools:progress="60" />
 
     <ProgressBar
         android:id="@+id/progressBarProtein"
@@ -29,9 +28,34 @@
         app:layout_constraintEnd_toStartOf="@+id/vg33"
         app:layout_constraintStart_toStartOf="@+id/vg05"
         app:layout_constraintTop_toTopOf="@+id/hg25"
-        android:layout_marginBottom="@dimen/dp_24"
         android:progressDrawable="@drawable/custom_progress_bg"
         tools:progress="30" />
+
+    <ProgressBar
+        android:id="@+id/progressBarFats"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/hg30"
+        app:layout_constraintEnd_toStartOf="@+id/vg66"
+        app:layout_constraintStart_toStartOf="@+id/vg33"
+        app:layout_constraintTop_toTopOf="@+id/hg25"
+        android:progressDrawable="@drawable/custom_progress_bg"
+        tools:progress="30" />
+
+    <ProgressBar
+        android:id="@+id/progressBarCarbs"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/hg30"
+        app:layout_constraintEnd_toStartOf="@+id/vg95"
+        app:layout_constraintStart_toStartOf="@+id/vg66"
+        app:layout_constraintTop_toTopOf="@+id/hg25"
+        android:progressDrawable="@drawable/custom_progress_bg"
+        tools:progress="30" />
+
+
 
     <TextView
         style="@style/baseText"
@@ -52,11 +76,89 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_32"
         android:text="60 %"
-        android:textSize="@dimen/text_size_large"
+        android:textSize="@dimen/text_size_medium"
         app:layout_constraintBottom_toBottomOf="@id/progressBar"
         app:layout_constraintLeft_toLeftOf="@id/progressBar"
         app:layout_constraintRight_toRightOf="@id/progressBar"
         app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+    <TextView
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proteins"
+        android:textSize="@dimen/text_size_large"
+        android:layout_marginTop="@dimen/dp_24"
+        app:layout_constraintBottom_toTopOf="@id/hg25"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarProtein"
+        app:layout_constraintRight_toRightOf="@id/progressBarProtein"
+        app:layout_constraintTop_toBottomOf="@+id/hg20"
+        />
+
+    <TextView
+        android:id="@+id/tvProgressBarProtein"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60 %"
+        android:textSize="@dimen/text_size_large"
+        android:layout_marginBottom="@dimen/dp_24"
+        app:layout_constraintBottom_toTopOf="@id/hg35"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarProtein"
+        app:layout_constraintRight_toRightOf="@id/progressBarProtein"
+        app:layout_constraintTop_toBottomOf="@+id/hg30" />
+
+    <TextView
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fats"
+        android:layout_marginTop="@dimen/dp_24"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintBottom_toTopOf="@id/hg25"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarFats"
+        app:layout_constraintRight_toRightOf="@id/progressBarFats"
+        app:layout_constraintTop_toBottomOf="@+id/hg20"
+        />
+
+    <TextView
+        android:id="@+id/tvProgressBarFats"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60 %"
+        android:textSize="@dimen/text_size_large"
+        android:layout_marginBottom="@dimen/dp_24"
+        app:layout_constraintBottom_toTopOf="@id/hg35"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarFats"
+        app:layout_constraintRight_toRightOf="@id/progressBarFats"
+        app:layout_constraintTop_toBottomOf="@+id/hg30" />
+
+    <TextView
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carbs"
+        android:textSize="@dimen/text_size_large"
+        android:layout_marginTop="@dimen/dp_24"
+        app:layout_constraintBottom_toTopOf="@id/hg25"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarCarbs"
+        app:layout_constraintRight_toRightOf="@id/progressBarCarbs"
+        app:layout_constraintTop_toBottomOf="@+id/hg20"
+        />
+
+    <TextView
+        android:id="@+id/tvProgressBarCarbs"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60 %"
+        android:textSize="@dimen/text_size_large"
+        android:layout_marginBottom="@dimen/dp_24"
+        app:layout_constraintBottom_toTopOf="@id/hg35"
+        app:layout_constraintLeft_toLeftOf="@id/progressBarCarbs"
+        app:layout_constraintRight_toRightOf="@id/progressBarCarbs"
+        app:layout_constraintTop_toBottomOf="@+id/hg30" />
 
     <TextView
         android:id="@+id/logout"
@@ -82,6 +184,7 @@
         app:layout_constraintStart_toEndOf="@id/vg05" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -170,7 +273,7 @@
         app:layout_constraintBottom_toTopOf="@id/hg90"
         app:layout_constraintEnd_toStartOf="@id/vg95"
         app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintTop_toBottomOf="@id/hg35">
+        app:layout_constraintTop_toBottomOf="@id/hg40">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -202,7 +305,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_in_pro"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_medium"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_breakfast"
@@ -212,15 +316,29 @@
             android:paddingRight="20dp"
             android:visibility="gone" />
 
-
-        <TextView
-            android:id="@+id/dinner"
-            style="@style/baseText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/dinner"
-            android:textSize="@dimen/text_size_header_font" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dinner"
+                style="@style/baseText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/dinner"
+                android:textSize="@dimen/text_size_header_font" />
+
+            <ImageView
+                android:id="@+id/but_addDinnerToMeal"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add" />
+
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_dinner"
@@ -230,14 +348,28 @@
             android:paddingRight="20dp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/lunch"
-            style="@style/baseText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/lunch"
-            android:textSize="@dimen/text_size_header_font" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lunch"
+                style="@style/baseText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/lunch"
+                android:textSize="@dimen/text_size_header_font" />
+
+            <ImageView
+                android:id="@+id/but_addLunchToMeal"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lunch"
@@ -247,14 +379,28 @@
             android:paddingRight="20dp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/snack"
-            style="@style/baseText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/snack"
-            android:textSize="@dimen/text_size_header_font" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/snack"
+                style="@style/baseText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/snack"
+                android:textSize="@dimen/text_size_header_font" />
+
+            <ImageView
+                android:id="@+id/but_addSnackToMeal"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_snack"
@@ -264,14 +410,28 @@
             android:paddingRight="20dp"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/supper"
-            style="@style/baseText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/supper"
-            android:textSize="@dimen/text_size_header_font" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/supper"
+                style="@style/baseText"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/supper"
+                android:textSize="@dimen/text_size_header_font" />
+
+            <ImageView
+                android:id="@+id/but_addSupperToMeal"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add" />
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_supper"
@@ -332,6 +492,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40" />
 
 
     <androidx.constraintlayout.widget.Guideline
