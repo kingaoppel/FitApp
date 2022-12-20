@@ -19,6 +19,7 @@ import com.example.fitapp.R;
 import com.example.fitapp.activity.AddProducktActivity;
 import com.example.fitapp.activity.MainActivity;
 import com.example.fitapp.activity.Register3Activity;
+import com.example.fitapp.interfaces.OnMealAdapterItemClickInterface;
 
 import java.util.List;
 
@@ -26,10 +27,12 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
     private Context context;
     private List<MyProduct> items;
+    private OnMealAdapterItemClickInterface onMealAdapterItemClickInterface;
 
-    public BreakfastAdapter(Context context, List<MyProduct> items) {
+    public BreakfastAdapter(Context context, List<MyProduct> items, OnMealAdapterItemClickInterface onMealAdapterItemClickInterface) {
         this.context = context;
         this.items = items;
+        this.onMealAdapterItemClickInterface = onMealAdapterItemClickInterface;
     }
 
     @NonNull
@@ -70,6 +73,13 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 //                    view.getContext().startActivity(intent);
 //                }
 //            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onMealAdapterItemClickInterface.onMealItemClick(items.get(getAdapterPosition()));
+                }
+            });
         }
     }
 }

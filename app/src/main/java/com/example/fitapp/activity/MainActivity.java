@@ -19,10 +19,12 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.example.fitapp.adapters.BreakfastAdapter;
+import com.example.fitapp.interfaces.OnMealAdapterItemClickInterface;
 import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.repositories.MainRepository;
 import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
@@ -50,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView date;
     private TextView tvprogressBar;
 
-    private Context context;
     private BreakfastAdapter breakfastAdapter;
+    private OnMealAdapterItemClickInterface onMealAdapterItemClickInterface;
     RecyclerView breakfast;
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo, fat, carbo, protein;
@@ -224,9 +226,18 @@ public class MainActivity extends AppCompatActivity {
         items.add("2");
         items.add("3");
 
+
+
         breakfast = findViewById(R.id.rv_breakfast);
-        breakfastAdapter = new BreakfastAdapter(MainActivity.this, itemsBreakfast);
-        LinearLayoutManager manager = new LinearLayoutManager(context);
+        onMealAdapterItemClickInterface = new OnMealAdapterItemClickInterface() {
+            @Override
+            public void onMealItemClick(MyProduct product) {
+                //TODO IMPLEMENT
+                Toast.makeText(MainActivity.this, product.getName()+"", Toast.LENGTH_SHORT).show();
+            }
+        };
+        breakfastAdapter = new BreakfastAdapter(MainActivity.this, itemsBreakfast, onMealAdapterItemClickInterface);
+        LinearLayoutManager manager = new LinearLayoutManager(MainActivity.this);
         breakfast.setLayoutManager(manager);
         breakfast.setAdapter(breakfastAdapter);
 
