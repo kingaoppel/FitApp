@@ -42,6 +42,10 @@ public class Meal implements Serializable {
     }
 
     public void setNutritoons() {
+//        calories = 0.0;
+//        proteins = 0.0;
+//        fats = 0.0;
+//        carbo = 0.0;
         if(items != null) {
             for (MyProduct item : items) {
                 calories += item.getCalories();

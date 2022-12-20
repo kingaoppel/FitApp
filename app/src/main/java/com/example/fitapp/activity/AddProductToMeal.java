@@ -204,9 +204,9 @@ public class AddProductToMeal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mainViewModel.clearData();
-                if(saveProductToMeal()){
+                if (saveProductToMeal()) {
                     Toast.makeText(AddProductToMeal.this, name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
+                    Intent intent = new Intent(AddProductToMeal.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -257,7 +257,7 @@ public class AddProductToMeal extends AppCompatActivity {
                                         } else if (mealName.equals("supper")) {
                                             dayWithMeals.setSupper(meal);
                                         }
-                                        mainViewModel.saveToSharedPrefs(this);
+                                        mainViewModel.setDayWithMealsAndSave(itemsDay, this);
                                         return true;
                                     }
                                 }
@@ -282,7 +282,8 @@ public class AddProductToMeal extends AppCompatActivity {
                             } else if (mealName.equals("supper")) {
                                 dayWithMeals.setSupper(meal);
                             }
-                            mainViewModel.saveToSharedPrefs(this);
+
+                            mainViewModel.setDayWithMealsAndSave(itemsDay, this);
                             return true;
                         }
                     }

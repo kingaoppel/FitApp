@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fitapp.MyProduct;
@@ -71,11 +72,22 @@ public class MainActivity extends AppCompatActivity {
     private List<MyProduct> itemsBreakfast = new ArrayList<>();
     private DayWithMeals dayWithMeals;
 
+    private ProgressBar progressBar;
+    private int currentProgress = 0;
+    private int maxProgress = 100;
+
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        progressBar = findViewById(R.id.progressBar);
+
+        currentProgress = 90;
+        progressBar.setProgress(currentProgress);
+        progressBar.setMax(100);
+
 
         logoutButton = findViewById(R.id.logout);
         tvbreakfast = findViewById(R.id.breakfast);
@@ -160,11 +172,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (breakfast.isShown()) {
                     breakfast.setVisibility(View.VISIBLE);
+                    if(dayWithMeals != null && dayWithMeals.getBreakfast() != null) {
+                        itemsBreakfast.clear();
+                        itemsBreakfast.addAll(dayWithMeals.getBreakfast().getItems());
+                        breakfastAdapter.notifyDataSetChanged();
+                    }
                     //na gone
                 } else {
                     breakfast.setVisibility(View.VISIBLE);
-                    if(dayWithMeals != null){
-                        itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                    if(dayWithMeals != null && dayWithMeals.getBreakfast() != null) {
+                        itemsBreakfast.clear();
+                        itemsBreakfast.addAll(dayWithMeals.getBreakfast().getItems());
                         breakfastAdapter.notifyDataSetChanged();
                     }
 
@@ -189,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
         breakfast = findViewById(R.id.rv_breakfast);
         breakfastAdapter = new BreakfastAdapter(MainActivity.this, itemsBreakfast);
         LinearLayoutManager manager = new LinearLayoutManager(context);
-        //LinearLayoutManager manager = new LinearLayoutManager(context);
         breakfast.setLayoutManager(manager);
         breakfast.setAdapter(breakfastAdapter);
 
@@ -204,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
         newC.set(Calendar.SECOND, 0);
 
         theDate = newC.getTime();
-
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,8 +264,11 @@ public class MainActivity extends AppCompatActivity {
                                             protein.setText("Proteins : " + df.format(dayWithMeals.getSumProteins()) + " / " + df.format(proteinsSumPerDay).toString());
                                             fat.setText("Fats : " + df.format(dayWithMeals.getSumFats()) + " / " + df.format(fatsSumPerDay).toString());
                                             carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
-                                            itemsBreakfast = dayWithMeals.getBreakfast().getItems();
-                                            breakfastAdapter.notifyDataSetChanged();
+                                            itemsBreakfast.clear();
+                                            if(dayWithMeals.getBreakfast() != null){
+                                                itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                                                breakfastAdapter.notifyDataSetChanged();
+                                            }
                                         }
                                     }
                                 }
@@ -275,8 +294,11 @@ public class MainActivity extends AppCompatActivity {
                             protein.setText("Proteins : " + df.format(dayWithMeals.getSumProteins()) + " / " + df.format(proteinsSumPerDay).toString());
                             fat.setText("Fats : " + df.format(dayWithMeals.getSumFats()) + " / " + df.format(fatsSumPerDay).toString());
                             carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
-                            itemsBreakfast = dayWithMeals.getBreakfast().getItems();
-                            breakfastAdapter.notifyDataSetChanged();
+                            itemsBreakfast.clear();
+                            if(dayWithMeals.getBreakfast() != null){
+                                itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                                breakfastAdapter.notifyDataSetChanged();
+                            }
                         }
                     }
                 }

@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <ProgressBar
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:indeterminateOnly="false"
+        app:layout_constraintBottom_toTopOf="@id/hg25"
+        app:layout_constraintTop_toBottomOf="@id/hg05"
+        app:layout_constraintEnd_toStartOf="@+id/vg80"
+        app:layout_constraintStart_toEndOf="@+id/vg20"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/custom_progress"
+        android:visibility="gone"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
