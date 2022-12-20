@@ -63,7 +63,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             plus = itemView.findViewById(R.id.but_addProducttoMeal);
 
             plus.setVisibility(View.GONE);
-            
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

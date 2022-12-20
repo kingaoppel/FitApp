@@ -56,6 +56,8 @@ public class AddProductToMeal extends AppCompatActivity {
     private Date date;
     private MyProduct myProduct = new MyProduct();
 
+    private TextView sumCaloriesPerDay, sumProteinPerDay, sumFatPerDay, sumCarboPerDay;
+
     Map<String, Object> dataRef = new HashMap<>();
     List<String> lista = new ArrayList<>();
 
@@ -90,6 +92,11 @@ public class AddProductToMeal extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        sumCaloriesPerDay = findViewById(R.id.sumCaloriesInAddProductToMeal);
+        sumProteinPerDay = findViewById(R.id.sumProtrinsInAddProductToMeal);
+        sumFatPerDay = findViewById(R.id.sumFatInAddProductToMeal);
+        sumCarboPerDay = findViewById(R.id.sumCarboInAddProductToMeal);
+
         calories.setText("Calories: " + dCalories.toString());
         protein.setText("Proteins: " + dProtein.toString());
         fat.setText("Fats: " + dFat.toString());
@@ -108,6 +115,21 @@ public class AddProductToMeal extends AppCompatActivity {
         }
 
         itemsDay = mainViewModel.getDayWithMealsLiveData().getValue();
+
+        if (mealName != null) {
+            if (itemsDay != null) {
+                for (DayWithMeals dayWithMeals : itemsDay) {
+                    if ((dayWithMeals.getDate().toString()).equals(date.toString())) {
+                        sumCaloriesPerDay.setText("Calories: " + dayWithMeals.getSumCallories().toString());
+                        sumCarboPerDay.setText("Carbohydrates: " + dayWithMeals.getSumCarbo().toString());
+                        sumFatPerDay.setText("Fats: " + dayWithMeals.getSumFats().toString());
+                        sumProteinPerDay.setText("Proteins: " + dayWithMeals.getSumProteins().toString());
+                    }
+                }
+            }
+        }
+
+
 
         DocumentReference docRef = db.collection("products").document(sName);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -50,6 +50,7 @@ public class UserPageActivity extends AppCompatActivity {
     TextView thighFirst, thighNow;
     TextView calfFirst, calfNow;
     TextView addBodyMeas;
+    TextView logout;
 
     LinearLayout linearLayoutMeasuremants;
 
@@ -98,6 +99,7 @@ public class UserPageActivity extends AppCompatActivity {
         addBodyMeas = findViewById(R.id.tVaddBodyMeas);
 
         progressBarWeight = findViewById(R.id.progressBarWeight);
+        logout = findViewById(R.id.logout);
 
         addBodyMeas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +175,9 @@ public class UserPageActivity extends AppCompatActivity {
 
 
                             } else {
+                                yourWeightNow.setText(weightList.get(weightList.size() - 1).toString());
+                                yourWeightNowString.setText("Your weight now " + weightList.get(weightList.size() - 1).toString());
+
                                 linearLayoutMeasuremants.setVisibility(View.VISIBLE);
 //                            yourWeightNow.setText(weightList.get(0) + "");
                                 String t1 = weightList.get(0).toString();
@@ -191,22 +196,22 @@ public class UserPageActivity extends AppCompatActivity {
                                 progressWeight.setText(tempToProgressWeight.toString() + " kg" + t3 + "from the beginning of training (" + weightList.get(0).toString() + " kg)");
 
                                 armFirst.setText(circumferenceArmList.get(0).toString());
-                                armNow.setText(circumferenceArmList.get(circumferenceArmList.size() - 1).toString() + " kg");
+                                armNow.setText(circumferenceArmList.get(circumferenceArmList.size() - 1).toString() + " cm");
 
                                 calfFirst.setText(circumferenceCalfList.get(0).toString());
-                                calfNow.setText(circumferenceCalfList.get(circumferenceCalfList.size() - 1).toString() + " kg");
+                                calfNow.setText(circumferenceCalfList.get(circumferenceCalfList.size() - 1).toString() + " cm");
 
                                 chestFirst.setText(circumferenceChestList.get(0).toString());
-                                chestNow.setText(circumferenceChestList.get(circumferenceChestList.size() - 1).toString() + " kg");
+                                chestNow.setText(circumferenceChestList.get(circumferenceChestList.size() - 1).toString() + " cm");
 
                                 hipFirst.setText(circumferenceHipList.get(0).toString());
-                                hipNow.setText(circumferenceHipList.get(circumferenceHipList.size() - 1).toString() + " kg");
+                                hipNow.setText(circumferenceHipList.get(circumferenceHipList.size() - 1).toString() + " cm");
 
                                 waistFirst.setText(circumferenceWaistList.get(0).toString());
-                                waistNow.setText(circumferenceWaistList.get(circumferenceWaistList.size() - 1).toString() + " kg");
+                                waistNow.setText(circumferenceWaistList.get(circumferenceWaistList.size() - 1).toString() + " cm");
 
                                 thighFirst.setText(circumferenceThighList.get(0).toString());
-                                thighNow.setText(circumferenceThighList.get(circumferenceThighList.size() - 1).toString() + " kg");
+                                thighNow.setText(circumferenceThighList.get(circumferenceThighList.size() - 1).toString() + " cm");
 
                             }
                         } else {

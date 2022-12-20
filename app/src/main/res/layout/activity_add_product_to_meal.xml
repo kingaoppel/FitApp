@@ -172,7 +172,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/sumCalories2"
+                android:id="@+id/sumCaloriesInAddProductToMeal"
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,7 +184,7 @@
 
             <TextView
                 style="@style/baseText"
-                android:id="@+id/sumProtrins2"
+                android:id="@+id/sumProtrinsInAddProductToMeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
@@ -195,7 +195,7 @@
 
             <TextView
                 style="@style/baseText"
-                android:id="@+id/sumFat2"
+                android:id="@+id/sumFatInAddProductToMeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
@@ -205,7 +205,7 @@
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView
-                android:id="@+id/sumCarbo2"
+                android:id="@+id/sumCarboInAddProductToMeal"
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

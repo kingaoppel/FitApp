@@ -20,6 +20,7 @@
         android:focusable="true"
         android:clickable="true">
 
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -108,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_4"
             android:padding="@dimen/dp_4"
-            android:text="@string/kg"
+            android:text="67 kg"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
             android:layout_gravity="center"
@@ -129,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_4"
             android:padding="@dimen/dp_4"
-            android:text="@string/kg"
+            android:text="54 kg"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
             android:layout_gravity="center"/>
@@ -232,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -252,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -285,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -303,12 +304,12 @@
                 style="@style/baseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
-                android:textSize="@dimen/text_size_norm"
-                android:layout_gravity="center"/>
+                android:textSize="@dimen/text_size_norm" />
 
         </LinearLayout>
 
@@ -338,7 +339,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -358,7 +359,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -391,7 +392,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -411,7 +412,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -444,7 +445,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -464,7 +465,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -497,7 +498,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -517,7 +518,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
                 android:padding="@dimen/dp_4"
-                android:text="@string/kg"
+                android:text="17 cm"
                 android:textDirection="ltr"
                 android:textSize="@dimen/text_size_norm"
                 android:layout_gravity="center"/>
@@ -545,12 +546,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_4"
             android:paddingTop="@dimen/dp_24"
-            android:paddingBottom="@dimen/dp_48"
+            android:paddingBottom="@dimen/dp_24"
             android:text="@string/settings"
             android:textDirection="ltr"
             android:textSize="@dimen/text_size_norm"
             android:layout_gravity="center"
             />
+
+        <TextView
+            android:id="@+id/logout"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="@dimen/dp_32"
+            android:text="Log out"
+            android:textDirection="ltr"
+            android:textSize="@dimen/text_size_norm" />
 
     </LinearLayout>
 
