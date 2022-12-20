@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.example.fitapp.activity.AddProducktActivity;
 import com.example.fitapp.activity.MainActivity;
@@ -24,9 +25,9 @@ import java.util.List;
 public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.ViewHolder> {
 
     private Context context;
-    private List<String> items;
+    private List<MyProduct> items;
 
-    public BreakfastAdapter(Context context, List<String> items) {
+    public BreakfastAdapter(Context context, List<MyProduct> items) {
         this.context = context;
         this.items = items;
     }
@@ -40,7 +41,7 @@ public class BreakfastAdapter extends RecyclerView.Adapter<BreakfastAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull BreakfastAdapter.ViewHolder holder, int position) {
-        String str = items.get(position);
+        String str = items.get(position).getName();
         holder.textView.setText(str);
     }
 

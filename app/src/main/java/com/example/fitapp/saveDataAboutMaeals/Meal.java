@@ -17,6 +17,10 @@ public class Meal implements Serializable {
     private String note;
 
     public Meal() {
+        calories = 0.0;
+        proteins = 0.0;
+        fats = 0.0;
+        carbo = 0.0;
     }
 
     public Meal(List<MyProduct> items, Double calories, Double proteins, Double fats, Double carbo, String note) {
@@ -34,6 +38,19 @@ public class Meal implements Serializable {
 
     public void setItems(List<MyProduct> items) {
         this.items = items;
+        setNutritoons();
+    }
+
+    public void setNutritoons() {
+        if(items != null) {
+            for (MyProduct item : items) {
+                calories += item.getCalories();
+                proteins += item.getProtein();
+                fats += item.getFats();
+                carbo += item.getCarbs();
+            }
+        }
+        return;
     }
 
     public Double getCalories() {
@@ -42,6 +59,7 @@ public class Meal implements Serializable {
 
     public void setCalories(Double calories) {
         this.calories = calories;
+        setNutritoons();
     }
 
     public Double getProteins() {
@@ -50,6 +68,7 @@ public class Meal implements Serializable {
 
     public void setProteins(Double proteins) {
         this.proteins = proteins;
+        setNutritoons();
     }
 
     public Double getFats() {
@@ -58,6 +77,7 @@ public class Meal implements Serializable {
 
     public void setFats(Double fats) {
         this.fats = fats;
+        setNutritoons();
     }
 
     public Double getCarbo() {
@@ -66,6 +86,7 @@ public class Meal implements Serializable {
 
     public void setCarbo(Double carbo) {
         this.carbo = carbo;
+        setNutritoons();
     }
 
     public String getNote() {

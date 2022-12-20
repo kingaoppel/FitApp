@@ -139,7 +139,7 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
             }
         });
 
-        if(dateOfMeal != null){
+        if (dateOfMeal != null) {
             int day = dateOfMeal.getDate();
             int month = dateOfMeal.getMonth() + 1;
             int year = dateOfMeal.getYear() + 1900;

@@ -204,11 +204,12 @@ public class AddProductToMeal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mainViewModel.clearData();
-                saveProductToMeal();
-                Toast.makeText(AddProductToMeal.this, name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
-                startActivity(intent);
-                finish();
+                if(saveProductToMeal()){
+                    Toast.makeText(AddProductToMeal.this, name.getText() + " zostało dodane do posiłku", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AddProductToMeal.this, AddProducktActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
@@ -221,7 +222,7 @@ public class AddProductToMeal extends AppCompatActivity {
                         Meal meal = new Meal();
 
                         if (mealName.equals("breakfast")) {
-                             meal = dayWithMeals.getBreakfast();
+                            meal = dayWithMeals.getBreakfast();
                         } else if (mealName.equals("lunch")) {
                             meal = dayWithMeals.getLunch();
                         } else if (mealName.equals("dinner")) {
@@ -232,16 +233,15 @@ public class AddProductToMeal extends AppCompatActivity {
                             meal = dayWithMeals.getSupper();
                         }
 
-                        if(meal == null){
+                        if (meal == null) {
                             meal = new Meal();
                         }
 
                         if (meal != null) {
                             List<MyProduct> myProductList = meal.getItems();
-                            if(myProductList == null){
+                            if (myProductList == null) {
                                 myProductList = new ArrayList<>();
-                            }
-                            else {
+                            } else {
                                 for (MyProduct myProduct : myProductList) {
                                     if (myProduct.getName().equals(sName)) {
                                         myProduct.setAmount(dAmount);
@@ -257,6 +257,7 @@ public class AddProductToMeal extends AppCompatActivity {
                                         } else if (mealName.equals("supper")) {
                                             dayWithMeals.setSupper(meal);
                                         }
+                                        mainViewModel.saveToSharedPrefs(this);
                                         return true;
                                     }
                                 }
@@ -281,6 +282,7 @@ public class AddProductToMeal extends AppCompatActivity {
                             } else if (mealName.equals("supper")) {
                                 dayWithMeals.setSupper(meal);
                             }
+                            mainViewModel.saveToSharedPrefs(this);
                             return true;
                         }
                     }

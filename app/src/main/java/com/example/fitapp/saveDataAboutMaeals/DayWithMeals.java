@@ -35,6 +35,47 @@ public class DayWithMeals implements Serializable {
     }
 
     public DayWithMeals() {
+        sumCallories = 0.0;
+        sumProteins = 0.0;
+        sumFats = 0.0;
+        sumCarbo = 0.0;
+    }
+
+    public void setNutritions(){
+        sumCallories = 0.0;
+        sumProteins = 0.0;
+        sumFats = 0.0;
+        sumCarbo = 0.0;
+        if(breakfast != null){
+            sumCallories += breakfast.getCalories();
+            sumProteins += breakfast.getProteins();
+            sumFats += breakfast.getFats();
+            sumCarbo += breakfast.getCarbo();
+        }
+        if(dinner != null){
+            sumCallories += dinner.getCalories();
+            sumProteins += dinner.getProteins();
+            sumFats += dinner.getFats();
+            sumCarbo += dinner.getCarbo();
+        }
+        if(lunch != null){
+            sumCallories += lunch.getCalories();
+            sumProteins += lunch.getProteins();
+            sumFats += lunch.getFats();
+            sumCarbo += lunch.getCarbo();
+        }
+        if(snack != null){
+            sumCallories += snack.getCalories();
+            sumProteins += snack.getProteins();
+            sumFats += snack.getFats();
+            sumCarbo += snack.getCarbo();
+        }
+        if(supper != null){
+            sumCallories += supper.getCalories();
+            sumProteins += supper.getProteins();
+            sumFats += supper.getFats();
+            sumCarbo += supper.getCarbo();
+        }
     }
 
 
@@ -52,6 +93,7 @@ public class DayWithMeals implements Serializable {
 
     public void setBreakfast(Meal breakfast) {
         this.breakfast = breakfast;
+        setNutritions();
     }
 
     public Meal getDinner() {
@@ -60,6 +102,7 @@ public class DayWithMeals implements Serializable {
 
     public void setDinner(Meal dinner) {
         this.dinner = dinner;
+        setNutritions();
     }
 
     public Meal getLunch() {
@@ -68,6 +111,7 @@ public class DayWithMeals implements Serializable {
 
     public void setLunch(Meal lunch) {
         this.lunch = lunch;
+        setNutritions();
     }
 
     public Meal getSnack() {
@@ -76,6 +120,7 @@ public class DayWithMeals implements Serializable {
 
     public void setSnack(Meal snack) {
         this.snack = snack;
+        setNutritions();
     }
 
     public Meal getSupper() {
@@ -84,6 +129,7 @@ public class DayWithMeals implements Serializable {
 
     public void setSupper(Meal supper) {
         this.supper = supper;
+        setNutritions();
     }
 
     public Double getSumCallories() {

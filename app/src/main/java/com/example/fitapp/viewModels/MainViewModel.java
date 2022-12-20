@@ -75,6 +75,10 @@ public class MainViewModel extends ViewModel {
         mainRepository.clearData();
     }
 
+    public void clearDayWithMeals() {
+        mainRepository.clearDayWithMeals();
+    }
+
     public void setNameProduct(String name) {
         mainRepository.setNameProduct(name);
     }
@@ -87,13 +91,13 @@ public class MainViewModel extends ViewModel {
         mainRepository.setDayWithMeals(dayWithMeals);
     }
 
-    public boolean setDayWithMealsAndSave(List<DayWithMeals> dayWithMeals, Context ctx){
+    public boolean setDayWithMealsAndSave(List<DayWithMeals> dayWithMeals, Context ctx) {
         setDayWithMeals(dayWithMeals);
         return mainRepository.saveToSharedPrefs(ctx);
     }
 
     //add single item to list
-    public boolean addDayWithMealsAndSave(DayWithMeals dayWithMeals, Context ctx){
+    public boolean addDayWithMealsAndSave(DayWithMeals dayWithMeals, Context ctx) {
         mainRepository.addDayWithMeals(dayWithMeals);
         return mainRepository.saveToSharedPrefs(ctx);
     }

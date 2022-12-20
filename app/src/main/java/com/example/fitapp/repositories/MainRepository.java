@@ -107,6 +107,10 @@ public class MainRepository {
         productInfo.setValue(null);
     }
 
+    public void clearDayWithMeals() {
+        dayWithMealsMutableLiveData.setValue(new ArrayList<>());
+    }
+
     public void setNameProduct(String name) {
         Product temp = productInfo.getValue();
         if (temp == null) {

@@ -2,6 +2,7 @@ package com.example.fitapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +19,10 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.example.fitapp.adapters.BreakfastAdapter;
+import com.example.fitapp.remote.modelProduct.Product;
 import com.example.fitapp.repositories.MainRepository;
 import com.example.fitapp.saveDataAboutMaeals.DayWithMeals;
 import com.example.fitapp.viewModels.MainViewModel;
@@ -50,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo, fat, carbo, protein;
     private ImageView addMealToBreakfast, bodyMeasPage, userPage;
-    private static final DecimalFormat df = new DecimalFormat("0");
+    private static final DecimalFormat df = new DecimalFormat("0.0");
+    private Double caloriesSumPerDay = 0.0;
+    private Double fatsSumPerDay = 0.0;
+    private Double carbohydratesSumPerDay = 0.0;
+    private Double proteinsSumPerDay = 0.0;
 
     FirebaseUser currentUser;
     FirebaseFirestore db;
@@ -61,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     private MainViewModel viewModel;
     private List<DayWithMeals> itemsDay = new ArrayList<>();
+    private List<MyProduct> itemsBreakfast = new ArrayList<>();
+    private DayWithMeals dayWithMeals;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -100,10 +110,14 @@ public class MainActivity extends AppCompatActivity {
                         data = document.getData();
                         Log.d("User", "DocumentSnapshot data: " + data.get("amount_calories"));
                         //Integer temp = (Integer) data.get("amount_calories");
-                        calo.setText("Calories : " + df.format(data.get("amount_calories")) + "");
-                        protein.setText("Proteins : " + df.format(data.get("amount_proteins")).toString());
-                        fat.setText("Fats : " + df.format(data.get("amount_fats")).toString());
-                        carbo.setText("Carbohydrates: " + df.format(data.get("amount_carbs")).toString());
+                        caloriesSumPerDay = (Double) data.get("amount_calories");
+                        fatsSumPerDay = (Double) data.get("amount_fats");
+                        carbohydratesSumPerDay = (Double) data.get("amount_carbs");
+                        proteinsSumPerDay = (Double) data.get("amount_proteins");
+                        calo.setText("Calories : " + df.format(caloriesSumPerDay).toString());
+                        protein.setText("Proteins : " + df.format(proteinsSumPerDay).toString());
+                        fat.setText("Fats : " + df.format(fatsSumPerDay).toString());
+                        carbo.setText("Carbohydrates: " + df.format(carbohydratesSumPerDay).toString());
                     } else {
                         Log.d("User", "No such document");
                     }
@@ -145,9 +159,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (breakfast.isShown()) {
-                    breakfast.setVisibility(View.GONE);
+                    breakfast.setVisibility(View.VISIBLE);
+                    //na gone
                 } else {
                     breakfast.setVisibility(View.VISIBLE);
+                    if(dayWithMeals != null){
+                        itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                        breakfastAdapter.notifyDataSetChanged();
+                    }
+
                 }
             }
         });
@@ -167,20 +187,21 @@ public class MainActivity extends AppCompatActivity {
         items.add("3");
 
         breakfast = findViewById(R.id.rv_breakfast);
-        breakfastAdapter = new BreakfastAdapter(MainActivity.this, items);
+        breakfastAdapter = new BreakfastAdapter(MainActivity.this, itemsBreakfast);
         LinearLayoutManager manager = new LinearLayoutManager(context);
+        //LinearLayoutManager manager = new LinearLayoutManager(context);
         breakfast.setLayoutManager(manager);
         breakfast.setAdapter(breakfastAdapter);
 
         Calendar myCal = Calendar.getInstance();
         newC = (Calendar) myCal.clone();
-        date.setText(myCal.get(Calendar.DAY_OF_MONTH) + "." + (myCal.get(Calendar.MONTH)+1) + "." + myCal.get(Calendar.YEAR));
-        newC.set(Calendar.YEAR,myCal.get(Calendar.YEAR));
-        newC.set(Calendar.MONTH,myCal.get(Calendar.MONTH)+1);
-        newC.set(Calendar.DAY_OF_MONTH,myCal.get(Calendar.DAY_OF_MONTH));
-        newC.set(Calendar.HOUR,0);
-        newC.set(Calendar.MINUTE,0);
-        newC.set(Calendar.SECOND,0);
+        date.setText(myCal.get(Calendar.DAY_OF_MONTH) + "." + (myCal.get(Calendar.MONTH) + 1) + "." + myCal.get(Calendar.YEAR));
+        newC.set(Calendar.YEAR, myCal.get(Calendar.YEAR));
+        newC.set(Calendar.MONTH, myCal.get(Calendar.MONTH) + 1);
+        newC.set(Calendar.DAY_OF_MONTH, myCal.get(Calendar.DAY_OF_MONTH));
+        newC.set(Calendar.HOUR, 0);
+        newC.set(Calendar.MINUTE, 0);
+        newC.set(Calendar.SECOND, 0);
 
         theDate = newC.getTime();
 
@@ -200,12 +221,12 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                newC.set(Calendar.YEAR,year);
-                                newC.set(Calendar.MONTH,monthOfYear);
-                                newC.set(Calendar.DAY_OF_MONTH,dayOfMonth+1);
-                                newC.set(Calendar.HOUR,0);
-                                newC.set(Calendar.MINUTE,0);
-                                newC.set(Calendar.SECOND,0);
+                                newC.set(Calendar.YEAR, year);
+                                newC.set(Calendar.MONTH, monthOfYear);
+                                newC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                newC.set(Calendar.HOUR, 0);
+                                newC.set(Calendar.MINUTE, 0);
+                                newC.set(Calendar.SECOND, 0);
 
                                 theDate = newC.getTime();
                                 long time_val = newC.getTimeInMillis();
@@ -214,6 +235,24 @@ public class MainActivity extends AppCompatActivity {
                                 date.setText(formatted_date + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year);
 
                                 newDayWithMeals(theDate);
+
+                                itemsDay = viewModel.getDayWithMealsLiveData().getValue();
+                                if (itemsDay == null) {
+                                    itemsDay = new ArrayList<>();
+                                }
+                                for (DayWithMeals day : itemsDay) {
+                                    if ((day.getDate().toString()).equals(theDate.toString())) {
+                                        dayWithMeals = day;
+                                        if (dayWithMeals != null) {
+                                            calo.setText("Calories : " + df.format(dayWithMeals.getSumCallories()) + " / " + df.format(caloriesSumPerDay) + "");
+                                            protein.setText("Proteins : " + df.format(dayWithMeals.getSumProteins()) + " / " + df.format(proteinsSumPerDay).toString());
+                                            fat.setText("Fats : " + df.format(dayWithMeals.getSumFats()) + " / " + df.format(fatsSumPerDay).toString());
+                                            carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
+                                            itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                                            breakfastAdapter.notifyDataSetChanged();
+                                        }
+                                    }
+                                }
                             }
                         },
                         year, month, day);
@@ -221,11 +260,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        viewModel.getDayWithMealsLiveData().observe(this, new Observer<List<DayWithMeals>>() {
+            @Override
+            public void onChanged(List<DayWithMeals> dayWithMealsList) {
+                if (dayWithMealsList == null) {
+                    dayWithMealsList = new ArrayList<>();
+                }
+
+                for (DayWithMeals day : dayWithMealsList) {
+                    if ((day.getDate().toString()).equals(theDate.toString())) {
+                        dayWithMeals = day;
+                        if (dayWithMeals != null) {
+                            calo.setText("Calories : " + df.format(dayWithMeals.getSumCallories()) + " / " + df.format(caloriesSumPerDay) + "");
+                            protein.setText("Proteins : " + df.format(dayWithMeals.getSumProteins()) + " / " + df.format(proteinsSumPerDay).toString());
+                            fat.setText("Fats : " + df.format(dayWithMeals.getSumFats()) + " / " + df.format(fatsSumPerDay).toString());
+                            carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
+                            itemsBreakfast = dayWithMeals.getBreakfast().getItems();
+                            breakfastAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+
+            }
+        });
+
     }
 
-    boolean newDayWithMeals(Date date){
+    boolean newDayWithMeals(Date date) {
         itemsDay = viewModel.getDayWithMealsLiveData().getValue();
-        if(itemsDay == null){
+        if (itemsDay == null) {
             itemsDay = new ArrayList<>();
         }
         for (DayWithMeals dayWithMeals : itemsDay) {
