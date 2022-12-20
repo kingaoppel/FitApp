@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView logoutButton;
     private TextView date;
     private TextView tvprogressBar, tvProgressBarFats, tvProgressBarCarbs, tvProgressBarProteins;
+    private TextView breakfastCalories, snackCalories, lunchCalories, dinnerCalories, supperCalories;
 
     private MealAdapter breakfastAdapter, lunchAdapter, dinnerAdapter, snackAdapter, supperAdapter;
     private OnMealAdapterItemClickInterface onMealAdapterItemClickInterface;
@@ -145,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        breakfastCalories = findViewById(R.id.breakfastKcal);
+        snackCalories = findViewById(R.id.snackKcal);
+        lunchCalories = findViewById(R.id.lunchKcal);
+        dinnerCalories = findViewById(R.id.dinnerKcal);
+        supperCalories = findViewById(R.id.supperKcal);
 
         if (currentUser != null) {
             uid = currentUser.getUid();
@@ -477,6 +486,31 @@ public class MainActivity extends AppCompatActivity {
                     tvProgressBarFats.setText(df.format(dayWithMeals.getSumFats()) + "/" + df.format(fatsSumPerDay).toString());
                     tvProgressBarProteins.setText(df.format(dayWithMeals.getSumProteins()) + "/" + df.format(proteinsSumPerDay).toString());
 
+                    if (dayWithMeals.getBreakfast() != null)
+                        breakfastCalories.setText(df.format(dayWithMeals.getBreakfast().getCalories()));
+                    else
+                        breakfastCalories.setText("0");
+
+                    if (dayWithMeals.getSnack() != null)
+                        snackCalories.setText(df.format(dayWithMeals.getSnack().getCalories()));
+                    else
+                        snackCalories.setText("0");
+
+                    if (dayWithMeals.getLunch() != null)
+                        lunchCalories.setText(df.format(dayWithMeals.getLunch().getCalories()));
+                    else
+                        lunchCalories.setText("0");
+
+                    if (dayWithMeals.getDinner() != null)
+                        dinnerCalories.setText(df.format(dayWithMeals.getDinner().getCalories()));
+                    else
+                        dinnerCalories.setText("0");
+
+                    if (dayWithMeals.getSupper() != null)
+                        supperCalories.setText(df.format(dayWithMeals.getSupper().getCalories()));
+                    else
+                        supperCalories.setText("0");
+
                     currentProgress = dayWithMeals.getSumCallories().intValue();
                     progressBar.setProgress(currentProgress);
                     progressBar.setMax(caloriesSumPerDay.intValue());
@@ -551,21 +585,62 @@ public class MainActivity extends AppCompatActivity {
                                             tvProgressBarFats.setText(df.format(dayWithMeals.getSumFats()) + "/" + df.format(fatsSumPerDay).toString());
                                             tvProgressBarProteins.setText(df.format(dayWithMeals.getSumProteins()) + "/" + df.format(proteinsSumPerDay).toString());
 
+                                            if (dayWithMeals.getBreakfast() != null)
+                                                breakfastCalories.setText("Cal: " + df.format(dayWithMeals.getBreakfast().getCalories()) + " P: " + df.format(dayWithMeals.getBreakfast().getProteins()) + " F: " + df.format(dayWithMeals.getBreakfast().getFats()) + " C: " + df.format(dayWithMeals.getBreakfast().getCarbo()));
+                                            else
+                                                breakfastCalories.setText("0");
+
+                                            if (dayWithMeals.getSnack() != null)
+                                                snackCalories.setText("Cal: " + df.format(dayWithMeals.getSnack().getCalories()) + " P: " + df.format(dayWithMeals.getSnack().getProteins()) + " F: " + df.format(dayWithMeals.getSnack().getFats()) + " C: " + df.format(dayWithMeals.getSnack().getCarbo()));
+                                            else
+                                                snackCalories.setText("0");
+
+                                            if (dayWithMeals.getLunch() != null)
+                                                lunchCalories.setText("Cal: " + df.format(dayWithMeals.getLunch().getCalories()) + " P: " + df.format(dayWithMeals.getLunch().getProteins()) + " F: " + df.format(dayWithMeals.getLunch().getFats()) + " C: " + df.format(dayWithMeals.getLunch().getCarbo()));
+                                            else
+                                                lunchCalories.setText("0");
+
+                                            if (dayWithMeals.getDinner() != null)
+                                                dinnerCalories.setText("Cal: " + df.format(dayWithMeals.getDinner().getCalories()) + " P: " + df.format(dayWithMeals.getDinner().getProteins()) + " F: " + df.format(dayWithMeals.getDinner().getFats()) + " C: " + df.format(dayWithMeals.getDinner().getCarbo()));
+                                            else
+                                                dinnerCalories.setText("0");
+
+                                            if (dayWithMeals.getSupper() != null)
+                                                supperCalories.setText("Cal: " + df.format(dayWithMeals.getSupper().getCalories()) + " P: " + df.format(dayWithMeals.getSupper().getProteins()) + " F: " + df.format(dayWithMeals.getSupper().getFats()) + " C: " + df.format(dayWithMeals.getSupper().getCarbo()));
+                                            else
+                                                supperCalories.setText("0");
+
                                             currentProgress = dayWithMeals.getSumCallories().intValue();
                                             progressBar.setProgress(currentProgress);
                                             progressBar.setMax(caloriesSumPerDay.intValue());
+                                            if (currentProgress > caloriesSumPerDay.intValue())
+                                                progressBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                                            else
+                                                progressBar.setProgress(currentProgress);
 
                                             currentProgressPro = dayWithMeals.getSumProteins().intValue();
                                             progressBarPro.setProgress(currentProgressPro);
                                             progressBarPro.setMax(proteinsSumPerDay.intValue());
+                                            if (currentProgressPro > proteinsSumPerDay.intValue())
+                                                progressBarPro.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                                            else
+                                                progressBar.setProgress(currentProgress);
 
                                             currentProgressFats = dayWithMeals.getSumFats().intValue();
                                             progressBarFats.setProgress(currentProgressFats);
                                             progressBarFats.setMax(fatsSumPerDay.intValue());
+                                            if (currentProgressFats > fatsSumPerDay.intValue())
+                                                progressBarFats.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                                            else
+                                                progressBar.setProgress(currentProgress);
 
                                             currentProgressCarbs = dayWithMeals.getSumCarbo().intValue();
                                             progressBarCarbs.setProgress(currentProgressCarbs);
                                             progressBarCarbs.setMax(carbohydratesSumPerDay.intValue());
+                                            if (currentProgressCarbs > carbohydratesSumPerDay.intValue())
+                                                progressBarCarbs.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                                            else
+                                                progressBar.setProgress(currentProgress);
 
                                             itemsBreakfast.clear();
                                             if (dayWithMeals.getBreakfast() != null) {

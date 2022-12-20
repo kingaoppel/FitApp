@@ -305,8 +305,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_in_pro"
-            android:textSize="@dimen/text_size_medium"
-            android:visibility="gone"/>
+            android:textSize="@dimen/text_size_medium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_breakfast"
@@ -339,6 +338,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/dinnerKcal"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_in_pro"
+            android:textSize="@dimen/text_size_medium" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_dinner"
@@ -347,6 +355,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:visibility="gone" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -370,6 +380,15 @@
                 android:src="@drawable/ic_add" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/lunchKcal"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_in_pro"
+            android:textSize="@dimen/text_size_medium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lunch"
@@ -402,6 +421,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/snackKcal"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_in_pro"
+            android:textSize="@dimen/text_size_medium" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_snack"
             android:layout_width="match_parent"
@@ -409,6 +437,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:visibility="gone" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -433,6 +463,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/supperKcal"
+            style="@style/baseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/calories_in_pro"
+            android:textSize="@dimen/text_size_medium" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_supper"
             android:layout_width="match_parent"
@@ -440,6 +479,8 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:visibility="gone" />
+
+
 
     </LinearLayout>
 

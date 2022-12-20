@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AddProducktActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
@@ -43,6 +44,9 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
     private LinearLayout addOwnProductLayout;
     private MainViewModel viewModel;
     private List<String> productNames = new ArrayList<>();
+    private TextView mealName;
+
+    private MainViewModel mainViewModel;
 
     private NoteFragment noteFragment;
     private ProductListFragment productListFragment;
@@ -67,6 +71,11 @@ public class AddProducktActivity extends AppCompatActivity implements FragmentMa
         searchItem = (TextInputEditText) findViewById(R.id.searchInputField2);
         addOwnProductLayout = (LinearLayout) findViewById(R.id.linearLayoutAddNewPro);
         date = (TextView) findViewById(R.id.tvDateOfDay);
+
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        mealName = (TextView) findViewById(R.id.tvMeal);
+        mealName.setText(mainViewModel.getMealName().toUpperCase(Locale.ROOT));
 
         String str;
 

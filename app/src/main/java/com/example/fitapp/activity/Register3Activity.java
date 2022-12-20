@@ -217,9 +217,9 @@ public class Register3Activity extends AppCompatActivity {
             //PPM u mężczyzn = 66,5 + (13,75 x masa ciała [kg]) + (5,003 x wzrost [cm]) - (6,775 x [wiek]).
         }
 
-        double fat = wei * 1.2;
-        double protein = wei * 1.8;
-        double carbs = wei * 3.3;
+        double fat = wei * 0.8;
+        double protein = wei * 1.5;
+        double carbs = (calories - (fat * 9) - (protein * 4)) / 4;
 //        data.put("height", hei);
 
         List<String> fav = new ArrayList<>();

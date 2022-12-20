@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitapp.MyProduct;
 import com.example.fitapp.R;
 import com.example.fitapp.interfaces.OnMealAdapterItemClickInterface;
+import com.example.fitapp.viewModels.MainViewModel;
 
+import java.util.Date;
 import java.util.List;
 
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
@@ -50,6 +53,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
 
         TextView textView;
         private ImageView plus;
+        private Date date;
+        private String mealName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,15 +63,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> {
             plus = itemView.findViewById(R.id.but_addProducttoMeal);
 
             plus.setVisibility(View.GONE);
-
-//            plus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent = new Intent(view.getContext(), AddProducktActivity.class);
-//                    view.getContext().startActivity(intent);
-//                }
-//            });
-
+            
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
