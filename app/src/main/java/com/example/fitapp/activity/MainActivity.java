@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView logoutButton;
     private TextView date;
+    private TextView tvprogressBar;
 
     private Context context;
     private BreakfastAdapter breakfastAdapter;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> items = new ArrayList<>();
     private TextView tvbreakfast, dinner, lunch, snack, supper, calo, fat, carbo, protein;
     private ImageView addMealToBreakfast, bodyMeasPage, userPage;
-    private static final DecimalFormat df = new DecimalFormat("0.0");
+    private static final DecimalFormat df = new DecimalFormat("0");
     private Double caloriesSumPerDay = 0.0;
     private Double fatsSumPerDay = 0.0;
     private Double carbohydratesSumPerDay = 0.0;
@@ -76,6 +77,18 @@ public class MainActivity extends AppCompatActivity {
     private int currentProgress = 0;
     private int maxProgress = 100;
 
+    private ProgressBar progressBarCalories;
+    private int currentProgressCalories = 0;
+    private int maxProgressCalories = 100;
+
+    private ProgressBar progressBarFats;
+    private int currentProgressFats = 0;
+    private int maxProgressFats = 100;
+
+    private ProgressBar progressBarPro;
+    private int currentProgressPro = 0;
+    private int maxProgressPro = 100;
+
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
 
-        currentProgress = 90;
-        progressBar.setProgress(currentProgress);
-        progressBar.setMax(100);
-
+//        currentProgress = 90;
+//        progressBar.setProgress(currentProgress);
+//        progressBar.setMax(100);
 
         logoutButton = findViewById(R.id.logout);
         tvbreakfast = findViewById(R.id.breakfast);
@@ -100,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         bodyMeasPage = findViewById(R.id.menu);
         userPage = findViewById(R.id.menu_person);
         date = findViewById(R.id.tvDateOfDay);
+
+        tvprogressBar = findViewById(R.id.tvProgressBar);
 
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -126,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
                         fatsSumPerDay = (Double) data.get("amount_fats");
                         carbohydratesSumPerDay = (Double) data.get("amount_carbs");
                         proteinsSumPerDay = (Double) data.get("amount_proteins");
+                        tvprogressBar.setText(df.format(caloriesSumPerDay).toString());
+                        currentProgress = 0;
+                        progressBar.setProgress(currentProgress);
+                        progressBar.setMax(caloriesSumPerDay.intValue());
+
                         calo.setText("Calories : " + df.format(caloriesSumPerDay).toString());
                         protein.setText("Proteins : " + df.format(proteinsSumPerDay).toString());
                         fat.setText("Fats : " + df.format(fatsSumPerDay).toString());
@@ -264,6 +283,10 @@ public class MainActivity extends AppCompatActivity {
                                             protein.setText("Proteins : " + df.format(dayWithMeals.getSumProteins()) + " / " + df.format(proteinsSumPerDay).toString());
                                             fat.setText("Fats : " + df.format(dayWithMeals.getSumFats()) + " / " + df.format(fatsSumPerDay).toString());
                                             carbo.setText("Carbohydrates: " + df.format(dayWithMeals.getSumCarbo()) + " / " + df.format(carbohydratesSumPerDay).toString());
+                                            tvprogressBar.setText(df.format(dayWithMeals.getSumCallories()) + "/" + df.format(caloriesSumPerDay).toString());
+                                            currentProgress = dayWithMeals.getSumCallories().intValue();
+                                            progressBar.setProgress(currentProgress);
+                                            progressBar.setMax(caloriesSumPerDay.intValue());
                                             itemsBreakfast.clear();
                                             if(dayWithMeals.getBreakfast() != null){
                                                 itemsBreakfast = dayWithMeals.getBreakfast().getItems();

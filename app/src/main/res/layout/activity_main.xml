@@ -7,28 +7,67 @@
     tools:context=".activity.MainActivity">
 
     <ProgressBar
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/dp_24"
         android:indeterminateOnly="false"
-        app:layout_constraintBottom_toTopOf="@id/hg25"
-        app:layout_constraintTop_toBottomOf="@id/hg05"
+        android:progressDrawable="@drawable/custom_progress"
+        app:layout_constraintBottom_toTopOf="@id/hg20"
         app:layout_constraintEnd_toStartOf="@+id/vg80"
         app:layout_constraintStart_toEndOf="@+id/vg20"
-        android:id="@+id/progressBar"
+        app:layout_constraintTop_toBottomOf="@id/hg05"
+        tools:progress="60"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBarProtein"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progressDrawable="@drawable/custom_progress"
-        android:visibility="gone"/>
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/hg30"
+        app:layout_constraintEnd_toStartOf="@+id/vg33"
+        app:layout_constraintStart_toStartOf="@+id/vg05"
+        app:layout_constraintTop_toTopOf="@+id/hg25"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:progressDrawable="@drawable/custom_progress_bg"
+        tools:progress="30" />
 
     <TextView
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:text="Calories"
+        android:textSize="@dimen/text_size_huge"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintLeft_toLeftOf="@id/progressBar"
+        app:layout_constraintRight_toRightOf="@id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/tvProgressBar"
+        style="@style/baseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_32"
+        android:text="60 %"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintLeft_toLeftOf="@id/progressBar"
+        app:layout_constraintRight_toRightOf="@id/progressBar"
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+    <TextView
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        android:id="@+id/logout"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvDateOfDay"
@@ -38,20 +77,19 @@
         android:gravity="center"
         android:text="@string/dateToday"
         android:textSize="@dimen/text_size_norm"
+        app:layout_constraintBottom_toTopOf="@id/hg05"
         app:layout_constraintEnd_toStartOf="@id/vg95"
-        app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintBottom_toTopOf="@id/hg05"/>
+        app:layout_constraintStart_toEndOf="@id/vg05" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_24"
         app:layout_constraintBottom_toTopOf="@+id/hg25"
         app:layout_constraintEnd_toStartOf="@id/vg95"
         app:layout_constraintStart_toEndOf="@id/vg20"
-        app:layout_constraintTop_toBottomOf="@id/hg05"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/dp_24"
-        >
+        app:layout_constraintTop_toBottomOf="@id/hg05">
 
         <TextView
             android:id="@+id/tvAmountOfCalories"
@@ -59,7 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/calories_per_100"
-            android:textSize="@dimen/text_size_huge" />
+            android:textSize="@dimen/text_size_huge"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tvAmountOfProteins"
@@ -68,7 +107,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_per_100"
-            android:textSize="@dimen/text_size_huge" />
+            android:textSize="@dimen/text_size_huge"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tvAmountOfFats"
@@ -77,7 +117,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_per_100"
-            android:textSize="@dimen/text_size_huge" />
+            android:textSize="@dimen/text_size_huge"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tvAmountOfCarbo"
@@ -86,39 +127,40 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/calories_per_100"
-            android:textSize="@dimen/text_size_huge" />
+            android:textSize="@dimen/text_size_huge"
+            android:visibility="gone" />
 
     </LinearLayout>
 
 
     <ImageView
+        android:id="@+id/menu_person"
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
-        android:id="@+id/menu_person"
         android:src="@drawable/ic_person"
-        app:layout_constraintEnd_toStartOf="@id/vg100"
         app:layout_constraintBottom_toTopOf="@id/hg100"
+        app:layout_constraintEnd_toStartOf="@id/vg100"
         app:layout_constraintStart_toEndOf="@id/vg66"
-        app:layout_constraintTop_toBottomOf="@id/hg90"/>
+        app:layout_constraintTop_toBottomOf="@id/hg90" />
 
     <ImageView
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
         android:src="@drawable/ic__houses"
-        app:layout_constraintEnd_toStartOf="@id/vg66"
         app:layout_constraintBottom_toTopOf="@id/hg100"
+        app:layout_constraintEnd_toStartOf="@id/vg66"
         app:layout_constraintStart_toEndOf="@id/vg33"
-        app:layout_constraintTop_toBottomOf="@id/hg90"/>
+        app:layout_constraintTop_toBottomOf="@id/hg90" />
 
     <ImageView
         android:id="@+id/menu"
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
         android:src="@drawable/ic_menu"
-        app:layout_constraintEnd_toStartOf="@id/vg33"
         app:layout_constraintBottom_toTopOf="@id/hg100"
+        app:layout_constraintEnd_toStartOf="@id/vg33"
         app:layout_constraintStart_toEndOf="@id/vg0"
-        app:layout_constraintTop_toBottomOf="@id/hg90"/>
+        app:layout_constraintTop_toBottomOf="@id/hg90" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -128,7 +170,7 @@
         app:layout_constraintBottom_toTopOf="@id/hg90"
         app:layout_constraintEnd_toStartOf="@id/vg95"
         app:layout_constraintStart_toEndOf="@id/vg05"
-        app:layout_constraintTop_toBottomOf="@id/hg25">
+        app:layout_constraintTop_toBottomOf="@id/hg35">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,11 +187,11 @@
                 android:textSize="@dimen/text_size_header_font" />
 
             <ImageView
+                android:id="@+id/but_addBreakfastToMeal"
                 android:layout_width="@dimen/dp_32"
                 android:layout_height="@dimen/dp_32"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_add"
-                android:id="@+id/but_addBreakfastToMeal"/>
+                android:src="@drawable/ic_add" />
 
         </LinearLayout>
 
@@ -169,7 +211,6 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:visibility="gone" />
-
 
 
         <TextView
@@ -271,7 +312,26 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hg35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
 
 
     <androidx.constraintlayout.widget.Guideline

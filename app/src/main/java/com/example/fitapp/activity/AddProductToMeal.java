@@ -146,32 +146,6 @@ public class AddProductToMeal extends AppCompatActivity {
 
         dAmount = mainViewModel.getProductLiveData().getValue().getAmount();
         amount.setText(dAmount.toString());
-//        calories.setText("Calories: " + dataRef.get("carbs").toString());
-
-//        items = mainViewModel.getProductLiveData().getValue().getNutrition().getNutrients();
-//        nutrientsItemCal = items.stream().filter(s -> s.getName().equals("Calories")).findFirst().orElse(null);
-//        if(nutrientsItemCal != null){
-//            dCalories = nutrientsItemCal.getAmount();
-//            calories.setText("Calories: " + dCalories + "");
-//        }
-
-//        nutrientsItemPro = items.stream().filter(s -> s.getName().equals("Protein")).findFirst().orElse(null);
-//        if(nutrientsItemPro != null){
-//            dProtein = nutrientsItemPro.getAmount();
-//            protein.setText("Proteins: " + dProtein + "");
-//        }
-
-//        nutrientsItemCarbo = items.stream().filter(s -> s.getName().equals("Carbohydrates")).findFirst().orElse(null);
-//        if(nutrientsItemCarbo != null){
-//            dCarbo = nutrientsItemCarbo.getAmount();
-//            carbo.setText("Carbohydrates: " + dCarbo + "");
-//        }
-//
-//        nutrientsItemFat = items.stream().filter(s -> s.getName().equals("Fat")).findFirst().orElse(null);
-//        if(nutrientsItemFat != null){
-//            dFat = nutrientsItemFat.getAmount();
-//            fat.setText("Carbohydrates: " + dFat + "");
-//        }
 
         amount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
