@@ -101,6 +101,15 @@ public class UserPageActivity extends AppCompatActivity {
         progressBarWeight = findViewById(R.id.progressBarWeight);
         logout = findViewById(R.id.logout);
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
+
         addBodyMeas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
