@@ -94,7 +94,7 @@ public class UserPageActivity extends AppCompatActivity {
         hipFirst = findViewById(R.id.userPage_hipFirst);
         hipNow = findViewById(R.id.userPage_hipNow);
         thighFirst = findViewById(R.id.userPage_thighFirst);
-        thighNow = findViewById(R.id.userPage_calfNow);
+        thighNow = findViewById(R.id.userPage_thighNow);
 
         addBodyMeas = findViewById(R.id.tVaddBodyMeas);
 
